@@ -4,7 +4,7 @@
 **Diferencial PRISMA:** No solo notificamos crisis, **prevenimos cascadas sistémicas**  
 **Fecha objetivo demo:** 19 diciembre 2025 (Elevator Pitch TwIN Lab)
 
-> 📋 **Estrategia dual:** Este caso se presenta junto con [Ciberataque Infraestructura Agua](./CASO_USO_MVP_Ciberataque_Depuradora.md) para demostrar que **el mismo motor de inteligencia situacional** funciona en dominios completamente diferentes (ambiental vs cyber).
+> 📋 **MVP:** Enfocado en este único escenario. Caso cyber aplazado a v2.
 
 ---
 
@@ -69,11 +69,11 @@ Día 0:  Viento gira a NORTE/NOROESTE + inversión térmica
 
 El simulador ofrece 3 fechas predefinidas (no calendario libre):
 
-| Fecha | Contexto | Población | Riesgo principal |
-|-------|----------|-----------|------------------|
-| **15 Junio** | Fin curso escolar, apertura piscinas municipales | 350k | Niños/jóvenes expuestos, familias en exteriores, inicio temporada calor |
-| **1 Julio** | Pre-San Fermín, turistas llegando | 600k+ | **Máxima tensión política**: ¿se cancela San Fermín? Crisis reputacional internacional |
-| **1 Agosto** | Ciudad semi-vacía, pico de calor | 250k | Personal sanitario reducido, incendio de 5ª generación (más rápido, más intenso), menos recursos disponibles |
+| Fecha | Contexto | Población | Cap. Operativa | Riesgo principal |
+|-------|----------|-----------|----------------|------------------|
+| **15 Junio** | Fin curso escolar, piscinas | 350k | 100% | Niños/jóvenes expuestos, familias en exteriores |
+| **6 Julio** | Día Chupinazo San Fermín | 1M | 90% | **Máxima tensión**: ¿se cancela? Crisis internacional |
+| **1 Agosto** | Ciudad semi-vacía, pico calor | 250k | 70% | Personal reducido, incendio 5ª generación |
 
 **En el simulador:** El usuario selecciona una de las 3 fechas y el sistema ajusta automáticamente:
 - Población y perfil demográfico
@@ -500,226 +500,105 @@ Acciones:
 
 ## 🏗️ Arquitectura Técnica MVP
 
-### Decisión: Chat Conversacional + FIWARE Event-Driven
-
-Streamlit (UI) + n8n (orquestación + IA) + FIWARE (Context Broker)
-
-### Componentes
+### Decisión: Streamlit + FIWARE MCP + n8n (agente)
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                      STREAMLIT                              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────────┐  │
-│  │ Scenario    │  │   Chat      │  │  Panel Estado       │  │
-│  │ Context     │  │   PRISMA    │  │  (KPIs tiempo real) │  │
-│  └─────────────┘  └─────────────┘  └─────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-         │                 ▲                    ▲
-         ▼                 ▼                    │
-┌─────────────────────────────────────────────────────────────┐
-│        n8n-1                          n8n-2                 │
-│  ┌─────────────────┐    ┌─────────────────────────────────┐ │
-│  │ Generador       │    │ Agente Conversacional           │ │
-│  │ Escenarios      │    │ (LLM + Knowledge Base)          │ │
-│  │ (con selector   │    │                                 │ │
-│  │ fecha)          │    │                                 │ │
-│  └─────────────────┘    └─────────────────────────────────┘ │
-│           │                          │                      │
-│           ▼                          ▼                      │
-│  ┌─────────────────────────────────────────────────────────┐│
-│  │ Alertas: SMS masivo | SMS VIP | Twitter | Telegram      ││
-│  └─────────────────────────────────────────────────────────┘│
-└─────────────────────────────────────────────────────────────┘
-         │                              ▲
-         ▼                              │ (Suscripciones)
-┌─────────────────────────────────────────────────────────────┐
-│                    FIWARE Context Broker                    │
-│  ┌────────────┐ ┌────────────┐ ┌────────────┐ ┌──────────┐  │
-│  │ Weather    │ │ AirQuality │ │ Emergency  │ │ Ocupancy │  │
-│  │ Observed   │ │ Observed   │ │ Calls112   │ │ Urgencia │  │
-│  └────────────┘ └────────────┘ └────────────┘ └──────────┘  │
-│  ┌────────────┐ ┌────────────┐ ┌────────────┐               │
-│  │ Forest     │ │ Twitter    │ │  Weather   │               │
-│  │ Fire (Has) │ │ Mentions   │ │  Forecast  │               │
-│  └────────────┘ └────────────┘ └────────────┘               │
-└─────────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────┐
+│                      STREAMLIT                            │
+│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐   │
+│  │ Config      │  │   Chat      │  │ Razonamiento    │   │
+│  │ Escenario   │  │   PRISMA    │  │ (trazabilidad)  │   │
+│  └─────────────┘  └─────────────┘  └─────────────────┘   │
+│         │                 │                               │
+│         ▼                 ▼                               │
+│  ┌─────────────┐    ┌─────────────────────────────────┐  │
+│  │ Script      │    │         n8n (agente)            │  │
+│  │ generador   │    │   LLM + Knowledge Base          │  │
+│  │ (FIWARE MCP)│    │   + Cascadas few-shot           │  │
+│  └──────┬──────┘    └───────────────┬─────────────────┘  │
+└─────────┼───────────────────────────┼────────────────────┘
+          │                           │
+          ▼                           ▼
+┌──────────────────────────────────────────────────────────┐
+│                 FIWARE Context Broker                     │
+│  WeatherObserved | AirQuality | ForestFire | Calls112    │
+│  HospitalOccupancy | SocialMediaAlert                    │
+└──────────────────────────────────────────────────────────┘
 ```
+
+**Simplificación MVP:** No hay n8n-1. El script generador de escenarios está en Streamlit usando FIWARE MCP directamente.
 
 ---
 
 ## 🔄 Flujo de Información
 
-### FASE 1: Usuario selecciona fecha e inicia
+### FASE 1: Iniciar escenario
+1. Usuario selecciona fecha (15 Jun / 6 Jul / 1 Ago)
+2. Click "Iniciar" → Script Python carga contexto + inicia streams
+3. Script inyecta datos a FIWARE vía MCP con delays
 
-1. Usuario elige fecha en selector (ej: "3 julio")
-2. Click "Iniciar Escenario"
-3. Streamlit → Webhook n8n (Generador Escenarios)
-4. n8n calcula parámetros según fecha:
-   - Población (350k vs 1M)
-   - Capacidad hospitalaria
-   - Contexto político
-5. n8n actualiza entidades FIWARE con datos iniciales
-6. FIWARE notifica a n8n (suscripción)
-7. Eventos empiezan a "suceder" con delays
+### FASE 2: Consultar
+1. Usuario pregunta en chat
+2. Streamlit → n8n (agente) con contexto + datos actuales
+3. LLM razona con Knowledge Base + Cascadas few-shot
+4. Respuesta con predicción y recomendaciones
 
-### FASE 2: Usuario consulta
+### FASE 3: Aprobar/Rechazar
+1. Usuario aprueba → n8n ejecuta (Telegram real, SMS simulado)
+2. Usuario rechaza → queda registrado (trazabilidad)
 
-1. Usuario pregunta en chat: "¿Cuál es la situación?"
-2. Streamlit → Webhook n8n (Agente)
-3. n8n consulta FIWARE (estado actual)
-4. LLM genera respuesta contextualizada
-5. Respuesta incluye predicción y recomendaciones
-
-### FASE 3: Aprobar y ejecutar
-
-1. Usuario: "Envía alerta a población"
-2. n8n valida intención
-3. n8n ejecuta: SMS masivo (simulado) + Telegram (real)
-4. Confirmación al usuario
-
-### FASE 4: Flujo de rechazo (Human-in-the-Loop)
-
-**Qué pasa cuando el operador dice "NO" a una recomendación:**
-
-| Situación | Acción PRISMA | Registro |
-|-----------|---------------|----------|
-| Rechazo simple | Registra, sigue monitorizando | "Operador X rechazó Y a HH:MM" |
-| Sin alternativa dada | Ofrece opciones: "¿Prefieres A, B, o ninguna?" | Opciones ofrecidas |
-| Situación crítica | Pide confirmación + motivo | "¿Confirmas? Motivo: ___" |
-| Situación empeora tras rechazo | Re-propone con datos actualizados | "Situación empeoró. ¿Reconsideras?" |
-| Múltiples rechazos críticos | Escala a nivel superior (si configurado) | Notifica a responsable jerárquico |
-
-**Trazabilidad obligatoria:**
-
-Cada rechazo queda registrado en entidad `OperatorDecision`:
-- `recommendation_id`: qué se recomendó
-- `action`: acción propuesta
-- `status`: APPROVED / REJECTED / DEFERRED
-- `decided_by`: quién decidió
-- `decided_at`: cuándo
-- `reason`: motivo del rechazo (texto libre)
-- `situation_snapshot`: estado FIWARE en ese momento
-- `follow_up`: si se re-propuso después
-
-**Por qué importa (lección DANA Valencia):**
-
-> En DANA Valencia, nadie sabe exactamente quién decidió qué, cuándo, y con qué información disponible.
->
-> PRISMA garantiza **trazabilidad total**: si el operador rechaza, queda registrado con contexto completo. No para culpar, sino para aprender y para que las decisiones sean **auditables**.
-
-**Para MVP:** Registrar rechazos es suficiente. Escalado automático es v2.
+**Trazabilidad (lección DANA):** Todo queda registrado. Quién decidió qué, cuándo, con qué información.
 
 ---
 
 ## 🎯 Componentes a Construir
 
-### 1. FIWARE (Entidades)
+### Estado actual (en código)
 
-**Datos de entrada:**
-- `WeatherObserved` (temperatura, humedad, viento)
-- `AirQualityObserved` (PM2.5, PM10, O3)
-- `ForestFire` (ubicación, estado, propagación)
-- `EmergencyCalls112` (contador, categorías)
-- `HospitalCapacity` (ocupación urgencias, UCI)
-- `TwitterMentions` (contador, sentiment)
-- `ScenarioContext` (fecha, población, fase)
+| Componente | Estado | Archivo |
+|------------|--------|---------|
+| UI Streamlit | ✅ Layout | `streamlit/app.py` |
+| Contexto escenarios | ✅ Definido | `streamlit/config/scenarios.py` |
+| Streams/entidades | ✅ Definido | `streamlit/config/scenarios.py` |
+| Knowledge Base | ✅ Definido | `streamlit/config/knowledge_base.py` |
+| Cascadas few-shot | ✅ Definido | `streamlit/config/knowledge_base.py` |
+| Script generador | ⏳ Pendiente | Usar FIWARE MCP |
+| Conexión n8n agente | ⏳ Pendiente | Webhook definido en .env |
 
-**Salida del agente (trazabilidad):**
-- `CascadePrediction` → Lo que PRISMA predice en cada análisis:
-  - `timestamp`: cuándo se hizo la predicción
-  - `trigger`: qué evento lo activó
-  - `prediction`: qué va a pasar si no actuamos
-  - `confidence`: nivel de certeza
-  - `recommended_actions[]`: acciones priorizadas
-  - `window_hours`: tiempo disponible para actuar
-
-> **Por qué:** Trazabilidad de las predicciones del sistema, no solo de los datos de entrada. Útil para post-mortem y para mostrar el "razonamiento" de PRISMA.
-
-### 2. n8n Workflows
-
-**Workflow A: Generador de Escenarios**
-- Recibe fecha seleccionada
-- Calcula parámetros según fecha
-- Actualiza FIWARE con delays (simula tiempo real)
-- **Modo Demo:** Toggle para acelerar delays (minutos simulados → segundos reales)
-- **Reset:** Endpoint para limpiar FIWARE y volver a estado inicial
-
-**Curva narrativa scripted (ejemplo 1 Julio - San Fermín):**
+### Curva narrativa scripted (6 Julio - Chupinazo)
 
 ```
 T+0min:  Estado inicial (35°C, PM2.5=50, urgencias 60%)
-T+2min:  AEMET actualiza pronóstico → 42°C mañana
-T+4min:  EFFIS detecta incendio Valle Roncal
-T+6min:  Primeras quejas Twitter (+20 menciones)
-T+8min:  PM2.5 empieza a subir (50→80)
-T+10min: Urgencias suben (60%→70%)
-T+12min: PM2.5 crítico (80→150)
-T+14min: 112 reporta +40% llamadas respiratorias
-T+16min: Urgencias al límite (85%)
-T+18min: PUNTO DE DECISIÓN: ¿Alerta? ¿San Fermín?
+T+2min:  AEMET: 42°C mañana
+T+4min:  EFFIS: incendio Valle Roncal
+T+6min:  Twitter: +20 menciones humo
+T+8min:  PM2.5: 50→80
+T+10min: Urgencias: 60%→70%
+T+12min: PM2.5: 80→150 (crítico)
+T+14min: 112: +40% llamadas respiratorias
+T+16min: Urgencias: 85% (límite)
+T+18min: PUNTO DE DECISIÓN
 ```
 
-> **Importante:** Sin secuencia scripted, la demo puede ser aburrida o caótica. Cada escenario necesita su guion con tiempos exactos.
-
-**Workflow B: Agente Conversacional**
-- Recibe pregunta usuario
-- Consulta FIWARE
-- LLM genera respuesta + recomendaciones
-- Ejecuta acciones aprobadas
-
-### 3. Streamlit UI
-
-- **Selector de escenario** (3 botones: 15 Junio / 1 Julio / 1 Agosto)
-- Botón "Iniciar Escenario"
-- **Toggle "Modo Demo"** (acelera simulación para pitch)
-- **Botón "Reset"** (limpia FIWARE, vuelve a estado inicial)
-- Chat conversacional (con streaming para evitar esperas)
-- Panel lateral con KPIs (jerarquía visual)
-- Indicador de fecha/contexto activo
-- **Spinner con mensaje** mientras LLM procesa ("PRISMA analizando 7 fuentes...")
-
-**Jerarquía visual de KPIs:**
-
-| Nivel | KPIs | Tamaño/Color |
-|-------|------|--------------|
-| **1 (críticos)** | Temperatura, Calidad aire (🟢🟡🔴), Ocupación urgencias % | Grande, siempre visible |
-| **2 (secundarios)** | Llamadas 112 (Δ vs normal), Estado incendio, Menciones Twitter | Medio |
-| **3 (contexto)** | Fecha simulada, Población estimada, Fase CECOPI | Pequeño, gris |
-
-### 4. Knowledge Base
-
-- Normativa Navarra (texto en prompt)
-- Umbrales de alerta (variables n8n)
-- Protocolos CECOPI (texto en prompt)
+### n8n Agente (PRISMA_2_Situational_Intelligence)
+- Recibe: contexto + datos actuales + pregunta
+- LLM con: Knowledge Base + Cascadas few-shot
+- Devuelve: respuesta + razonamiento + acciones recomendadas
 
 ---
 
-## ⚡ Plan de Ejecución (1 Semana)
+## ⚡ Plan de Ejecución (Semana 12-19 dic)
 
-### Lunes: FIWARE + Entidades Base
-- Crear entidades en Context Broker
-- Configurar suscripciones
-- Probar flujo básico
-
-### Martes: Generador de Escenarios
-- Workflow n8n con selector fecha
-- Lógica de parámetros por fecha
-- Delays para simular tiempo real
-
-### Miércoles: Agente Conversacional
-- Workflow n8n con LLM
-- Integrar consulta FIWARE
-- Knowledge base en prompts
-
-### Jueves: Streamlit + Alertas
-- UI con selector fecha y chat
-- Conexión webhooks n8n
-- Telegram de prueba
-
-### Viernes: Pulir y Ensayar
-- Demo completa end-to-end
-- Preparar narrativa pitch
-- Backup por si algo falla
+| Día | Foco | Entregable |
+|-----|------|------------|
+| **Jue 12** | UI layout + config escenarios | ✅ Hecho |
+| **Vie 13** | Script generador FIWARE | Inyectar datos con MCP |
+| **Sáb 14** | Conexión chat → n8n agente | Flujo completo |
+| **Dom 15** | Pulir agente + respuestas | Calidad LLM |
+| **Lun 16** | Mapa + visualización | Contexto geográfico |
+| **Mar 17** | Ensayo demo completa | End-to-end |
+| **Mié 18** | Buffer + Plan B | Video backup |
+| **Jue 19** | **PITCH** | 🎤 |
 
 ---
 
@@ -754,87 +633,18 @@ T+18min: PUNTO DE DECISIÓN: ¿Alerta? ¿San Fermín?
 
 ## 🆚 Análisis Competitivo: Everbridge
 
-### Qué es Everbridge
+> **Expandir en v2.** Resumen clave abajo.
 
-**El líder mundial en Critical Event Management (CEM)**
-- NASDAQ: EVBG
-- +6.500 clientes globales
-- Clientes: Goldman Sachs, Siemens, Johnson Controls, **112** (algún país EU), State of Oregon
-- Claim: "Know Earlier, Respond Faster, Improve Continuously"
-- Nuevo: "High Velocity CEM" con "Purpose-built AI"
+**Everbridge** = líder mundial CEM (NASDAQ: EVBG, +6.500 clientes). Valida modelo B2G+B2B.
 
-**Fuente:** [everbridge.com](https://www.everbridge.com/)
+**Diferencial PRISMA:**
+- Everbridge: "Know Earlier" (notifica) → PRISMA: "Predict Cascades" (predice)
+- Everbridge: reglas IF-THEN → PRISMA: razonamiento IA few-shot
+- Everbridge: 🇺🇸 USA, CLOUD Act → PRISMA: 🇪🇺 100% europeo, FIWARE, Data Spaces
 
-### Validación de nuestro modelo
+**Regulación favorable:** NIS2, CER, AI Act, DORA → compliance by design.
 
-**Everbridge vende B2G + B2B** → Nuestro modelo dual es correcto.
-
-| Sus sectores B2B | ¿PRISMA? |
-|------------------|----------|
-| Energy & Utilities | ✅ |
-| Insurance | ✅ |
-| Healthcare/Hospitals | ✅ |
-| Manufacturing | ✅ |
-| Commercial Real Estate | ✅ |
-| Transportation | ✅ |
-| Financial Services | ⚠️ Futuro |
-| Pharmaceutical | ⚠️ Futuro |
-
-**El 112 es cliente de Everbridge** → Valida que nuestro target B2G es correcto.
-
-### Diferencial de producto
-
-| Aspecto | Everbridge | PRISMA |
-|---------|------------|--------|
-| **Claim** | "Know Earlier" | **"Predict Cascades"** |
-| **Foco** | Notificación cuando pasa | **Predicción antes de que pase** |
-| **IA** | Analytics post-evento | **Razonamiento sobre cascadas** |
-| **Lógica** | Reglas IF-THEN | IA con ejemplos (few-shot) |
-| **Datos** | Los que configures | **Fusión multi-fuente automática** |
-| **Salida** | "Alerta: ola de calor" | **"2h para colapso urgencias, haz X"** |
-
-### Diferencial estratégico: Soberanía Tecnológica
-
-| Aspecto | Everbridge | PRISMA |
-|---------|------------|--------|
-| **Origen** | 🇺🇸 USA (NASDAQ: EVBG) | 🇪🇺 **100% europeo** |
-| **Datos** | Servidores US, CLOUD Act | **Soberanía total** |
-| **Estándares** | Propietarios, lock-in | **FIWARE** (open source) |
-| **Interoperabilidad** | Cerrada | **Data Spaces** (GAIA-X) |
-| **Licencia** | Comercial | **EUPL** |
-| **Compliance** | Adaptación posterior | **Nativo NIS2, CER, AI Act, DORA** |
-
-### El argumento geopolítico (para el pitch)
-
-> "Musk quiere romper la UE. Putin quiere una UE débil. China quiere dividir la UE. Trump quiere una UE de extrema derecha.
->
-> **La infraestructura crítica de Europa no puede depender de Big Tech americana.**
->
-> PRISMA es **Powered by FIWARE**, tecnología europea, open source, preparado para Data Spaces. Soberanía tecnológica desde el día 1."
-
-### Contexto regulatorio favorable
-
-| Regulación | Fecha | Afecta a | Oportunidad |
-|------------|-------|----------|-------------|
-| **NIS2** | Oct 2024 | Infraestructuras críticas | Utilities, energía, agua |
-| **CER** | Oct 2024 | Entidades críticas | Mismo target |
-| **AI Act** | Ago 2024 | IA en emergencias = alto riesgo | Compliance by design |
-| **DORA** | Ene 2025 | Sector financiero | Bancos, aseguradoras, fondos |
-
-**DORA (Digital Operational Resilience Act):** Nueva oportunidad que Everbridge ya vende. Aplica a todo el sector financiero europeo. PRISMA podría expandir aquí post-MVP.
-
-### ROI: Cómo lo vende Everbridge
-
-Everbridge cita Forrester: **358% ROI**, $8.5M en 3 años:
-- $3M efficiency gains
-- $2M reduced IT downtime
-- $1.5M security team productivity
-
-**Para PRISMA (caso Ola Calor + San Fermín):**
-- Cancelación San Fermín evitada: **100M€+**
-- Vidas salvadas: **incalculable**
-- Crisis reputacional evitada: **decenas de M€**
-- Coste PRISMA: **<<1% del impacto evitado**
+**ROI:** Cancelación San Fermín evitada = 100M€+. Coste PRISMA << 1%.
 
 ---
 
@@ -854,108 +664,20 @@ Everbridge cita Forrester: **358% ROI**, $8.5M en 3 años:
 
 ## 💰 Modelo de Negocio: B2G + B2B
 
-### Por qué no solo B2G
+> **Expandir en v2.** Resumen clave abajo.
 
-| Aspecto | B2G (Gobierno) | B2B (Privado) |
-|---------|----------------|---------------|
-| Ciclo de venta | 6-18 meses (licitaciones) | 1-3 meses |
-| Dependencia | Presupuestos públicos, política | Decisión empresarial |
-| Escalabilidad | Limitada (una CCAA cada vez) | Alta (muchas empresas) |
-| **Atractivo inversor** | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+**B2G** (piloto/credibilidad): 112 Navarra, Ayuntamientos, Protección Civil  
+**B2B** (escalabilidad): Utilities, seguros, eventos, industria, logística
 
-> **Para inversores:** B2G es el piloto que da credibilidad. B2B es donde está la escalabilidad y el retorno.
+**Target especial:** Empresas de gemelos digitales (Tracasa, iris360) → PRISMA como módulo de inteligencia.
 
-### El mercado B2B: Quién paga por inteligencia de riesgos
+**Data Spaces:** Monetización futura vía marketplace europeo de alertas.
 
-**Empresas con activos, operaciones o personal expuestos a cascadas:**
-
-| Sector | Dolor específico | Qué compran hoy |
-|--------|------------------|-----------------|
-| **Utilities (agua, energía)** | Infraestructura expuesta, obligación NIS2 | Alertas rayos, SCADA monitoring |
-| **Energía renovable** | Parques eólicos/solares | Heat stress, tormentas, irradiancia |
-| **Seguros** | Pricing de riesgo, gestión claims | Modelos climáticos, early warning |
-| **Inmobiliarias/Construcción** | Activos expuestos, obras paradas | Alertas inundación, viento |
-| **Eventos/Turismo** | Decisiones cancelación, seguridad | Meteo + riesgos combinados |
-| **Logística/Transporte** | Rutas afectadas, flotas | Alertas carreteras, puertos |
-| **Agricultura** | Cosechas, riego, heladas | Agro-meteo, plagas |
-| **Industria** | Continuidad operaciones | Heat stress laboral, calidad aire |
-
-### Referencia: Empresas DRR/Early Warning que ya venden B2B
-
-Empresas que ya monetizan inteligencia de riesgos al sector privado:
-
-- **Tomorrow.io** / **Climavision** → Alertas meteo hiperlocales
-- **DTN** → Riesgos para energía, agricultura, transporte
-- **One Concern** → Resiliencia para seguros e inmobiliarias
-- **Previsico** → Alertas inundación para utilities
-- **Tesicnor/RRD** (Navarra) → Heat stress, riesgos industriales
-
-### Target B2B especial: Empresas de Gemelos Digitales
-
-**Insight clave:** Empresas que desarrollan gemelos digitales tienen datos y visualización, pero les falta inteligencia predictiva. PRISMA puede ser el **módulo de inteligencia** que integran en sus soluciones.
-
-| Empresa | Qué tienen | Qué les falta | PRISMA aporta |
-|---------|------------|---------------|---------------|
-| **Tracasa** | Gemelo urbano Pamplona | Solo visualización | Predicción cascadas |
-| **iris360** | Plataforma IoT + gemelo 3D | Dashboards reactivos | Razonamiento IA |
-| **Integradores Smart City** | Datos + capas GIS | Inteligencia situacional | El cerebro |
-| **Consultoras digitales** | Proyectos gemelos para clientes | Diferenciación | IA como servicio |
-
-**Modelo:** PRISMA como módulo/API que se integra en gemelos de terceros → escalabilidad sin fuerza de ventas masiva.
-
-### Modelo dual: B2G como ancla, B2B como escala
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         PRISMA                                   │
-│              (Inteligencia de riesgos en cascada)               │
-└─────────────────────────────────────────────────────────────────┘
-                    │                           │
-         ┌──────────┴──────────┐     ┌─────────┴──────────┐
-         ▼                      ▼     ▼                    ▼
-┌─────────────────┐    ┌─────────────────────────────────────────┐
-│     B2G         │    │                B2B                       │
-│  (Ancla/Piloto) │    │           (Escalabilidad)                │
-├─────────────────┤    ├─────────────────────────────────────────┤
-│ • 112 Navarra   │    │ • Utilities (agua, energía)             │
-│ • Ayuntamientos │    │ • Seguros (pricing, claims)             │
-│ • Protección    │    │ • Inmobiliarias (activos)               │
-│   Civil         │    │ • Eventos (San Fermín, festivales)      │
-│                 │    │ • Industria (heat stress, continuidad)  │
-│ Valor: piloto,  │    │ • Logística (rutas, flotas)             │
-│ credibilidad,   │    │                                         │
-│ caso de uso     │    │ Valor: escalabilidad, recurrencia,      │
-│                 │    │ ciclos cortos, atractivo inversor       │
-└─────────────────┘    └─────────────────────────────────────────┘
-```
-
-### Data Spaces como canal de monetización B2B
-
-```
-PRISMA (productor de inteligencia)
-        │
-        ▼
-Data Space (marketplace europeo)
-        │
-        ├── Suscripción "Alertas zona industrial Pamplona"
-        ├── Suscripción "Riesgos eventos masivos Navarra"  
-        ├── Suscripción "Heat stress laboral tiempo real"
-        ├── API "Predicción cascada por coordenadas"
-        │
-        ▼
-Consumidores B2B pagan por alertas relevantes
-```
-
-**Ventaja Data Spaces:** No vendes a cada empresa individualmente → publicas en el marketplace y las empresas se suscriben. Escalabilidad sin fuerza de ventas masiva.
-
-### Resumen para inversores
-
-| Fase | Canal | Cliente | Valor |
-|------|-------|---------|-------|
-| **MVP** | Directo | 112 Navarra | Piloto, credibilidad, caso de uso |
-| **v1** | Directo | Utilities Navarra | Primeros ingresos B2B |
-| **v2** | Data Space | Multi-sector | Escalabilidad, recurrencia |
-| **v3** | Multi-región | España + UE | Expansión geográfica |
+| Fase | Cliente | Valor |
+|------|---------|-------|
+| MVP | 112 Navarra | Piloto, credibilidad |
+| v1 | Utilities Navarra | Primeros ingresos B2B |
+| v2 | Data Space multi-sector | Escalabilidad |
 
 ---
 
@@ -969,65 +691,34 @@ Consumidores B2B pagan por alertas relevantes
 
 ## 🔗 Data Space Ready
 
-### PRISMA: FIWARE-native desde día 1
+> **Expandir en v2.**
 
-- **Powered by FIWARE** → Certificación objetivo Q4 2026
-- **NGSI-v2/NGSI-LD** → Interoperabilidad nativa con cualquier sistema FIWARE
-- **Smart Data Models** → Entidades estandarizadas (WeatherObserved, AirQualityObserved, Alert...)
-- **Context Broker** → Orion-LD como fuente de verdad
-- **MCP FIWARE** → Model Context Protocol desarrollado para integrar LLMs con FIWARE (activo propio, ya operativo)
+PRISMA = FIWARE-native desde día 1: NGSI-v2/LD, Smart Data Models, Context Broker, MCP FIWARE (activo propio operativo).
 
-### Data Spaces: El futuro de los datos en Europa
+Preparado para: GAIA-X, IDSA, Data Spaces sectoriales.
 
-PRISMA está preparado para conectar con:
-- **GAIA-X** → Infraestructura de datos federada europea
-- **IDSA** → International Data Spaces Association
-- **Data Spaces sectoriales** → Energía, Movilidad, Salud, Smart Cities
-
-### Modelo de negocio futuro (post-MVP)
-
-```
-PRISMA genera alertas contextualizadas
-        ↓
-Data Space (marketplace de datos)
-        ↓
-Suscriptores pagan por alertas relevantes:
-  • Empresas zona industrial
-  • Organizadores eventos (San Fermín)
-  • Sanidad privada
-  • Aseguradoras
-  • Medios de comunicación
-```
-
-> **Mensaje para inversores:** PRISMA no es solo un producto, es un **nodo en el ecosistema europeo de datos**. Preparado para el futuro de la interoperabilidad.
+**Mensaje inversores:** PRISMA = nodo en ecosistema europeo de datos.
 
 ---
 
-## 📋 Decisiones Pendientes
+## 📋 Decisiones Tomadas
 
-### Técnicas
-- [x] ¿Qué LLM usar? → **GPT-4o** (Mistral en fase posterior)
-- [ ] ¿SMS real o simulado para demo? → Simulado
-- [x] ¿Integración real con AEMET o datos sintéticos? → **Sintéticos**, entidades FIWARE reales
+| Decisión | Resultado |
+|----------|-----------|
+| LLM | GPT-4o (Mistral v2) |
+| Datos | Sintéticos via FIWARE MCP |
+| Escenarios | 3 fechas (15 Jun, 6 Jul, 1 Ago) |
+| n8n-1 | ❌ Eliminado → script directo |
+| Caso cyber | Aplazado a v2 |
 
-### Demo
-- [x] ¿Cuántos escenarios de fecha preparar? → **3** (15 Jun, 1 Jul, 1 Ago)
-- [ ] ¿Mostrar mapa o solo chat?
+### Pendiente
+- [ ] Mapa: ¿mostrar o solo chat?
+- [ ] Narrativa pitch: ¿DANA o calor 2023 primero?
 
-### Narrativa
-- [ ] ¿Empezar por DANA o por ola calor 2023?
-- [ ] ¿Mencionar San Fermín explícitamente?
-
-### Gestión de latencia LLM (riesgo en demo)
-GPT-4o puede tardar 3-8 segundos. Mitigaciones:
-- **Streaming**: `st.write_stream` para mostrar respuesta mientras se genera
-- **Spinner con contexto**: "PRISMA analizando 7 fuentes de datos..."
-- **Respuestas cacheadas**: Para preguntas frecuentes ("¿cuál es la situación?")
-
-### Plan B para la demo (si algo falla el 19 dic)
-- **Video pregrabado** de la demo funcionando
-- **Modo offline**: Datos hardcodeados que no dependan de FIWARE en vivo
-- **Script de respuestas**: Si LLM no responde, leer de guion preparado
+### Plan B (si algo falla)
+- Video pregrabado
+- Modo offline con datos hardcodeados
+- Script de respuestas manual
 
 ---
 
@@ -1065,47 +756,13 @@ GPT-4o puede tardar 3-8 segundos. Mitigaciones:
 
 ---
 
-## 🎤 El Meta-Argumento del Pitch
+## 🎤 Meta-Argumento del Pitch
 
-### La historia detrás de la demo
+> **"Donde otros necesitan 18 meses y 2M€, nosotros entregamos en 6 meses con 250k€."**
 
-> "Esto que veis es el resultado de dos meses de trabajo con herramientas modernas: Cursor, LLMs, MCPs, n8n, FIWARE.
->
-> **Esto demuestra la velocidad de iteración que permiten las herramientas de nueva generación.**
->
-> Con un equipo de 3-4 personas, podríamos tener v1 en producción en 6 meses."
+**Ventaja:** Low-code (n8n, Streamlit) + AI-assisted dev (Cursor) + Estándares abiertos (FIWARE, MCP).
 
-### Por qué esto importa
-
-Las empresas de software tradicionales necesitan:
-- Equipos de 10-20 personas
-- 12-18 meses de desarrollo
-- Millones en inversión inicial
-
-PRISMA demuestra que con:
-- **Low-code** (n8n, Streamlit)
-- **AI-assisted development** (Cursor + LLMs)
-- **Estándares abiertos** (FIWARE, MCP)
-- **Infraestructura cloud moderna**
-
-...un equipo pequeño puede iterar a velocidades antes imposibles.
-
-### El mensaje para inversores
-
-> "No estáis invirtiendo solo en un producto. Estáis invirtiendo en un equipo que domina las herramientas de nueva generación.
->
-> Donde otros necesitan 18 meses y 2M€, nosotros entregamos en 6 meses con 250k€.
->
-> **Esa es la ventaja competitiva real.**"
-
-### Activos diferenciadores ya operativos
-
-| Activo | Estado | Diferencial |
-|--------|--------|-------------|
-| **MCP FIWARE** | ✅ Operativo | Integración LLM ↔ Context Broker |
-| **Sandbox FIWARE** | ✅ Operativo | Entidades, suscripciones |
-| **n8n workflows** | 🔄 En desarrollo | Orquestación, agente |
-| **Conocimiento dominio** | ✅ Sólido | 112 Navarra, emergencias, CECOPI |
+**Activos operativos:** MCP FIWARE ✅ | Sandbox FIWARE ✅ | Conocimiento dominio ✅
 
 ---
 

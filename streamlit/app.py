@@ -24,7 +24,7 @@ with st.sidebar:
     
     fecha = st.radio(
         "Fecha escenario",
-        ["15 Junio", "1 Julio (San Fermín)", "1 Agosto"],
+        ["15 Junio", "6 Julio (San Fermín)", "1 Agosto"],
         index=1
     )
     
@@ -80,7 +80,7 @@ with tab_scenario:
     with col1:
         st.metric("Población", f"{ctx['poblacion']:,}")
     with col2:
-        st.metric("Hospital", f"{ctx['hospital_capacity_pct']}%")
+        st.metric("Cap. Operativa", f"{ctx['capacidad_operativa_pct']}%")
     with col3:
         st.metric("Tensión política", ctx['contexto_politico'])
     with col4:

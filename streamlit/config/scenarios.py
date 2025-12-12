@@ -12,29 +12,29 @@ SCENARIOS = {
         "fecha_display": "15 Junio",
         "poblacion": 350000,
         "perfil_demografico": "Familias, niños/jóvenes",
-        "hospital_capacity_pct": 100,
+        "capacidad_operativa_pct": 100,  # % personal sanitario disponible
         "contexto_politico": "Bajo",
         "riesgo_principal": "Niños/jóvenes expuestos, familias en exteriores",
         "fire_spread_multiplier": 1.0,
         "narrativa": "Fin de curso escolar, apertura de piscinas municipales. Inicio de temporada de calor."
     },
     
-    "1_julio": {
-        "fecha_display": "1 Julio",
-        "poblacion": 600000,
-        "perfil_demografico": "Turistas + locales",
-        "hospital_capacity_pct": 95,
+    "6_julio": {
+        "fecha_display": "6 Julio",
+        "poblacion": 1000000,
+        "perfil_demografico": "Turistas internacionales + locales + medios",
+        "capacidad_operativa_pct": 90,  # % personal sanitario disponible
         "contexto_politico": "Máximo",
-        "riesgo_principal": "¿Se cancela San Fermín? Crisis reputacional internacional",
+        "riesgo_principal": "Chupinazo en horas. ¿Se cancela San Fermín? Crisis reputacional internacional",
         "fire_spread_multiplier": 1.2,
-        "narrativa": "Pre-San Fermín, turistas llegando. Medios internacionales (CNN, BBC) ya en Pamplona. Máxima tensión política."
+        "narrativa": "Día del Chupinazo. 1 millón de personas en la ciudad. Medios internacionales (CNN, BBC) en directo. Máxima tensión política."
     },
     
     "1_agosto": {
         "fecha_display": "1 Agosto",
         "poblacion": 250000,
         "perfil_demografico": "Residentes, población vulnerable",
-        "hospital_capacity_pct": 70,  # Vacaciones personal sanitario
+        "capacidad_operativa_pct": 70,  # % personal sanitario disponible (vacaciones)
         "contexto_politico": "Medio",
         "riesgo_principal": "Personal sanitario reducido, incendio 5ª generación, menos recursos",
         "fire_spread_multiplier": 1.5,  # Más rápido, más intenso
@@ -45,7 +45,7 @@ SCENARIOS = {
 # Mapeo de selección UI → key
 SCENARIO_MAP = {
     "15 Junio": "15_junio",
-    "1 Julio (San Fermín)": "1_julio",
+    "6 Julio (San Fermín)": "6_julio",
     "1 Agosto": "1_agosto"
 }
 
