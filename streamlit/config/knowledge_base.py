@@ -52,6 +52,58 @@ KNOWLEDGE_BASE = {
         "valles_riesgo": ["Roncal", "Salazar", "Baztán"],
         "viento_sur": "Bochorno - crea condiciones de ignición",
         "viento_norte": "Trae humo de incendios pirenaicos a Pamplona",
-    }
+    },
+    
+    "cascadas_tipicas": [
+        {
+            "trigger": "Temperatura > 40°C + Humedad < 20%",
+            "cascada": [
+                "Golpes de calor aumentan (+30% llamadas 112)",
+                "Urgencias se saturan (2-4h)",
+                "Población vulnerable en riesgo (residencias)",
+            ],
+            "ventana_accion": "2-3 horas"
+        },
+        {
+            "trigger": "Incendio activo + Viento gira a Norte",
+            "cascada": [
+                "Humo llega a Pamplona (1-2h)",
+                "PM2.5 se dispara (>150 µg/m³)",
+                "Problemas respiratorios (+40% llamadas 112)",
+                "Urgencias saturadas si ya hay carga por calor",
+            ],
+            "ventana_accion": "1-2 horas antes de que llegue el humo"
+        },
+        {
+            "trigger": "PM2.5 > 150 + Urgencias > 85%",
+            "cascada": [
+                "Sistema sanitario al límite",
+                "Cancelar cirugías no urgentes",
+                "Derivar pacientes a otros centros",
+                "Si es pre-San Fermín: decisión política crítica",
+            ],
+            "ventana_accion": "30 min - 1 hora"
+        },
+        {
+            "trigger": "Llamadas 112 respiratorias +40% + Sensores oficiales normales",
+            "inferencia": "Humo llegando a zonas sin sensores (barrios norte)",
+            "cascada": [
+                "Sensores confirmarán en 2-3 horas",
+                "Para entonces urgencias ya saturadas",
+                "Actuar ANTES de confirmación oficial",
+            ],
+            "ventana_accion": "2 horas de ventaja si se actúa ya"
+        },
+        {
+            "trigger": "Contexto San Fermín + cualquier crisis",
+            "cascada": [
+                "Amplificación mediática internacional (CNN, BBC)",
+                "Presión política máxima",
+                "Decisión sobre fiestas requerida",
+                "Impacto económico potencial: 100M€+",
+            ],
+            "ventana_accion": "Comunicación inmediata"
+        },
+    ]
 }
 

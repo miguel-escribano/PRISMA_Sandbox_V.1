@@ -51,7 +51,7 @@ ctx = SCENARIOS[scenario_key]
 # MAIN - Tabs
 # =============================================================================
 
-tab_main, tab_data, tab_kb = st.tabs(["📊 Vista Principal", "📡 Contexto & Streams", "📚 Knowledge Base"])
+tab_main, tab_scenario, tab_domain, tab_cascades = st.tabs(["📊 Vista Principal", "📡 Escenario", "📚 Dominio", "🔗 Cascadas"])
 
 # -----------------------------------------------------------------------------
 # TAB 1: Vista Principal
@@ -73,7 +73,7 @@ with tab_main:
 # -----------------------------------------------------------------------------
 # TAB 2: Contexto + Streams
 # -----------------------------------------------------------------------------
-with tab_data:
+with tab_scenario:
     # Contexto
     st.markdown("### 📋 Contexto del Escenario")
     col1, col2, col3, col4 = st.columns(4)
@@ -106,7 +106,7 @@ with tab_data:
 # -----------------------------------------------------------------------------
 # TAB 3: Knowledge Base
 # -----------------------------------------------------------------------------
-with tab_kb:
+with tab_domain:
     st.markdown("### 📚 Knowledge Base del Agente")
     st.caption("Información estática que el LLM usa para razonar")
     
@@ -134,3 +134,19 @@ with tab_kb:
         with st.expander("📋 Protocolos", expanded=True):
             for k, v in KNOWLEDGE_BASE["protocolos"].items():
                 st.markdown(f"- **{k}**: {v}")
+
+# -----------------------------------------------------------------------------
+# TAB 4: Cascadas (Few-shot)
+# -----------------------------------------------------------------------------
+with tab_cascades:
+    st.markdown("### 🔗 Cascadas Típicas (Few-shot para LLM)")
+    st.caption("Ejemplos de razonamiento que guían al agente")
+    
+    for i, cascade in enumerate(KNOWLEDGE_BASE["cascadas_tipicas"]):
+        with st.expander(f"**{cascade['trigger']}**", expanded=True):
+            if "inferencia" in cascade:
+                st.info(f"💡 Inferencia: {cascade['inferencia']}")
+            st.markdown("**Cascada:**")
+            for step in cascade["cascada"]:
+                st.markdown(f"  → {step}")
+            st.warning(f"⏱️ Ventana de acción: {cascade['ventana_accion']}")
