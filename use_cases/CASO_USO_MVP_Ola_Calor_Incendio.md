@@ -585,6 +585,20 @@ T+18min: PUNTO DE DECISIÓN
 - LLM con: Knowledge Base + Cascadas few-shot
 - Devuelve: respuesta + razonamiento + acciones recomendadas
 
+### Prompting activo (importante)
+
+El prompt del agente debe incluir **preguntas que fuercen análisis situacional**:
+
+```
+Dado el estado actual de los datos, responde:
+1. ¿Hay alguna combinación de factores que por separado no alarman pero juntos sí?
+2. ¿Algún cambio reciente (viento, temperatura) altera el riesgo de datos anteriores?
+3. ¿Qué pasará en 1-2h si la tendencia continúa?
+4. ¿Hay ventana de acción que se esté cerrando?
+```
+
+**Por qué:** Sin estas preguntas, el LLM puede limitarse a describir datos. Con ellas, forzamos **razonamiento predictivo** sobre cascadas.
+
 ---
 
 ## ⚡ Plan de Ejecución (Semana 12-19 dic)

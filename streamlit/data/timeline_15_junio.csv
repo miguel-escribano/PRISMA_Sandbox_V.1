@@ -1,0 +1,13 @@
+t_min,sim_time,WeatherObserved_temperature,WeatherObserved_relativeHumidity,WeatherObserved_windSpeed,WeatherObserved_windDirection,WeatherObserved_forecast6h,WeatherObserved_forecastConfidence,AirQualityObserved_pm25,AirQualityObserved_pm10,ForestFire_status,ForestFire_severity,ForestFire_affectedArea,ForestFire_distanceToPamplona,EmergencyCalls112_respiratoryCalls,EmergencyCalls112_heatStrokeCalls,EmergencyCalls112_deltaVsNormal,HospitalOccupancy_emergencyOccupancy,HospitalOccupancy_icuOccupancy,SocialMediaAlert_mentionCount,SocialMediaAlert_sentiment
+0,09:00,34,45,5,S,stable,70,25,35,active,medium,150,65,5,2,0,48,55,15,neutral
+2,09:12,35,42,6,S,stable,70,28,38,active,medium,180,64,6,3,5,50,56,25,neutral
+4,09:24,36,38,8,SW,wind_change,60,35,48,active,medium,220,62,7,4,10,52,58,40,neutral
+6,09:36,37,35,10,N,wind_change,60,55,75,active,high,280,58,10,5,20,55,60,80,negative
+8,09:48,38,32,10,N,wind_change,65,85,115,active,high,350,54,15,7,35,60,65,150,negative
+10,10:00,39,30,8,NW,wind_change,70,110,150,active,high,420,50,22,9,50,68,70,250,negative
+12,10:12,39,30,6,NW,wind_change,75,130,175,high,high,500,47,28,11,65,72,74,350,alarm
+14,10:24,38,32,5,W,wind_change,80,115,155,high,high,550,48,25,10,55,70,72,300,negative
+16,10:36,37,35,6,SW,wind_change,85,90,120,active,medium,580,50,20,8,40,65,68,200,negative
+18,10:48,36,38,7,S,stable,85,65,85,active,medium,600,52,15,6,25,60,64,120,neutral
+20,11:00,36,40,8,S,stable,90,45,60,active,medium,610,55,10,5,15,55,60,80,neutral
+

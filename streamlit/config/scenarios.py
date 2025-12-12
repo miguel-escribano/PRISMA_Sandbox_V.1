@@ -56,16 +56,20 @@ SCENARIO_MAP = {
 STREAMS = {
     "WeatherObserved": {
         "entity_id": "WeatherObserved:Pamplona:01",
+        "location": {"lat": 42.8125, "lon": -1.6458, "name": "Estación Meteo Pamplona"},
         "attributes": {
             "temperature": {"type": "Number", "unit": "°C", "range": [20, 45]},
             "relativeHumidity": {"type": "Number", "unit": "%", "range": [10, 100]},
             "windSpeed": {"type": "Number", "unit": "m/s", "range": [0, 30]},
             "windDirection": {"type": "Text", "values": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]},
+            "forecast6h": {"type": "Text", "values": ["stable", "worsening", "rain_expected", "wind_change"]},
+            "forecastConfidence": {"type": "Number", "unit": "%", "range": [0, 100]},
         }
     },
     
     "AirQualityObserved": {
         "entity_id": "AirQualityObserved:Pamplona:01",
+        "location": {"lat": 42.8168, "lon": -1.6432, "name": "Estación Calidad Aire Pamplona"},
         "attributes": {
             "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 500]},
             "pm10": {"type": "Number", "unit": "µg/m³", "range": [0, 600]},
@@ -76,16 +80,18 @@ STREAMS = {
     
     "ForestFire": {
         "entity_id": "ForestFire:Roncal:01",
+        "location": {"lat": 42.7892, "lon": -0.9561, "name": "Valle de Roncal (Pirineos)"},
         "attributes": {
             "status": {"type": "Text", "values": ["inactive", "detected", "active", "contained", "extinguished"]},
             "severity": {"type": "Text", "values": ["low", "medium", "high", "extreme"]},
             "affectedArea": {"type": "Number", "unit": "ha", "range": [0, 10000]},
-            "spreadRate": {"type": "Number", "unit": "ha/h", "range": [0, 100]},
+            "distanceToPamplona": {"type": "Number", "unit": "km", "range": [0, 100]},
         }
     },
     
     "EmergencyCalls112": {
         "entity_id": "EmergencyCalls112:Pamplona:01",
+        "location": {"lat": 42.8055, "lon": -1.6460, "name": "SOS Navarra 112"},
         "attributes": {
             "totalCalls": {"type": "Number", "unit": "calls/h", "range": [0, 500]},
             "respiratoryCalls": {"type": "Number", "unit": "calls/h", "range": [0, 100]},
@@ -96,6 +102,7 @@ STREAMS = {
     
     "HospitalOccupancy": {
         "entity_id": "HospitalOccupancy:HUN:01",
+        "location": {"lat": 42.8063, "lon": -1.6544, "name": "Hospital Universitario de Navarra"},
         "attributes": {
             "emergencyOccupancy": {"type": "Number", "unit": "%", "range": [0, 150]},
             "icuOccupancy": {"type": "Number", "unit": "%", "range": [0, 100]},
@@ -105,6 +112,7 @@ STREAMS = {
     
     "SocialMediaAlert": {
         "entity_id": "SocialMediaAlert:Pamplona:01",
+        "location": {"lat": 42.8125, "lon": -1.6458, "name": "Pamplona (agregado)"},
         "attributes": {
             "mentionCount": {"type": "Number", "unit": "mentions/h", "range": [0, 1000]},
             "sentiment": {"type": "Text", "values": ["positive", "neutral", "negative", "alarm"]},

@@ -32,6 +32,16 @@ with st.sidebar:
     
     st.markdown("---")
     
+    speed = st.select_slider(
+        "⏱️ Velocidad",
+        options=[1, 2, 4, 6, 10, 20],
+        value=6
+    )
+    sim_duration = 180 // speed  # 3h simuladas
+    st.caption(f"📝 {sim_duration} min demo = 3h simuladas")
+    
+    st.markdown("---")
+    
     col1, col2 = st.columns(2)
     with col1:
         if st.button("▶️ Iniciar", use_container_width=True):
@@ -57,18 +67,18 @@ tab_main, tab_scenario, tab_domain, tab_cascades = st.tabs(["📊 Vista Principa
 # TAB 1: Vista Principal
 # -----------------------------------------------------------------------------
 with tab_main:
-    st.markdown("### 🗺️ Mapa")
-    st.container(height=250, border=True)
+    st.caption("🗺️ Mapa")
+    st.container(height=350, border=True)
     
     col_chat, col_reasoning = st.columns(2)
     
     with col_chat:
-        st.markdown("### 💬 Chat")
-        st.container(height=200, border=True)
+        st.caption("💬 Chat")
+        st.container(height=180, border=True)
     
     with col_reasoning:
-        st.markdown("### 🧠 Razonamiento")
-        st.container(height=200, border=True)
+        st.caption("🧠 Razonamiento")
+        st.container(height=180, border=True)
 
 # -----------------------------------------------------------------------------
 # TAB 2: Contexto + Streams
@@ -94,12 +104,18 @@ with tab_scenario:
     st.markdown("### 📡 Streams de Datos → FIWARE")
     
     for stream_name, stream_config in STREAMS.items():
-        with st.expander(f"**{stream_name}** ({stream_config['entity_id']})", expanded=True):
+        loc = stream_config.get("location", {})
+        loc_str = f"📍 {loc.get('name', '')} ({loc.get('lat', '')}, {loc.get('lon', '')})"
+        dist = stream_config.get("distance_to_pamplona_km")
+        if dist:
+            loc_str += f" — {dist}km de Pamplona"
+        
+        with st.expander(f"**{stream_name}** — {loc.get('name', '')}", expanded=True):
+            st.caption(loc_str)
             cols = st.columns(len(stream_config["attributes"]))
             for i, (attr_name, attr_config) in enumerate(stream_config["attributes"].items()):
                 with cols[i % len(cols)]:
                     unit = attr_config.get("unit", "")
-                    # TODO: valores reales cuando scenario_running
                     st.caption(attr_name)
                     st.code(f"-- {unit}")
 
