@@ -1,6 +1,7 @@
 """PRISMA MVP - Ola de Calor + Incendio."""
 import streamlit as st
 from config.scenarios import SCENARIOS, SCENARIO_MAP, STREAMS
+from config.knowledge_base import KNOWLEDGE_BASE
 
 st.set_page_config(page_title="PRISMA", page_icon="🔮", layout="wide")
 
@@ -50,7 +51,7 @@ ctx = SCENARIOS[scenario_key]
 # MAIN - Tabs
 # =============================================================================
 
-tab_main, tab_data = st.tabs(["📊 Vista Principal", "📡 Contexto & Streams"])
+tab_main, tab_data, tab_kb = st.tabs(["📊 Vista Principal", "📡 Contexto & Streams", "📚 Knowledge Base"])
 
 # -----------------------------------------------------------------------------
 # TAB 1: Vista Principal
@@ -92,13 +93,44 @@ with tab_data:
     # Streams
     st.markdown("### 📡 Streams de Datos → FIWARE")
     
-    if not st.session_state.scenario_running:
-        st.info("Inicia el escenario para ver los streams")
-    else:
-        for stream_name, stream_config in STREAMS.items():
-            with st.expander(f"**{stream_name}** ({stream_config['entity_id']})", expanded=True):
-                cols = st.columns(len(stream_config["attributes"]))
-                for i, (attr_name, attr_config) in enumerate(stream_config["attributes"].items()):
-                    with cols[i % len(cols)]:
-                        unit = attr_config.get("unit", "")
-                        st.metric(attr_name, f"--{unit}")
+    for stream_name, stream_config in STREAMS.items():
+        with st.expander(f"**{stream_name}** ({stream_config['entity_id']})", expanded=True):
+            cols = st.columns(len(stream_config["attributes"]))
+            for i, (attr_name, attr_config) in enumerate(stream_config["attributes"].items()):
+                with cols[i % len(cols)]:
+                    unit = attr_config.get("unit", "")
+                    # TODO: valores reales cuando scenario_running
+                    st.caption(attr_name)
+                    st.code(f"-- {unit}")
+
+# -----------------------------------------------------------------------------
+# TAB 3: Knowledge Base
+# -----------------------------------------------------------------------------
+with tab_kb:
+    st.markdown("### 📚 Knowledge Base del Agente")
+    st.caption("Información estática que el LLM usa para razonar")
+    
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        with st.expander("🏥 Infraestructura Crítica", expanded=True):
+            st.json(KNOWLEDGE_BASE["infraestructura_critica"])
+        
+        with st.expander("⚠️ Umbrales de Alerta", expanded=True):
+            st.json(KNOWLEDGE_BASE["umbrales_alerta"])
+        
+        with st.expander("🗺️ Geografía", expanded=True):
+            st.json(KNOWLEDGE_BASE["geografia"])
+    
+    with col2:
+        with st.expander("✅ Acciones Disponibles", expanded=True):
+            for a in KNOWLEDGE_BASE["acciones_disponibles"]:
+                st.markdown(f"- **{a['accion']}** → {a['responsable']}")
+        
+        with st.expander("👥 Stakeholders", expanded=True):
+            for k, v in KNOWLEDGE_BASE["stakeholders"].items():
+                st.markdown(f"- **{k}**: {v}")
+        
+        with st.expander("📋 Protocolos", expanded=True):
+            for k, v in KNOWLEDGE_BASE["protocolos"].items():
+                st.markdown(f"- **{k}**: {v}")
