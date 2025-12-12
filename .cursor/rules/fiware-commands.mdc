@@ -1,0 +1,17 @@
+# PRISMA Sandbox - FIWARE Commands
+
+## Commands
+- Entities → Read .cursor/commands/entities.md
+- Subscriptions → Read .cursor/commands/subscriptions.md
+- STH → Read .cursor/commands/sth.md
+- Perseo → Read .cursor/commands/perseo.md
+- IoT Agent → Read .cursor/commands/iot-agent.md
+
+## Key References
+- Postman: C:\Users\migue\FIWARE-MCP-Server-Auth-Environment\ThinkingCities APIs sdmenvironment.postman_collection.json
+- Smart Data Models: https://github.com/smart-data-models/
+- NGSI-v2 Spec: https://fiware.github.io/specifications/ngsiv2/stable/
+
+## Format
+- API: NGSI-v2 (NOT NGSI-LD)
+- Attributes: { "value": X, "type": "Type" }

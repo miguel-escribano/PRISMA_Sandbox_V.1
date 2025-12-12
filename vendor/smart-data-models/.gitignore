@@ -1,0 +1,9 @@
+# Ignore the cloned repos themselves (they're git submodules)
+# Keep only this README and .gitignore tracked
+dataModel.*/
+Smart-Sensoring/
+
+# But track any custom files we add
+!README.md
+!.gitignore
+

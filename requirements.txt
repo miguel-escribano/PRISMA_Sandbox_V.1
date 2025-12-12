@@ -1,0 +1,31 @@
+# PRISMA Sandbox V.1 - Python Dependencies
+
+# Smart Data Models
+pysmartdatamodels
+
+# FIWARE Integration
+requests
+python-dotenv
+
+# MCP Server (optional - for running MCP server)
+fastmcp
+
+# Data Processing
+pandas
+numpy
+
+# Geospatial
+geojson
+shapely
+geopandas
+
+# AI/ML (planned)
+# langchain
+# openai
+
+# Workflow Automation
+# n8n-client (if available)
+
+# Web UI
+streamlit
+

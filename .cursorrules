@@ -1,0 +1,82 @@
+# PRISMA MVP Development Rules
+
+## Principio Rector: NO OVERENGINEER
+
+**Fecha límite:** 19 diciembre 2025 (Elevator Pitch)
+**Objetivo:** Demo funcional de 7 minutos, no producto completo.
+
+---
+
+## ⛔ NO HACER (hasta después del pitch)
+
+1. **No abstracciones prematuras** — Si solo se usa una vez, no hagas función/clase
+2. **No manejo de errores exhaustivo** — Try/except básico, no error handling enterprise
+3. **No tests unitarios** — La demo ES el test
+4. **No logging estructurado** — print() es suficiente para debug
+5. **No documentación de código** — Docstrings mínimos, el código debe ser obvio
+6. **No optimización** — Si funciona, no lo toques
+7. **No features que no se demuestren** — Si no se ve en el pitch, no existe
+8. **No refactoring** — Código feo que funciona > código bonito a medias
+9. **No configuración dinámica** — Hardcodear valores para la demo está OK
+10. **No múltiples entornos** — Solo desarrollo, no staging/prod
+
+---
+
+## ✅ SÍ HACER
+
+1. **Código que funcione** — Prioridad absoluta
+2. **Camino feliz primero** — Happy path, sin edge cases
+3. **Hardcodear para la demo** — Valores fijos, JSON inline, está permitido
+4. **Copiar/pegar** — Si acelera, hazlo. DRY es para v2
+5. **Comentarios TODO** — Marcar lo que mejorar después: `# TODO: v2 - hacer X`
+6. **Commits frecuentes** — Cada feature que funcione, commit
+7. **Plan B siempre** — Cada componente debe tener fallback offline
+
+---
+
+## Arquitectura MVP
+
+```
+streamlit/
+├── app.py              # Entry point, todo junto inicialmente
+├── components/         # Solo si app.py supera 300 líneas
+│   ├── chat.py
+│   ├── sidebar.py
+│   └── scenario.py
+└── assets/             # Logos, imágenes
+
+n8n/                    # Workflows (no código Python)
+
+src/                    # Solo utilidades críticas
+├── fiware_client.py    # Ya existe
+└── config.py           # Ya existe
+```
+
+---
+
+## Flujo de desarrollo
+
+1. **Vertical slice** — Una feature completa end-to-end antes de la siguiente
+2. **Demo primero** — ¿Se ve bien en el pitch? Si no, no importa
+3. **Fake it till you make it** — Datos hardcodeados > integración rota
+
+---
+
+## Checklist antes de cada commit
+
+- [ ] ¿Funciona el happy path?
+- [ ] ¿Se ve en la demo de 7 min?
+- [ ] ¿Tiene Plan B si falla?
+- [ ] ¿Es lo mínimo necesario?
+
+---
+
+## Recordatorio
+
+> "Premature optimization is the root of all evil" — Knuth
+> 
+> "If it works, ship it" — MVP mantra
+
+**Después del 19 dic:** Refactorizar, tests, documentación, arquitectura limpia.
+**Ahora:** Demo que funcione.
+

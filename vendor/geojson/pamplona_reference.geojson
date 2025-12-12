@@ -1,0 +1,72 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ayuntamiento de Pamplona",
+        "type": "government",
+        "address": "Plaza Consistorial, s/n"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-1.6440304, 42.8125217]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Catedral de Pamplona",
+        "type": "religious",
+        "address": "Calle Dormitalería, 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-1.6443889, 42.8180556]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Ciudadela de Pamplona",
+        "type": "park",
+        "address": "Avenida del Ejército"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-1.6383333, 42.8138889]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Universidad de Navarra",
+        "type": "education",
+        "address": "Campus Universitario"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-1.6627778, 42.8011111]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Pamplona City Center Area",
+        "type": "boundary",
+        "description": "Approximate city center boundary"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-1.6500, 42.8100],
+          [-1.6380, 42.8100],
+          [-1.6380, 42.8200],
+          [-1.6500, 42.8200],
+          [-1.6500, 42.8100]
+        ]]
+      }
+    }
+  ]
+}
+

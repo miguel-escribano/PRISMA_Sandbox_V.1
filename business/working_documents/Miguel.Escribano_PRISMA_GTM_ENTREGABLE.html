@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>PRISMA Go-to-Market</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="custom-styles.css" />
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">PRISMA Go-to-Market</h1>
+</header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#prisma---go-to-market-strategy">PRISMA - Go-to-Market Strategy</a>
+<ul>
+<li><a href="#resumen-ejecutivo">Resumen Ejecutivo</a>
+<ul>
+<li><a href="#el-problema-que-resolvemos">El problema que resolvemos</a></li>
+<li><a href="#nuestra-solución">Nuestra solución</a></li>
+<li><a href="#estado-actual-del-proyecto">Estado actual del proyecto</a></li>
+<li><a href="#mercado-y-oportunidad">Mercado y oportunidad</a></li>
+<li><a href="#credibilidad-del-fundador">Credibilidad del fundador</a></li>
+<li><a href="#plan-de-financiación-y-validación">Plan de financiación y validación</a></li>
+<li><a href="#arquitectura-prisma---programa-de-desarrollo-aiops">Arquitectura PRISMA - Programa de Desarrollo AIOps</a></li>
+</ul></li>
+<li><a href="#descubrimiento-recopilación-de-datos-y-análisis">1. DESCUBRIMIENTO, RECOPILACIÓN DE DATOS Y ANÁLISIS</a>
+<ul>
+<li><a href="#a.-definición-de-producto">A. Definición de producto</a></li>
+<li><a href="#b.-objetivos-estratégicos">B. Objetivos estratégicos</a></li>
+<li><a href="#c.-identificación-del-mercado-y-de-tu-cliente">C. Identificación del Mercado y de tu cliente</a></li>
+<li><a href="#d.-inteligencia-de-mercado-e-inteligencia-competitiva">D. Inteligencia de Mercado e inteligencia competitiva</a></li>
+<li><a href="#e.-opciones-de-distribución">E. Opciones de distribución</a></li>
+<li><a href="#f.-prueba-betaprueba-de-mercado">F. Prueba beta/Prueba de mercado</a></li>
+</ul></li>
+<li><a href="#estrategia-go-to-market">2. ESTRATEGIA GO-TO-MARKET</a>
+<ul>
+<li><a href="#a.-business-case">A. Business Case</a></li>
+<li><a href="#b.-estrategia-de-mercado">B. Estrategia de mercado</a></li>
+<li><a href="#c.-pricing">C. Pricing</a></li>
+<li><a href="#d.-ventas-y-soporte-de-ventas">D. Ventas y soporte de ventas</a></li>
+<li><a href="#e.-soporte-técnico">E. Soporte técnico</a></li>
+<li><a href="#f.-hoja-de-ruta-del-producto">F. Hoja de ruta del producto</a></li>
+<li><a href="#g.-programas-externos-de-marketing">G. Programas externos de Marketing</a></li>
+<li><a href="#h.-pr-y-publicidad">H. PR y Publicidad</a></li>
+<li><a href="#i.-marketing-interno">I. Marketing Interno</a></li>
+<li><a href="#j.-presupuesto-y-recursos-indicadores-clave-de-rendimiento-kpi-y-métricas">J. Presupuesto y recursos: indicadores clave de rendimiento (KPI) y métricas</a></li>
+<li><a href="#k.-regulaciones">K. Regulaciones</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#anexos">ANEXOS</a>
+<ul>
+<li><a href="#anexo-1-plan-operativo-pitch-próximas-5-semanas">ANEXO 1: Plan Operativo Pitch (Próximas 5 semanas)</a></li>
+<li><a href="#anexo-2-roadmap-de-implementación-técnica-11-fases">ANEXO 2: Roadmap de Implementación Técnica (11 fases)</a></li>
+<li><a href="#anexo-3-exploración-de-mercado">ANEXO 3: Exploración de Mercado</a>
+<ul>
+<li><a href="#contexto">Contexto</a></li>
+<li><a href="#hallazgos-clave-del-mercado">Hallazgos Clave del Mercado</a></li>
+<li><a href="#sectores-críticos-prioritarios">Sectores Críticos Prioritarios</a></li>
+<li><a href="#análisis-swot">Análisis SWOT</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<h1 id="prisma---go-to-market-strategy">PRISMA - Go-to-Market Strategy</h1>
+<p><strong>Nombre proyecto</strong>: PRISMA (posible empresa futura: RESILIA)<br />
+<strong>Contacto</strong>: Miguel Escribano</p>
+<hr />
+<h2 id="resumen-ejecutivo">Resumen Ejecutivo</h2>
+<h3 id="el-problema-que-resolvemos">El problema que resolvemos</h3>
+<p>Las ciudades enfrentan una brecha crítica: cuando ocurre una emergencia (una inundación, un apagón eléctrico, una ola de calor extremo), los sistemas actuales solo detectan el evento inicial pero no anticipan los <strong>efectos en cascada</strong>. Por ejemplo, un apagón no solo corta la luz: colapsa hospitales, deja sin agua potable, paraliza el tráfico y puede provocar saqueos. A nivel global, los desastres naturales y tecnológicos causan pérdidas económicas de más de <strong>300.000 millones de dólares anuales</strong> (UNDRR, Global Assessment Report 2022), y el 70% de estas pérdidas ocurren en cascadas que podrían haberse mitigado con alerta temprana adecuada.</p>
+<p>La <strong>DANA de Valencia (octubre 2024)</strong> ejemplifica este problema: 224 fallecidos y 17.000 millones de euros en pérdidas por falta de coordinación entre AEMET, Confederación Hidrográfica del Júcar y Generalitat. Los datos meteorológicos e hidrológicos existían en silos sin fusión inteligente, las alertas llegaron tarde, y la dependencia de juicios técnicos y políticos retrasó evacuaciones críticas. A nivel global, el <strong>Texas Winter Storm Uri (febrero 2021)</strong> demostró cómo cascadas infraestructura crítica pueden ser letales: 246 muertos y USD 195.000 millones en pérdidas porque operadores de energía, agua y salud operaban en silos sin capacidad de anticipar el efecto dominó (frío extremo → colapso eléctrico → crisis hospitalaria). Un sistema como PRISMA hubiera fusionado automáticamente los datos, detectado el riesgo de cascada horas antes, y generado alertas objetivas sin depender de coordinación humana.</p>
+<p>En Navarra, estos desastres han costado <strong>80 millones de euros en dos décadas</strong> (Consorcio de Seguros).</p>
+<p>Hoy, los gestores de emergencias tienen datos dispersos en múltiples sistemas que no se comunican entre sí: sensores meteorológicos, cámaras de tráfico, redes sociales, llamadas al 112… pero nadie integra esta información para <strong>anticipar lo que viene</strong> ni coordinar respuestas rápidas. Además, nuevas regulaciones europeas como la Directiva de Resiliencia de Entidades Críticas (CER) y la Directiva de Seguridad de Redes e Información 2 (NIS2) obligan a ciudades y empresas críticas a mejorar sus capacidades de prevención urgentemente.</p>
+<h3 id="nuestra-solución">Nuestra solución</h3>
+<p>PRISMA es un <strong>sistema de inteligencia situacional</strong> que actúa como un “cerebro coordinador” para la gestión de emergencias tanto en entornos urbanos como en sectores industriales y empresariales. Funciona así:</p>
+<ol type="1">
+<li><strong>Observa constantemente</strong> múltiples fuentes de información (meteorología, sensores urbanos, redes sociales, servicios de emergencia)</li>
+<li><strong>Interpreta situaciones complejas</strong> detectando patrones que los humanos tardarían horas en ver</li>
+<li><strong>Predice riesgos en cascada</strong> (ej: “esta tormenta cortará la luz en 3 hospitales en 20 minutos”)</li>
+<li><strong>Sugiere acciones específicas</strong> a los operadores humanos, que siempre mantienen el control final</li>
+</ol>
+<p>Lo diferente de PRISMA es que <strong>razona como un experto humano</strong>. A diferencia de las soluciones actuales, no solo aplica reglas automáticas predefinidas (flujos de procesos). Sino que puede detectar situaciones nuevas que nunca ocurrieron antes y proponer respuestas adaptadas.</p>
+<h3 id="estado-actual-del-proyecto">Estado actual del proyecto</h3>
+<p><strong>Dónde estamos hoy (Noviembre 2025)</strong>: Miguel Escribano, el fundador, está desarrollando solo un prototipo funcional para demostrar en el <strong>Elevator Pitch del 19 de diciembre</strong> (40 días). El presupuesto personal inmediato es muy limitado (1-2.000€), aunque podría acceder a 20.000€ adicionales con apoyo de inversores (mínimo 80.000 primer año) si el proyecto avanza.</p>
+<p><strong>Lo que habrá el 19 de diciembre</strong>: Un asistente conversacional que interpreta datos reales de meteorología, redes eléctricas y sensores urbanos, simulando cómo respondería ante un apagón prolongado en Pamplona. Será una demostración técnica convincente, no un producto comercial completo.</p>
+<p><strong>La decisión crítica post-pitch</strong>: Basándose en el feedback recibido, Miguel decidirá si constituir una empresa (RESILIA), buscar socios técnicos y comerciales, o explorar otras opciones como ofrecer servicios de consultoría especializada a empresas establecidas.</p>
+<h3 id="mercado-y-oportunidad">Mercado y oportunidad</h3>
+<p><strong>Clientes potenciales</strong>: Ayuntamientos que gestionan emergencias, empresas de energía y agua obligadas por nuevas leyes europeas a mejorar su resiliencia, hospitales, organizadores de grandes eventos, y empresas de ingeniería que necesitan tecnología diferenciada para ganar licitaciones públicas.</p>
+<p><strong>Tamaño de mercado</strong>: Solo en España, el mercado de ciudades inteligentes y gestión de emergencias supera los 1.000 millones de euros anuales, con financiación europea disponible hasta 2027.</p>
+<p><strong>Ventaja competitiva</strong>: Existe una ventana de 12-18 meses antes de que grandes competidores (empresas ya establecidas) integren esta nueva generación de inteligencia artificial en sus sistemas. PRISMA puede aprovechar ese tiempo para ganar tracción con clientes iniciales.</p>
+<h3 id="credibilidad-del-fundador">Credibilidad del fundador</h3>
+<p>Miguel tiene 15 años de experiencia integrando tecnología para ciudades e industrias. En los últimos 10 años ha liderado desde áreas de Desarrollo de Negocio y RevOps, proyectos de IoT de alta madurez tecnológica que consiguieron 4,5 millones de euros de financiación, trabajando con organizaciones como la OMS, EPA estadounidense, World Athletics, y empresas como Suez. Tiene acceso a una red de potenciales colaboradores técnicos y clientes.</p>
+<h3 id="plan-de-financiación-y-validación">Plan de financiación y validación</h3>
+<p><strong>Objetivo inmediato (2026)</strong>: Conseguir entre 100.000 y 200.000 euros combinando inversores ángel, ayudas públicas de ENISA, CDTI y SODENA, y potencialmente primeros contratos de validación técnica con clientes piloto.</p>
+<p><strong>Criterios de éxito para diciembre 2026</strong>: Tener al menos 2 clientes piloto activos validando la tecnología, haber formado un equipo de 2-3 personas, y haber conseguido suficiente financiación para desarrollar el producto durante 12-18 meses más.</p>
+<p><strong>Opciones de modelo de negocio</strong>: Además de desarrollar un producto software propio (ruta más ambiciosa pero arriesgada), existe la posibilidad de empezar ofreciendo servicios de consultoría especializada a empresas como Tesicnor, iris360 o TRACASA, que ya tienen clientes pero necesitan esta nueva capacidad de inteligencia artificial. Esta segunda ruta genera ingresos más rápido y con menos inversión inicial.</p>
+<hr />
+<h3 id="arquitectura-prisma---programa-de-desarrollo-aiops">Arquitectura PRISMA - Programa de Desarrollo AIOps</h3>
+<figure>
+<img src="PRISMA._AIOps%20build-up%20program.png" alt="Diagrama de arquitectura PRISMA AIOps" /><figcaption aria-hidden="true">Diagrama de arquitectura PRISMA AIOps</figcaption>
+</figure>
+<p><em>Figura 1: Roadmap de construcción de la arquitectura PRISMA en 11 fases, desde el diseño conceptual hasta la monitorización continua en producción.</em></p>
+<hr />
+<h2 id="descubrimiento-recopilación-de-datos-y-análisis">1. DESCUBRIMIENTO, RECOPILACIÓN DE DATOS Y ANÁLISIS</h2>
+<h3 id="a.-definición-de-producto">A. Definición de producto</h3>
+<h4 id="identificación-del-problema-del-mercado-qué-problemas-se-resuelven-max-300-palabras">1. Identificación del problema del mercado: ¿qué problemas se resuelven? (max 300 palabras)</h4>
+<p>En Navarra, estos desastres han generado pérdidas de <strong>80 millones de euros en dos décadas</strong> (Consorcio de Seguros).</p>
+<p>¿Y en el mundo? Según la <strong>ONU</strong> y el <strong>Banco Mundial</strong>, las catástrofes naturales y emergencias vinculadas al cambio climático han provocado pérdidas económicas superiores al <strong>3% del PIB global anual</strong> durante la última década, con pérdidas estimadas por encima de los <strong>2 billones de dólares</strong> (fuente: <code>https://www.worldbank.org/en/topic/disasterriskmanagement/overview</code>; <code>https://www.unep.org/resources/report/2024-global-landscape-disaster-losses</code>).</p>
+<p>Además de su impacto humano —con millones de desplazados y daños recurrentes a infraestructuras críticas— estos eventos revelan la vulnerabilidad sistémica de ciudades, servicios esenciales y cadenas de suministro. Los riesgos en cascada, donde un desastre inicial desencadena problemas en salud, transporte, energía y comunicaciones, afectan tanto a países desarrollados como en desarrollo.</p>
+<p>Este contexto ha impulsado una demanda global creciente de soluciones tecnológicas de resiliencia, herramientas de gestión inteligente de emergencias y sistemas interoperables de alerta temprana como los que propone PRISMA, especialmente ante los requisitos de normativas internacionales como el Marco de Sendai (ONU) y la Directiva de Resiliencia Europea.</p>
+<h4 id="validación-del-problema-del-mercado-explique-y-valide-cómo-el-conjunto-de-características-del-producto-resuelve-el-problema-o-los-problemas-max-300-palabras">2. Validación del problema del mercado: explique y valide cómo el conjunto de características del producto resuelve el problema o los problemas (max 300 palabras)</h4>
+<p>PRISMA resuelve los problemas identificados mediante una arquitectura de <strong>agentes IA (GenAI + Agentic AI)</strong> compatible con FIWARE que orquesta inteligencia situacional:</p>
+<p><strong>MVP Elevator Pitch (Dic 2025) - Fase Detección</strong>:</p>
+<p>El MVP incluye un agente conversacional con una base de conocimiento que interpreta datos de sensores IoT (calidad del aire, meteorología, niveles de ríos) bajo demanda, utilizando guías de valores normales y anormales junto con protocolos de respuesta. El sistema integra múltiples fuentes de datos mediante APIs de AEMET, IDENA, datos IoT municipales y redes sociales. Utiliza modelos de lenguaje grandes (LLM) como GPT o Mistral para detectar patrones anómalos y evaluar la gravedad mediante técnicas de prompting. En una versión aspiracional, el agente funcionaría de forma autónoma con una rutina ReAct que incluye observación, interpretación, análisis, reporte e interacción humana sin esperar consultas.</p>
+<p><strong>Roadmap post-validación (2026) - Si se constituye empresa</strong>:</p>
+<p>El roadmap incluye la transformación semántica de datos a modelos NGSI-LD (Next Generation Service Interface - Linked Data) interoperables con gemelos digitales existentes. El sistema utilizará múltiples agentes especializados para calcular probabilidades de riesgos compuestos, como por ejemplo cómo una tormenta puede provocar un apagón que a su vez cause fallos hospitalarios. Las acciones coordinadas incluirán supervisión humana en el proceso (Human-in-the-Loop) con recomendaciones automáticas y trazabilidad completa para cumplir con el Reglamento Europeo de Inteligencia Artificial (AI Act). Finalmente, incorporará una memoria vectorial que permite aprendizaje continuo sobre eventos pasados.</p>
+<p><strong>Diferencia arquitectural clave vs. competencia</strong> (validar en pilotos 2026): Los sistemas actuales como iris360 y Everbridge usan workflows predefinidos donde si un sensor supera un umbral X se genera una alerta Y. PRISMA utiliza razonamiento mediante modelos de lenguaje grandes (LLM) no lineal para detectar situaciones emergentes no programadas previamente.</p>
+<p><strong>Validación necesaria</strong>: Las pruebas de concepto (PoC) con el servicio de emergencias 112 de Navarra y técnicos del Ayuntamiento de Pamplona durante el primer trimestre de 2026 determinarán si el enfoque agéntico aporta valor real frente a dashboards tradicionales.</p>
+<h3 id="b.-objetivos-estratégicos">B. Objetivos estratégicos</h3>
+<h4 id="qué-esperas-conseguir-en-6-meses-en-1-año-en-2-años-max-500-palabras">1. ¿Qué esperas conseguir en 6 meses? ¿En 1 año? ¿En 2 años? (max 500 palabras)</h4>
+<p><strong>INMEDIATO (Dic 2025 - Elevator Pitch 19 dic, 37 días)</strong></p>
+<p><strong>Objetivo crítico</strong>: Validar viabilidad técnica y de mercado, pitch convincente para decisión go/no-go empresa</p>
+<p><strong>MVP demo funcional</strong>: - Agente conversacional interpretando datos IoT (calidad aire, meteo, ríos) bajo demanda - Knowledge Base con umbrales normales/anormales, protocolos básicos - Integración mínima 3-4 APIs (AEMET, Red Eléctrica, IDENA, Twitter) - Caso de uso: Apagón prolongado (simulado con datos históricos o sintéticos) - Aspiracional si tiempo: Agente “vivo” con rutina ReAct autónoma</p>
+<p><strong>Entregables pitch</strong>: - Demo en vivo funcional (5-7 min) - Pitch deck (problema, solución, diferencial, roadmap, financiación) - Validación inicial: 3-5 conversaciones clientes potenciales (utilities, 112, Tesicnor)</p>
+<p><strong>6 MESES (Jun 2026 - Post TwIN Lab)</strong> - Condicional a decisión post-pitch</p>
+<p>Si se decide crear empresa RESILIA: - MVP productizable integrado con sandbox FIWARE Pamplona - 2-3 escenarios riesgo funcionales (hidro-meteorológico + tecnológico) - Validación técnica con 112 Navarra / técnicos municipales - Primeros contactos comerciales: 5-8 conversaciones cualificadas utilities/ayuntamientos - Equipo “shadow” activado: 1-2 co-fundadores incorporados (dev + domain expert) - Financiación seed: 50-100k€ asegurados (Business Angel + ayudas TwIN Lab) - Decisión arquitectura: Compatible FIWARE vs nativo (depende de soporte técnico TwIN Lab)</p>
+<p><strong>1 AÑO (Dic 2026)</strong> - Condicional a go empresa</p>
+<p>Primeros clientes piloto y financiación consolidada: - Empresa RESILIA constituida (SL), 2-3 co-fundadores operativos - 2-3 pilotos en ejecución (pagados o equity-free vía TwIN Lab) - Producto modular “PRISMA Detect” comercializable (entry-level, 40-60k€) - Financiación asegurada: 100-200k€ (Business Angel + ENISA + ayudas CDTI/SODENA) - Equipo: 1-2 contrataciones técnicas (dev Python/FIWARE, ML engineer) - Roadmap producto validado: Priorización módulos según feedback pilotos - Certificación FIWARE “Powered by” en proceso (target Q1-Q2 2027) - Métricas de validación PMF: NPS &gt;50 en pilotos, 3+ cartas intención clientes</p>
+<p><strong>2 AÑOS (Dic 2027)</strong> - Aspiracional</p>
+<p>Consolidación comercial y escalado inicial: - 5-8 clientes activos (mix B2G + B2B) - ARR objetivo: 150-250k€ (modesto, enfoque demostrar tracción) - Equipo: 4-6 personas (2-3 tech, 1 comercial, 1 fundador full-time) - Expansión geográfica: Navarra + 1-2 CCAA limítrofes (Euskadi, Aragón) - Suite modular: PRISMA Detect (maduro) + PRISMA Respond (beta con early adopters) - Segunda ronda: 300-500k€ (VCs GovTech si métricas positivas) - Alianzas: 1-2 integradores activos (Tesicnor + consultora GIS) - Reconocimiento: Caso de éxito publicado en FIWARE Marketplace, premio startup GovTech</p>
+<p><strong>Criterio pivote</strong>: Si a dic 2026 no hay 2+ pilotos en ejecución o financiación &lt;50k€, replantear modelo (servicios AIOps custom vs producto SaaS).</p>
+<p><strong>Métrica norte estrella realista (2 años)</strong>: 5-8 clientes activos + 200k ARR + Product-Market Fit validado (NPS &gt;50).</p>
+<h3 id="c.-identificación-del-mercado-y-de-tu-cliente">C. Identificación del Mercado y de tu cliente</h3>
+<h4 id="definición-del-mercado-quiénes-son-los-mercados-objetivo-cuál-es-el-tamaño-de-los-mercados-objetivo-números-accesibilidad-y-poder-adquisitivo-max-300-palabras">1. Definición del mercado: ¿Quiénes son los mercados objetivo? ¿Cuál es el tamaño de los mercados objetivo (números, accesibilidad y poder adquisitivo)? (max 300 palabras)</h4>
+<p>RESILIA (MVP: PRISMA) se posiciona en tres mercados principales como solución “Powered by FIWARE”.</p>
+<p>El mercado primario es el <strong>sector gubernamental (B2G) de GovTech y Territorios Resilientes</strong>, que incluye comunidades autónomas, municipios (más de 200 ciudades de la Agenda 2030 y Plan EDIL), Protección Civil, Confederaciones Hidrográficas, Defensa, FSE e infraestructuras críticas, además de sectores como sanidad, transporte, educación y servicios sociales. El tamaño del mercado español de ciudades inteligentes alcanza los 1.000 millones de euros anuales. El poder adquisitivo proviene de fondos europeos como FEDER y Next Generation EU, presupuestos municipales y subvenciones estatales. La accesibilidad es alta a través del FIWARE Marketplace, la Red RETECH y relaciones directas con TRACASA y ayuntamientos.</p>
+<p>El mercado secundario es el <strong>sector empresarial (B2B/B2B2G) de Utilities y Sectores Críticos</strong>, que incluye empresas de energía como Iberdrola, Endesa y Naturgy, ciclo integral del agua con empresas como Global Omnium y Suez, ESCO, industria y alimentación como Mercairuña, sanidad privada, y sectores como finanzas, turismo, comercio y aseguradoras con foco en riesgo climático. El tamaño del sector utilities en España alcanza los 2.500 millones de euros anuales en digitalización y resiliencia. El poder adquisitivo es alto con presupuestos propios de I+D+i y cumplimiento regulatorio mediante NIS2 (Directiva de Seguridad de Redes e Información 2) y CER (Directiva de Resiliencia de Entidades Críticas). La accesibilidad es media-alta vía partners como FIWARE Foundation e integradores, además de la red personal con empresas como Suez y Acciona.</p>
+<p>El mercado terciario es el de <strong>Multilateral, I+D e Innovación</strong>, que actúa como catalizador e incluye organizaciones internacionales como UNDRR, centros de investigación y universidades, proyectos piloto y consorcios Horizon Europe. El tamaño alcanza los 500 millones de euros anuales en proyectos de reducción del riesgo de desastres (DRR) y gemelos digitales en la UE. La accesibilidad es alta gracias a la experiencia en consorcios, publicaciones y relaciones con centros de investigación.</p>
+<h4 id="segmentación-de-clientes-qué-clústeres-o-grupos-similares-con-comportamientos-similares-existen-dentro-de-los-mercados-objetivo-max-300-palabras">2. Segmentación de clientes: ¿qué clústeres o grupos similares con comportamientos similares existen dentro de los mercados objetivo? (max 300 palabras)</h4>
+<p><strong>SEGMENTO 1: Early Adopters Técnicos</strong> (Año 1-2) - Prioridad quick-win: - <strong>Perfil</strong>: Recintos eventos (IFEMA, Camp Nou, Wanda Metropolitano), hospitales privados, ciudades tech-savvy (Pamplona piloto) - <strong>Comportamiento</strong>: Buscan innovación, alta urgencia (aseguradoras presionan), presupuesto I+D disponible - <strong>Necesidad</strong>: Gestión personas en riesgo inmediato, diferenciación, compliance seguros - <strong>Ciclo de venta</strong>: 3-6 meses (PoC pagado → producción) - Prioridad año 1: 70% ventas este segmento - <strong>Willingness-to-pay</strong>: Alta (40-60k€ PoC, 80-150k€ despliegue)</p>
+<p><strong>SEGMENTO 2: Utilities con Mandato NIS2</strong> (Año 2-3): - <strong>Perfil</strong>: Empresas energía/agua con activos críticos, obligadas cumplir NIS2 (Directiva de Seguridad de Redes e Información 2) y CER (Directiva de Resiliencia de Entidades Críticas 2022/2557) - <strong>Comportamiento</strong>: Compra basada en compliance, procesos largos, alta exigencia técnica/seguridad - <strong>Necesidad</strong>: Resiliencia operativa, continuidad negocio, protección activos, reporte ESG - <strong>Ciclo de venta</strong>: 6-12 meses (piloto corporativo → despliegue multi-site) - Prioridad año 1: 30% ventas</p>
+<p><strong>SEGMENTO 3: Administraciones Reactivas</strong> (Año 3+): - <strong>Perfil</strong>: Ayuntamientos grandes/medianos post-evento crítico, Protección Civil autonómica - <strong>Comportamiento</strong>: Compra reactiva tras incidente, budget asegurado, proceso burocrático, RFP público - <strong>Necesidad</strong>: Evitar repetición crisis, cumplimiento normativo (Sendai, Directiva UE) - <strong>Ciclo de venta</strong>: 9-18 meses (licitación pública)</p>
+<p><strong>SEGMENTO 4: Integradores y Resellers</strong> (Año 2-3): - <strong>Perfil</strong>: Consultoras GIS (ESRI partners), integradores FIWARE, empresas GovTech - <strong>Comportamiento</strong>: Modelo B2B2G, buscan soluciones white-label o OEM - <strong>Necesidad</strong>: Ampliar portfolio, soluciones diferenciadas - <strong>Ciclo de venta</strong>: 3-6 meses (acuerdo partnership)</p>
+<p><strong>Priorización Año 1</strong>: 70% Seg.1 (eventos/farma privado), 30% Seg.2 (utilities).</p>
+<h4 id="información-sobre-los-clientesmercados-qué-investigaciones-de-mercado-respaldan-los-objetivos-max-300-palabras">3. Información sobre los clientes/mercados: ¿Qué investigaciones de mercado respaldan los objetivos? (max 300 palabras)</h4>
+<p><strong>Evidencias de mercado</strong>:</p>
+<ol type="1">
+<li><strong>Pérdidas económicas documentadas - validación urgencia</strong>:
+<ul>
+<li>80M€ Navarra 2 décadas (Consorcio Seguros)</li>
+<li>17.000M€ DANA Valencia oct-2024 (224 fallecidos) - gestión tardía valida necesidad fusión datos</li>
+<li>USD195.000M Texas Winter Storm feb-2021 (246 muertos) - cascada clima a infraestructura crítica</li>
+<li>USD6.000M Northeast Blackout ago-2003 (55M afectados) - cascada tecnológica sin visibilidad integrada</li>
+</ul></li>
+<li><strong>Mandato regulatorio europeo</strong>:
+<ul>
+<li>Directiva resiliencia UE 2024/2881</li>
+<li>Marco Sendai (ONU) - ratificado por España</li>
+<li>Iniciativa UNDRR “Early Warnings for All” (2027) - compromiso global</li>
+<li>NIS2 (Directiva de Seguridad de Redes e Información 2) y CER (Directiva de Resiliencia de Entidades Críticas 2022/2557) - obligatorio para utilities e infraestructuras críticas</li>
+</ul></li>
+<li><strong>Presupuestos públicos activos</strong>:
+<ul>
+<li>Plan EDIL (Estrategias DUSI Locales) - 200+ ciudades españolas</li>
+<li>Fondos FEDER 2021-2027 para resiliencia urbana</li>
+<li>Agenda 2030 - ODS 11 (Ciudades sostenibles) y ODS 13 (Acción climática)</li>
+</ul></li>
+<li><strong>Análisis sector GovTech</strong> (Gartner):
+<ul>
+<li>Informe CIOs GovTech 2024: Prioridad #1 = Inteligencia del dato para decisiones en tiempo real</li>
+<li>El 65% de las ciudades europeas invierten ya en gemelos digitales (2023-2025)</li>
+</ul></li>
+<li><strong>Ecosistema FIWARE</strong>:
+<ul>
+<li>200+ soluciones certificadas en Marketplace</li>
+<li>50+ iHubs activos en Europa</li>
+<li>Track record de adoptación en smart cities</li>
+</ul></li>
+<li><strong>Experiencia propia del fundador</strong>:
+<ul>
+<li>€4.5M+ captados en proyectos IoT/SaaS</li>
+<li>Colaboraciones con WHO, UNEP, US EPA, World Athletics - valida capacidad de acceso a mercado internacional</li>
+<li><blockquote>
+<p>1,000 estaciones IoT desplegadas - valida viabilidad técnica integración sensores</p>
+</blockquote></li>
+</ul></li>
+<li><strong>Competencia indirecta</strong> (validación de mercado):
+<ul>
+<li>Plataformas de gestión de emergencias existentes (pero sin IA agentica ni multirriesgo integral)</li>
+<li>Soluciones GIS/gemelos digitales (pero sin capa de inteligencia situacional)</li>
+<li>Sistemas de alerta temprana sectoriales (clima, sísmica) - pero sin interoperabilidad</li>
+</ul></li>
+</ol>
+<p>La convergencia de mandato regulatorio + presupuesto disponible + brecha tecnológica actual valida la oportunidad de mercado.</p>
+<h3 id="d.-inteligencia-de-mercado-e-inteligencia-competitiva">D. Inteligencia de Mercado e inteligencia competitiva</h3>
+<h4 id="identificación-de-tendencias-del-mercado-cómo-afectarán-las-tendencias-al-lanzamiento-y-la-viabilidad-del-producto-max-150-palabras">1. Identificación de tendencias del mercado: ¿Cómo afectarán las tendencias al lanzamiento y la viabilidad del producto? (max 150 palabras)</h4>
+<p><strong>Tendencias favorables</strong>:</p>
+<ol type="1">
+<li><p><strong>Regulación creciente</strong>: NIS2 (Directiva de Seguridad de Redes e Información 2), CER (Directiva de Resiliencia de Entidades Críticas 2022/2557), AI Act (Reglamento Europeo de Inteligencia Artificial) y Directiva Resiliencia UE impulsan inversión obligatoria en sistemas de gestión de riesgos, generando un mercado cautivo en expansión. Casos como Colonial Pipeline ransomware (mayo-2021, USD4.4M rescate + disrupciones millonarias) aceleran urgencia compliance NIS2 para utilities</p></li>
+<li><p><strong>Adopción de gemelos digitales</strong>: El 65% de las ciudades europeas invierten ya en gemelos digitales (2023-2025), constituyendo una base instalada ideal para PRISMA como capa de inteligencia</p></li>
+<li><p><strong>Madurez IA Generativa</strong>: Modelos de lenguaje grandes (LLMs) accesibles y APIs estables (GPT, Mistral) + frameworks (LangChain, CrewAI) reducen tiempo y coste de desarrollo de agentes</p></li>
+<li><p><strong>Aumento de eventos extremos</strong>: Frecuencia e intensidad de desastres climáticos en aumento genera urgencia política y presupuestos disponibles crecientes</p></li>
+<li><p><strong>Soberanía digital europea</strong>: Prioridad en infraestructuras críticas y soluciones open source (EUPL, FIWARE) representa ventaja competitiva vs. soluciones cloud US/China</p></li>
+<li><p><strong>Fondos Next Generation EU</strong>: 2021-2027 con foco en resiliencia climática y digitalización representa ventana de oportunidad de financiación</p></li>
+<li><p><strong>Soberanía europea en resiliencia y datos</strong>: El Plan ReArmar Europa 2030 (€800.000M en 4 años, marzo 2025) prioriza autonomía estratégica incluyendo resiliencia de infraestructuras críticas como elemento de defensa. Europa reconoce vulnerabilidad crítica: 92% datos occidentales almacenados en USA (Parlamento Europeo, 2025). PRISMA responde con arquitectura FIWARE/EUPL (open source europeo), procesamiento datos en Europa, sin dependencia cloud USA/China. Ciudades europeas están en primera línea ante guerra Ucrania, presión OTAN, amenazas híbridas, haciendo resiliencia local prioritaria para seguridad continental</p></li>
+</ol>
+<p><strong>Riesgos mitigables</strong>: Fatiga de “smart city” se aborda con enfoque en ROI medible (reducción de daños, tiempo de respuesta); posible recesión económica se mitiga con modelo pay-as-you-grow sin CAPEX inicial.</p>
+<h4 id="competenciapanorama-competitivo-quiénes-son-los-principales-competidores-y-cómo-reaccionarán-ante-la-entrada-en-el-mercado-o-lanzamiento-de-mi-producto-max-150-palabras">2. Competencia/Panorama competitivo: ¿Quiénes son los principales competidores y cómo reaccionarán ante la entrada en el mercado o lanzamiento de mi producto? (max 150 palabras)</h4>
+<p>El mercado está fragmentado entre Infraestructura IoT y Gestión de Emergencias, sin soluciones que cierren el ciclo completo:</p>
+<ul>
+<li><p><strong>Plataformas IoT/Digital Twins</strong> (Siemens City Digital Twin, Azure Digital Twins, AWS Smart Cities): Excelentes en monitorización y dashboards, débiles en respuesta autónoma. <strong>iris360</strong> (español, FIWARE) es el competidor más relevante localmente con casos éxito (Algeciras, Medellín), certificaciones ENS Alto/ISO 27001, pero arquitectura pre-GenAI sin capacidad autónoma ni coordinación agentica.</p></li>
+<li><p><strong>Critical Event Management</strong> (Everbridge líder NASDAQ USD500M, One Concern predicción desastres, Palantir analytics gobierno, Tesicnor RRD): Excelentes en alertas y workflows predefinidos, débiles en detección autónoma de situaciones emergentes. Everbridge automatiza respuestas a riesgos conocidos (rule-based). Palantir enfoca mega-contratos defense/USA ($5-20M), no mid-market Europa. Tesicnor gestiona respuesta a eventos climáticos con muy buena predicción pero sin coodinación entre actores, sin decisión inteligente más allá de la pre-alerta del evento.</p></li>
+</ul>
+<p><strong>Diferencia arquitectural PRISMA</strong>: Competidores usan automation lineal/serial. PRISMA detecta patrones no programados, razona sobre cascadas impredecibles, sugiere acciones contextuales sin workflow predefinido. Complementario a Everbridge: ellos ejecutan lo conocido, PRISMA razona sobre lo desconocido.</p>
+<p><strong>Ventana</strong>: 12-18 meses antes que competidores añadan reasoning autónomo. Oportunidad: dominar 20-30 clientes mid-market europeo antes que reaccionen.</p>
+<h3 id="e.-opciones-de-distribución">E. Opciones de distribución</h3>
+<h4 id="qué-opciones-de-venta-y-distribución-hay-disponibles-max-150-palabras">1. ¿Qué opciones de venta y distribución hay disponibles? (max 150 palabras)</h4>
+<p><strong>Canales de venta y distribución</strong>:</p>
+<ol type="1">
+<li><strong>Venta directa B2G</strong> (Año 1-2, prioridad alta):
+<ul>
+<li>Contacto directo con ayuntamientos vía red RETECH/FIWARE iHubs</li>
+<li>Relación personal fundador con administraciones (track record)</li>
+<li>Proceso: Webinar/demo → PoC pagado (3-6 meses) → contrato SaaS</li>
+</ul></li>
+<li><strong>FIWARE Marketplace</strong> (Año 1+, escalabilidad):
+<ul>
+<li>Listado “Powered by FIWARE” tras certificación (mes 6-9)</li>
+<li>Visibilidad en 50+ iHubs europeos y comunidad de 200+ soluciones</li>
+<li>Lead generation pasivo con credibilidad técnica</li>
+</ul></li>
+<li><strong>Integradores y resellers</strong> (Año 2-3, expansión):
+<ul>
+<li>Partnerships con consultoras GIS (ESRI partners), integradores FIWARE, empresas GovTech</li>
+<li>Modelo white-label u OEM con margen distribuidor (20-30%)</li>
+</ul></li>
+<li><strong>Licitaciones públicas</strong> (Año 2+, contratos grandes):
+<ul>
+<li>RFPs Plan EDIL, FEDER, infraestructuras críticas</li>
+<li>Requiere homologaciones previas (ENS, ISO)</li>
+</ul></li>
+<li><strong>Venta directa B2B utilities</strong> (Año 2-3):
+<ul>
+<li>Contacto directo a través de red personal (Suez, Acciona, Iberdrola)</li>
+<li>Proceso largo (6-12 meses) pero contratos grandes (100-300k€)</li>
+</ul></li>
+</ol>
+<h3 id="f.-prueba-betaprueba-de-mercado">F. Prueba beta/Prueba de mercado</h3>
+<h4 id="cómo-probarás-el-producto-y-recopilarás-opiniones-sobre-este-nuevo-lanzamiento-max-150-palabras">1. ¿Cómo probarás el producto y recopilarás opiniones sobre este nuevo lanzamiento? (max 150 palabras)</h4>
+<p><strong>Estrategia de validación y beta testing</strong>:</p>
+<p><strong>Fase 1: Alpha interno (Meses 1-6 - TwIN Lab)</strong>: - MVP PRISMA desarrollado con co-creación continua: Técnicos municipales Ayto. Pamplona, 112 Navarra/SOS Navarra (CECOPI) - Testing semanal con usuarios reales en sandbox TwIN Lab - Métricas: Tiempo de alerta, precisión de predicción cascadas, usabilidad (SUS score), satisfacción (NPS)</p>
+<p><strong>Fase 2: Beta cerrado (Meses 7-9)</strong>: - 3-5 early adopters (clientes piloto pagados): Ayuntamientos RETECH + 1-2 utilities - PoC de 3 meses con escenarios reales (no simulados) - Panel de usuarios beta con sesiones mensuales de feedback</p>
+<p><strong>Fase 3: Beta abierto selectivo (Meses 10-12)</strong>: - Demo Day TwIN Lab → captación 5-10 clientes piloto adicionales - Programa beta gratuito/descuento (50%) a cambio de testimonios y casos de estudio - Eventos de co-creación (hackathons, workshops) con comunidad FIWARE</p>
+<p><strong>Métricas de éxito beta</strong>: &gt;80% satisfacción (NPS &gt;50), &lt;10% churn en pruebas, 5+ casos de uso documentados, 3+ logos de clientes para web/marketing.</p>
+<hr />
+<h2 id="estrategia-go-to-market">2. ESTRATEGIA GO-TO-MARKET</h2>
+<h3 id="a.-business-case">A. Business Case</h3>
+<h4 id="por-qué-estás-haciendo-esto-y-qué-esperas-obtener-max-150-palabras">1. ¿Por qué estás haciendo esto y qué esperas obtener? (max 150 palabras)</h4>
+<p><strong>Por qué</strong>: Las ciudades europeas enfrentan una brecha crítica en capacidad de respuesta ante riesgos en cascada que incluyen riesgos climáticos, tecnológicos, sanitarios y cibernéticos. Los sistemas actuales operan en silos, generando “puntos ciegos” que cuestan vidas y recursos: 80 millones de euros en pérdidas en Navarra durante dos décadas, y más recientemente, <strong>17.000 millones de euros y 224 vidas en la DANA de Valencia (octubre 2024)</strong> por falta de fusión inteligente de datos entre AEMET, organismos de cuenca y protección civil. El marco regulatorio europeo que incluye el Marco Sendai, NIS2 (Directiva de Seguridad de Redes e Información 2), CER (Directiva de Resiliencia de Entidades Críticas) y la Directiva de Resiliencia, junto con los fondos Next Generation EU, crean una ventana de oportunidad sin precedentes para soluciones de inteligencia situacional multirriesgo. Además, Europa prioriza autonomía estratégica en infraestructuras críticas (Plan ReArmar Europa €800.000M) reconociendo que resiliencia urbana y empresarial es defensa continental ante tensiones geopolíticas actuales.</p>
+<p><strong>Qué espero obtener</strong>:</p>
+<p>El impacto social objetivo es proteger más de 500.000 habitantes en más de 10 ciudades, reducir el tiempo de alerta de crisis de horas a minutos, y salvar vidas y activos mediante decisiones informadas en tiempo real. La viabilidad empresarial contempla construir RESILIA como empresa SaaS escalable con ingresos recurrentes anuales de 750.000 euros y entre 6 y 10 empleos en 3 años, consolidar la categoría de producto en inteligencia situacional para reducción del riesgo de desastres (DRR), y lograr independencia financiera mediante un modelo recurrente. El reconocimiento sectorial busca establecer PRISMA/RESILIA como referencia en el ecosistema FIWARE, el DRR europeo y los gemelos digitales territoriales, posicionando a Navarra como hub de innovación en resiliencia urbana. Finalmente, la alineación personal permite aplicar 20 años de experiencia en IoT y Smart Cities a un problema con propósito, combinando viabilidad comercial con impacto social medible.</p>
+<p>El impacto estratégico europeo contempla contribuir a la autonomía tecnológica de Europa mediante arquitectura FIWARE/EUPL abierta y auditable, procesamiento de datos en Europa reduciendo dependencia cloud USA/China, y posicionar la resiliencia de infraestructuras críticas como elemento de defensa continental alineado con prioridades del Plan ReArmar Europa.</p>
+<h3 id="b.-estrategia-de-mercado">B. Estrategia de mercado</h3>
+<h4 id="propuesta-de-valor-qué-valor-tiene-la-oferta-propuesta-y-por-qué-alguien-me-compraría-a-mi-en-lugar-de-a-la-competencia-max-150-palabras">1. Propuesta de valor: ¿qué valor tiene la oferta propuesta y por qué alguien me compraría a mi en lugar de a la competencia? (max 150 palabras)</h4>
+<p>RESILIA es la primera solución de inteligencia situacional multirriesgo con inteligencia artificial agentica que convierte gemelos digitales pasivos en orquestadores activos de respuesta a crisis.</p>
+<p><strong>Por qué comprarnos vs. competencia</strong>:</p>
+<ol type="1">
+<li><p><strong>Verdadero multirriesgo</strong>: Un solo sistema integra clima + tecnológico + sanitario + ciber, detectando cascadas que soluciones single-hazard no ven</p></li>
+<li><p><strong>IA agentica con Human-in-the-Loop</strong>: Agentes autónomos que sugieren acciones específicas bajo supervisión humana (compliance AI Act), no solo dashboards informativos</p></li>
+<li><p><strong>Interoperabilidad nativa FIWARE/NGSI-LD + soberanía europea</strong>: Plug-and-play con gemelos digitales existentes, arquitectura open source (EUPL) auditable, sin lock-in tecnológico. Datos procesados en Europa, no en cloud USA/China. Alineado con prioridad UE de autonomía estratégica en infraestructuras críticas (Plan ReArmar Europa €800.000M, 92% datos occidentales almacenados fuera UE)</p></li>
+<li><p><strong>Time-to-value acelerado</strong>: SaaS pay-as-you-grow sin CAPEX, MVP funcional en 3-6 meses (vs. 12-24 meses de soluciones enterprise legacy)</p></li>
+<li><p><strong>Cumplimiento regulatorio integrado</strong>: Diseñado desde origen para NIS2 (Directiva de Seguridad de Redes e Información 2), CER (Directiva de Resiliencia de Entidades Críticas), AI Act (Reglamento Europeo de Inteligencia Artificial), ENS Alto (Esquema Nacional de Seguridad nivel Alto) y Marco Sendai - no retrofitting</p></li>
+<li><p><strong>Track record fundador</strong>: €4.5M+ captados, &gt;1,000 IoT deployments, colaboraciones WHO/UNEP/US EPA - reduce riesgo de adopción</p></li>
+</ol>
+<h4 id="posicionamiento-cómo-te-gustaría-que-el-mercado-viera-tu-oferta-entre-otras-opciones-max-150-palabras">2. Posicionamiento – ¿Cómo te gustaría que el mercado viera tu oferta entre otras opciones? (max 150 palabras)</h4>
+<p><strong>Posicionamiento deseado</strong>: “La capa de inteligencia situacional para gemelos digitales que convierte datos en decisiones que salvan vidas”</p>
+<p><strong>Categoría de Solución</strong>: Inteligencia Situacional para todo el ciclo de vida de DRR (Disaster Risk Reduction) - creamos la categoría (blue ocean)</p>
+<figure>
+<img src="emergency-disaster-management-lifecycle-wheel-1.png" alt="Ciclo de vida de gestión de emergencias y desastres" /><figcaption aria-hidden="true">Ciclo de vida de gestión de emergencias y desastres</figcaption>
+</figure>
+<p><em>Figura 2: Ciclo de vida de gestión de emergencias y desastres. PRISMA opera en todas las fases: Mitigación, Preparación, Respuesta y Recuperación, proporcionando inteligencia situacional continua.</em></p>
+<p>Queremos ser percibidos como el cerebro que hace inteligentes a los gemelos existentes, no como otro gemelo digital. Somos prevención activa que evita que pequeños eventos se conviertan en desastres, no simplemente software de emergencias. Somos un orquestador de respuesta coordinada multiactor, no una herramienta de alertas básica.</p>
+<p><strong>Comparación mental para compradores</strong>: - Vs. ESRI/GIS: “ESRI visualiza, RESILIA decide y actúa” - Vs. Everbridge: “Everbridge notifica crisis, RESILIA las previene y mitiga” - Vs. consultoras: “Consultoras hacen estudios de riesgo estáticos, RESILIA ofrece inteligencia dinámica 24/7” - Vs. plataformas multiriegos: “Tesicnor avisa del riesgo climático y activa acciones de protección planificadas en un despacho. RESILIA sabe lo que conviene en realidad en cada momento”</p>
+<p><strong>Asociación de marca</strong>: FIWARE (interoperabilidad), UNDRR (DRR global), Navarra (innovación pública), Early Warnings (urgencia climática)</p>
+<h4 id="mensaje-cuáles-son-los-tres-principales-problemas-resueltos-o-beneficios-obtenidos-max-150-palabras">3. Mensaje: ¿cuáles son los tres principales problemas resueltos o beneficios obtenidos? (max 150 palabras)</h4>
+<p><strong>1. PROBLEMA: “Llegamos tarde a las crisis porque no vemos las cascadas venir”</strong><br />
+<strong>BENEFICIO: Anticipación de riesgos compuestos en minutos</strong></p>
+<p>El sistema detecta patrones de riesgo en cascada, como por ejemplo cómo una tormenta puede provocar un apagón que a su vez cause fallos hospitalarios, antes de que estos eventos escalen. Reduce el tiempo de alerta de horas a menos de 5 minutos. Las métricas objetivo incluyen una reducción del 70% en tiempo de respuesta y del 40% en daños evitables.</p>
+<p><strong>2. PROBLEMA: “Tenemos muchos datos pero decisiones lentas y reactivas”</strong><br />
+<strong>BENEFICIO: Decisiones informadas automáticas con supervisión humana</strong></p>
+<p>El sistema fusiona más de 10 fuentes de datos incluyendo sensores IoT, satélites, redes sociales y llamadas al 112 en un contexto accionable. Sugiere respuestas específicas como activar generadores, redirigir tráfico o alertar hospitales. Proporciona trazabilidad total para cumplir con el Reglamento Europeo de Inteligencia Artificial (AI Act) e incluye supervisión humana en el proceso.</p>
+<p><strong>3. PROBLEMA: “Cada sistema habla su propio idioma, no se integran”</strong><br />
+<strong>BENEFICIO: Interoperabilidad total sin reemplazar infraestructura existente</strong></p>
+<p>La arquitectura FIWARE y NGSI-LD permite conexión plug-and-play con gemelos digitales existentes. Utiliza APIs abiertas sin dependencia de proveedor y licencia EUPL. El tiempo para generar valor oscila entre 3 y 6 meses, no los 2 años típicos de otras soluciones.</p>
+<h4 id="modelo-de-ventas-y-asistencia-técnica-cómo-venderé-y-prestaré-asistencia-técnica-al-producto-max-150-palabras">4. Modelo de ventas y asistencia técnica: ¿cómo venderé y prestaré asistencia técnica al producto? (max 150 palabras)</h4>
+<p><strong>Modelo de ventas</strong>:</p>
+<p><strong>Fase 1 (Año 1)</strong>: Venta directa consultiva - Outbound cualificado: Lista target de 20 ciudades RETECH + 10 utilities (contacto directo fundador) - Inbound: Presencia en FIWARE Marketplace, webinars mensuales, casos de éxito Pamplona - Proceso: Discovery call (30 min) → Demo personalizada (1h) → PoC pagado (3-6 meses, 20-50k€) → Contrato SaaS - Ciclo de venta: 3-6 meses (early adopters) / 6-12 meses (utilities)</p>
+<p><strong>Fase 2 (Año 2-3)</strong>: Escalado vía partnerships - Canal indirecto: Acuerdos con 3-5 integradores FIWARE/GIS (margen 20-30%) - Licitaciones públicas: RFPs EDIL, FEDER (requiere homologaciones ISO, ENS Alto) - Marketplace activo: Self-service para ciudades pequeñas (freemium/trial)</p>
+<p><strong>Asistencia técnica</strong>: - Tier 1: Help desk online + chatbot IA (documentación, FAQs) 24/7 - Tier 2: Equipo soporte remoto (email/chat, SLA 24h) - horario laboral - Tier 3: Ingenieros especializados (bugs críticos, customizaciones) - SLA 4h para P1</p>
+<p><strong>Onboarding</strong>: 2 semanas con formación virtual (4 sesiones x 2h), documentación técnica, sandbox de pruebas</p>
+<h4 id="recorrido-del-comprador-etapas-del-proceso-de-decisión-cuáles-son-los-comportamientos-que-adopta-un-cliente-antes-y-después-de-la-compra-max-150-palabras">5. Recorrido del comprador (etapas del proceso de decisión): ¿cuáles son los comportamientos que adopta un cliente antes y después de la compra? (max 150 palabras)</h4>
+<p><strong>PRE-COMPRA</strong>:</p>
+<ol type="1">
+<li><p><strong>Awareness</strong>: Evento crítico reciente (inundación, apagón) O mandato regulatorio (NIS2) O presupuesto disponible (Next Gen EU) → busca “gestión multirriesgo ciudades”, “inteligencia situacional”</p></li>
+<li><p><strong>Consideration</strong>: Descubre RESILIA vía FIWARE Marketplace, webinar, contacto directo → consume caso de éxito Pamplona, whitepaper técnico, demo grabada → compara vs. ESRI/Everbridge</p></li>
+<li><p><strong>Evaluation</strong>: Demo personalizada (1h) con CIO + Protección Civil → workshop de discovery (identificar 2-3 escenarios prioritarios) → propuesta de PoC pagado (20-50k€, 3-6 meses)</p></li>
+<li><p><strong>Decision</strong>: PoC ejecutado con éxito → presentación a comité directivo (ROI, compliance, roadmap) → negociación contrato SaaS anual</p></li>
+</ol>
+<p><strong>POST-COMPRA</strong>:</p>
+<ol start="5" type="1">
+<li><p><strong>Onboarding</strong>: Formación usuarios (técnicos, operativos, directivos), integración APIs, parametrización escenarios</p></li>
+<li><p><strong>Adoption</strong>: Uso incremental (piloto departamental → extensión citywide), feedback continuo, ajustes configuración</p></li>
+<li><p><strong>Advocacy</strong>: Cliente satisfecho → caso de estudio publicable, referencia comercial, expansión a más escenarios/módulos</p></li>
+</ol>
+<h4 id="perfiles-de-compradores-cuáles-son-las-características-y-comportamientos-de-los-usuarios-del-producto-max-150-palabras">6. Perfiles de compradores: ¿cuáles son las características y comportamientos de los usuarios del producto? (max 150 palabras)</h4>
+<p><strong>PERFIL 1: CIO / Director Innovación Municipal</strong> - Champion, decisor presupuesto - Edad: 40-55 años, formación técnica - Pain: Presión política para “ciudad inteligente”, integración de sistemas legacy, cumplimiento regulatorio - Comportamiento: Evalúa ROI técnico, busca interoperabilidad, risk-averse (prefiere PoC) - Motivación: Modernización sin disrupción, credibilidad vía certificaciones, referencias de pares</p>
+<p><strong>PERFIL 2: Director Protección Civil / Emergencias</strong> - Usuario final clave, influencer técnico - Edad: 45-60 años, formación mixta (policía/bomberos + gestión pública) - Pain: Tiempo de respuesta insuficiente, coordinación multi-actor compleja - Comportamiento: Evalúa usabilidad operativa bajo presión, prioriza fiabilidad sobre features - Motivación: Salvar vidas, reducir daños, cumplir protocolos</p>
+<p><strong>PERFIL 3: Alcalde / Concejal Innovación</strong> - Sponsor ejecutivo, decisor final - Edad: 35-60 años, perfil político - Pain: Presión ciudadana post-crisis, visibilidad mediática - Comportamiento: Decisión basada en impacto social visible + viabilidad presupuestaria - Motivación: Reconocimiento, reelección, legado de innovación</p>
+<p><strong>PERFIL 4: Técnicos GIS / Datos Municipales</strong> - Usuario final diario - Edad: 28-45 años, formación GIS/Data Science - Pain: Datos en silos, herramientas no integradas - Motivación: Eficiencia operativa, herramientas modernas</p>
+<h4 id="casos-de-uso-cómo-se-utilizará-el-producto-max-150-palabras">7. Casos de uso – ¿Cómo se utilizará el producto? (max 150 palabras)</h4>
+<p><strong>CASO 1: Apagón eléctrico prolongado</strong> - Detecta corte eléctrico multi-zona vía APIs Red Eléctrica + reportes RRSS - Analiza impacto: Hospitales sin luz, gasolineras cerradas, tráfico colapsado - Recomienda: Activar generadores hospitalarios, regular tráfico, difundir alertas - Casos reales: Texas Winter Storm Uri (feb-2021) causó 246 muertos y USD195B pérdidas, y Northeast Blackout (ago-2003) afectó a 55M personas, ambos porque operadores energía, agua, hospitales no compartían visión integrada del riesgo en cascada. PRISMA hubiera fusionado pronóstico/telemetría/infraestructura crítica, prediciendo colapso 12-24h antes. - Target clientes: Iberdrola, Endesa, REE</p>
+<p><strong>CASO 2: Inundación fluvial por tormenta intensa</strong> - Fusiona datos: Pronósticos TESICNO RRD + Pronóstico AEMET + nivel ríos + topografía LIDAR + IoT sensores - Predice zonas inundables + tiempo hasta impacto + población en riesgo - Activa: Plan de evacuación, cierre pasos subterráneos, alerta servicios emergencia, alertas ultra personalizadas - Target clientes: Ayuntamientos zonas costeras/fluviales, Protección Civil autonómica</p>
+<p><strong>CASO 3: Ola de calor con riesgo sanitario</strong> - Monitoriza: Temperatura + calidad aire + demanda energética + ocupación hospitales - Identifica zonas mayor riesgo (población mayor, ausencia climatización) - Acciona: Apertura centros refugio, avisos población vulnerable, refuerzo servicios sanitarios - Target clientes: Quirónsalud, Osakidetza, Ayto. Sevilla/Córdoba</p>
+<p><strong>CASO 4: Ciberataque infraestructuras críticas</strong> - Detecta anomalías telemetría SCADA (depuradoras, subestaciones) - Evalúa impacto cascada (agua potable, energía, transporte) - Coordina: Respuesta CERT, aislamiento sistemas, comunicación ciudadana - Caso real: Colonial Pipeline ransomware (mayo-2021) cerró 5,500 millas de oleoducto, afectando 45% combustible costa Este USA. Faltaba mapeo de dependencias críticas para priorizar restauración. PRISMA mapea estas dependencias y detecta impacto en cascada en tiempo real (pipeline cae → estos 12 estados quedan sin combustible en X horas). - Target clientes: Utilities obligadas NIS2 (Directiva de Seguridad de Redes e Información 2)</p>
+<p>Pricing orientativo: 40-60k€ PoC eventos, 60-100k€ PoC utilities, 80-150k€ despliegue anual.</p>
+<h3 id="c.-pricing">C. Pricing</h3>
+<h4 id="qué-estrategia-de-precios-debería-de-ser-utilizada-descuentos-de-lanzamiento-para-fomentar-las-pruebas">1. ¿Qué estrategia de precios debería de ser utilizada? ¿Descuentos de lanzamiento para fomentar las pruebas?</h4>
+<p><strong>DISCLAIMER</strong>: Pricing preliminar basado en benchmarking competencia (Everbridge, iris360, One Concern). Será validado en conversaciones clientes Q1-Q2 2026.</p>
+<p><strong>Estrategia: Value-Based Pricing modular</strong></p>
+<p><strong>FASE 1 (2026 - Validación)</strong>: Pilotos equity-free o simbólicos - Objetivo: Validar propuesta de valor, NO monetizar - 2-3 pilotos TwIN Lab: Gratuitos a cambio de feedback + caso de estudio + carta intención - 1-2 pilotos early adopters B2B: 10-20k€ simbólicos (coste desarrollo + soporte)</p>
+<p><strong>FASE 2 (2026-2027 - Monetización inicial)</strong> - Si se decide crear empresa: - PoC pagado: 30-60k€ por 3-6 meses (según complejidad) - Incluye: Integración 1-2 fuentes datos, parametrización caso uso, soporte básico - Target: Utilities obligadas NIS2 (Directiva de Seguridad de Redes e Información 2) o recintos eventos (gestión riesgo aseguradoras)</p>
+<p><strong>FASE COMERCIAL (Año 1+)</strong>: Pricing SaaS por módulos + habitantes</p>
+<p><strong>Tier 1 - Ciudades pequeñas</strong> (&lt;50k hab.): 12-18k€/año - 3 escenarios riesgo, 5 usuarios, integraciones básicas</p>
+<p><strong>Tier 2 - Ciudades medianas</strong> (50-200k hab.): 30-60k€/año - 6 escenarios, 15 usuarios, integraciones avanzadas, soporte premium</p>
+<p><strong>Tier 3 - Ciudades grandes</strong> (&gt;200k hab.) o Utilities: 80-150k€/año + customizaciones - Escenarios ilimitados, SLA 4h, integraciones custom</p>
+<p><strong>Add-ons</strong>: Módulo adicional riesgo: +3-5k€/año; Integración API custom: 5-10k€ una vez; Formación avanzada: 2k€/sesión</p>
+<p><strong>Descuentos lanzamiento (Año 1)</strong>: - Early Adopter Program: 50% descuento año 1 a cambio de caso de estudio + 2 referencias - Beta tester program: Gratuito 6 meses (max 5 ciudades) si aportan feedback estructurado - Descuento por prepago: 15% si pago anual anticipado - Descuento RETECH: 20% para ciudades/organizaciones red RETECH</p>
+<h3 id="d.-ventas-y-soporte-de-ventas">D. Ventas y soporte de ventas</h3>
+<h4 id="herramientas-qué-tipo-de-material-promocional-demos-y-presentaciones-se-necesitan">1. Herramientas – ¿Qué tipo de material promocional, demos y presentaciones se necesitan?</h4>
+<p><strong>Sales Enablement Kit (Año 1)</strong>:</p>
+<ol type="1">
+<li>Demo interactiva (30-60 min): Sandbox en vivo con caso de uso apagón prolongado, customizable por sector cliente</li>
+<li>One-pager comercial: Propuesta de valor, 3 beneficios clave, pricing orientativo, logos clientes piloto</li>
+<li>Caso de éxito Pamplona (3-4 páginas): Métricas de impacto, testimonial técnico municipal, capturas dashboard</li>
+<li>Pitch deck (12-15 slides): Problema, solución, competencia, modelo de negocio, roadmap, equipo</li>
+<li>Whitepaper técnico (8-10 páginas): “Inteligencia Situacional Multirriesgo con IA Agentica” - arquitectura FIWARE, compliance AI Act/NIS2</li>
+<li>Video demo (3 min): Grabación caso de uso dramatizado, voz en off profesional, embebible en web/emails</li>
+<li>ROI calculator (Excel/web): Herramienta interactiva donde cliente introduce habitantes, presupuesto emergencias, eventos/año</li>
+<li>Propuesta comercial template: Estructura estándar con secciones auto-completables (alcance, pricing, cronograma)</li>
+<li>FAQs técnicas y comerciales: 20 preguntas frecuentes con respuestas</li>
+<li>Fichas de producto por vertical: B2G ciudades, B2B utilities energía, B2B utilities agua</li>
+</ol>
+<h4 id="adquisición-de-clientes-y-mix-de-canales-cuál-es-el-enfoque-adecuado-ventas-directas-distribuidores-de-valor-añadido">2. Adquisición de clientes y mix de canales: ¿cuál es el enfoque adecuado? ¿Ventas directas? ¿Distribuidores de valor añadido?</h4>
+<p><strong>Año 1 (MVP): 100% Venta Directa</strong> (fundador + 1 SDR externo part-time) - Outbound cualificado: Lista ABM de 30 cuentas target (20 ciudades RETECH + 10 utilities) - Inbound: FIWARE Marketplace listing, webinars mensuales, SEO/SEM básico - Prospección: LinkedIn Sales Navigator, email sequences, demos personalizadas - Cierre: Fundador cierra todos los deals, construye playbook de ventas replicable</p>
+<p><strong>Año 2 (Early Growth): 70% Directa + 30% Partners</strong> - Equipo directo: Fundador + Account Executive B2G + BDR/SDR interno - Partners prioritarios: Tesicnor (especialista DRR Navarra), ESRI partners y consultoras GovTech (2-3 adicionales) - Licitaciones: Participación 3-5 RFPs públicos (EDIL, FEDER)</p>
+<p><strong>Año 3 (Scale): 50% Directa + 30% Partners + 20% Marketplace</strong> - Equipo directo: 3-4 AEs (segmentados geografía/vertical) + 2 SDRs + Sales Engineer - Channel partners: 5-7 integradores activos, programa partner formal - Marketplace: FIWARE self-service con trial gratuito 14 días</p>
+<h4 id="apoyo-a-la-formación-cómo-se-formará-y-se-prestará-apoyo-al-canal-de-ventas">3. Apoyo a la formación: ¿cómo se formará y se prestará apoyo al canal de ventas?</h4>
+<p>Todavía es pronto para definir en detalle el proceso de formación y apoyo a canal indirecto, ya que dependerá del perfil de los partners y la evolución del producto y del mercado. Sin embargo, se prevé diseñar un programa de enablement adaptativo que incluya itinerarios básicos de onboarding, formación práctica y soporte continuo, ajustando el enfoque según las necesidades concretas que se detecten en la primera fase de colaboración.</p>
+<p>El objetivo inicial será identificar, junto con los primeros partners, cuáles son los conocimientos clave y los formatos más efectivos para acelerar su autonomía comercial y técnica (por ejemplo, sesiones virtuales, playbooks, recursos de marketing, etc.). Se plantea pilotar materiales mínimos (demo, argumentario básico, casos de uso principales) y recabar feedback tras los primeros ciclos de venta conjunta para iterar y ampliar progresivamente el programa.</p>
+<p>De cara al equipo interno, el proceso de capacitación también seguirá un enfoque progresivo: se arrancará con formación esencial (producto y mercado), aprendizaje basado en casos prácticos y acompañamiento directo en las primeras oportunidades, priorizando documentar y estructurar buenas prácticas a medida que se validen.</p>
+<p>En resumen, la metodología será co-diseñada junto a los primeros usuarios (partners y equipo comercial), priorizando la recopilación de evidencia real para ajustar contenidos, formatos y herramientas formativas conforme avance el despliegue.</p>
+<h3 id="e.-soporte-técnico">E. Soporte técnico</h3>
+<h4 id="crm-qué-herramienta-se-utilizará-para-crear-y-gestionar-las-relaciones-con-los-clientes">1. CRM – ¿Qué herramienta se utilizará para crear y gestionar las relaciones con los clientes?</h4>
+<p><strong>Pipedrive</strong> será la herramienta principal para gestionar clientes desde el primer año, por ser estándar en ventas B2B/B2G y fácil de escalar. Destaca por su buen manejo de oportunidades (pipeline), informes útiles y fácil integración con herramientas como LinkedIn, Zendesk o Slack.</p>
+<h4 id="asistencia-para-la-formación-los-clientes-necesitarán-formación">2. Asistencia para la formación: ¿los clientes necesitarán formación?</h4>
+<p><strong>SÍ - Formación estructurada obligatoria en onboarding + continua opcional</strong></p>
+<p><strong>Onboarding (Semanas 1-2, incluido en contrato SaaS)</strong>: - Sesión 1 (2h) - Usuarios técnicos: Arquitectura, integraciones API, configuración escenarios, gestión de datos - Sesión 2 (2h) - Usuarios operativos: Dashboard en vivo, interpretación alertas, flujos de respuesta, trazabilidad - Sesión 3 (1.5h) - Usuarios directivos: KPIs, reportes, cumplimiento regulatorio, roadmap - Sesión 4 (1.5h) - Hands-on práctica: Simulacro de crisis guiado (apagón o inundación) con todos los roles</p>
+<p><strong>Formación Continua</strong> (Opcional): - Webinars trimestrales: Nuevos features, mejores prácticas, Q&amp;A - grabados y disponibles on-demand - Advanced training: Configuración avanzada de agentes IA, optimización de reglas CEP - Train-the-trainer: Formar a personal cliente para que sea formador interno</p>
+<p><strong>Materiales self-service</strong>: - Knowledge base online, sandbox de pruebas permanente, certificación voluntaria “RESILIA Power User”</p>
+<h4 id="engagement-y-retención-de-clientes-cómo-se-fomentarán-evaluarán-y-fortalecerán-las-relaciones">3. Engagement y retención de clientes: ¿cómo se fomentarán, evaluarán y fortalecerán las relaciones?</h4>
+<p><strong>Programa de Customer Success - objetivo: &lt;5% churn anual</strong></p>
+<p><strong>A validar con clientes</strong> - El enfoque dependerá del tipo de cliente: - <strong>B2G (administraciones)</strong>: Seguimiento trimestral, enfoque en cumplimiento normativo y renovación presupuestaria anual - <strong>B2B (utilities/privado)</strong>: Seguimiento mensual, KPIs operativos, expansión a más escenarios - <strong>B2B2G (integradores)</strong>: Documentación técnica exhaustiva, soporte técnico especializado, menos seguimiento comercial</p>
+<p><strong>Métricas básicas</strong>: - NPS (Net Promoter Score) semestral para medir satisfacción - Tasa de uso del sistema (alertas generadas, accesos) - Casos de éxito documentados para referencias comerciales</p>
+<p><strong>A descubrir en pilotos</strong>: Frecuencia óptima de contacto, tipo de soporte preferido (self-service vs asistido), métricas relevantes por segmento.</p>
+<h4 id="medición-de-la-satisfacción-qué-herramientas-se-necesitan-para-realizar-un-seguimiento-de-la-satisfacción-y-la-fidelidad">4. Medición de la satisfacción: ¿qué herramientas se necesitan para realizar un seguimiento de la satisfacción y la fidelidad?</h4>
+<p><strong>Herramientas y métricas - enfoque minimalista inicial</strong>:</p>
+<p><strong>Fase pilotos (2026)</strong>: - Encuestas directas (Google Forms/Typeform) post-interacción - Llamadas periódicas para feedback cualitativo - Tracking básico de uso del sistema (logs de acceso, alertas generadas)</p>
+<p><strong>Si se escala (2027+)</strong>: - Herramienta NPS automatizada (a definir según presupuesto) - Sistema de ticketing para soporte (Zendesk o similar) - Analytics de producto para medir adopción</p>
+<p><strong>Métricas clave a seguir</strong>: - ¿Los clientes renuevan? (tasa de renovación) - ¿Recomiendan la solución? (referencias obtenidas) - ¿Usan el sistema activamente? (alertas generadas/mes)</p>
+<p>La elección de herramientas específicas dependerá del número de clientes, presupuesto disponible y complejidad operativa real.</p>
+<h3 id="f.-hoja-de-ruta-del-producto">F. Hoja de ruta del producto</h3>
+<h4 id="soporte-para-la-secuencia-de-desarrollo-cómo-se-comunicarán-evaluarán-y-supervisarán-las-solicitudes-de-mejoras-o-funciones-adicionales">1. Soporte para la secuencia de desarrollo: ¿Cómo se comunicarán, evaluarán y supervisarán las solicitudes de mejoras o funciones adicionales?</h4>
+<p><strong>Gestión del desarrollo de producto - enfoque pragmático</strong>:</p>
+<p><strong>Captura de necesidades</strong>: - Conversaciones directas con clientes piloto (feedback cualitativo) - Incidencias y sugerencias reportadas durante soporte - Observación del uso real del sistema</p>
+<p><strong>Priorización</strong>: Criterios básicos a considerar: - ¿Cuántos clientes lo necesitan? - ¿Qué impacto tiene en la propuesta de valor? - ¿Cuánto esfuerzo requiere desarrollarlo?</p>
+<p><strong>Roadmap</strong>: Horizonte 6-12 meses con 3 niveles de madurez: - <strong>PRISMA Detect</strong> (MVP actual): Detección y alerta de riesgos - <strong>PRISMA Respond</strong> (siguiente fase): Recomendaciones de acción - <strong>PRISMA Predict</strong> (futuro): Predicción proactiva de escenarios</p>
+<p><strong>Comunicación con clientes</strong>: Actualizaciones según evolucione el producto, participación de clientes piloto en decisiones clave de desarrollo.</p>
+<h4 id="sistema-de-recepción-de-feedback-del-mercado-cómo-se-comunicarán-los-planes-futuros-a-los-clientes">2. Sistema de recepción de feedback del mercado: ¿Cómo se comunicarán los planes futuros a los clientes?</h4>
+<p><strong>Comunicación de planes futuros - enfoque directo</strong>:</p>
+<p><strong>Fase inicial (primeros clientes)</strong>: - Conversaciones individuales periódicas con cada cliente - Transparencia sobre lo que se está desarrollando y por qué - Participación directa en definir prioridades</p>
+<p><strong>Si se escala</strong>: - Comunicación escrita de actualizaciones importantes (email/newsletter) - Presentaciones ocasionales sobre evolución del producto - Posible grupo consultivo con clientes principales</p>
+<p><strong>Principio clave</strong>: En fase temprana, la comunicación es directa y personalizada. Los canales y formatos se definirán según el número de clientes y sus preferencias reales, no según un modelo predefinido.</p>
+<h3 id="g.-programas-externos-de-marketing">G. Programas externos de Marketing</h3>
+<p><strong>A validar con la realidad del mercado</strong> - La estrategia de marketing dependerá del aprendizaje con primeros clientes y recursos disponibles.</p>
+<h4 id="branding">1. Branding</h4>
+<p><strong>Nombre</strong>: RESILIA (MVP: PRISMA)<br />
+<strong>Propuesta</strong>: “Inteligencia situacional para ciudades resilientes”</p>
+<p>Identidad visual y materiales básicos se desarrollarán según necesidades reales y presupuesto disponible.</p>
+<h4 id="generación-de-leads">2. Generación de leads</h4>
+<p><strong>Canales a explorar en fase inicial</strong>: - Contacto directo con red personal (utilities, ayuntamientos, integradores) - Presencia en FIWARE Marketplace - Participación en eventos clave del ecosistema - LinkedIn orgánico (fundador)</p>
+<p>La estrategia de generación de leads se definirá según lo que funcione en práctica, no según modelo teórico predefinido.</p>
+<h4 id="contenido">3. Contenido</h4>
+<p><strong>Mínimo viable</strong>: - Caso de éxito del piloto de Pamplona - Documentación técnica básica - Presentaciones para demostraciones</p>
+<p>Contenido adicional (blog, whitepapers, videos) se creará solo si demuestra utilidad real para cerrar ventas.</p>
+<h4 id="página-web">4. Página web</h4>
+<p>Página web básica cuando sea necesaria, probablemente después de validar el producto con primeros clientes. La estructura y complejidad dependerá de necesidades reales.</p>
+<h4 id="eventos">5. Eventos</h4>
+<p><strong>Prioritario</strong>: - Demo Day TwIN Lab (diciembre 2025) - FIWARE Summit (si hay producto validado) - Eventos smart cities regionales según oportunidad</p>
+<p>Participación en eventos se decidirá caso por caso según ROI esperado y recursos disponibles.</p>
+<h3 id="h.-pr-y-publicidad">H. PR y Publicidad</h3>
+<h4 id="cuáles-son-los-objetivos-y-recursos-para-las-comunicaciones-externas">1. ¿Cuáles son los objetivos y recursos para las comunicaciones externas?</h4>
+<p><strong>Enfoque inicial</strong>: Credibilidad técnica en el ecosistema FIWARE y smart cities, no publicidad masiva.</p>
+<p><strong>Acciones realistas</strong>: - Presencia en medios especializados si surge oportunidad (eSmartCity, SmartCityLab) - Comunicar hitos relevantes (primer cliente, certificación FIWARE, financiación) - LinkedIn orgánico del fundador para visibilidad en red profesional</p>
+<p><strong>No prioritario en fase inicial</strong>: Publicidad pagada (Google/Facebook/LinkedIn Ads) - ROI bajo en B2G/enterprise inicial.</p>
+<h3 id="i.-marketing-interno">I. Marketing Interno</h3>
+<h4 id="cómo-se-mantendrá-informados-a-los-empleados-sobre-la-nueva-iniciativa">1. ¿Cómo se mantendrá informados a los empleados sobre la nueva iniciativa?</h4>
+<p><strong>Año 1 (fundador solo)</strong>: No aplica.</p>
+<p><strong>Si se forma equipo</strong>: Comunicación directa y frecuente, herramientas básicas de colaboración (Slack/Discord, documentación compartida). Los procesos formales solo si el equipo crece y lo requiere.</p>
+<h3 id="j.-presupuesto-y-recursos-indicadores-clave-de-rendimiento-kpi-y-métricas">J. Presupuesto y recursos: indicadores clave de rendimiento (KPI) y métricas</h3>
+<h4 id="qué-indicadores-clave-de-rendimiento-medirán-el-éxito-qué-hitos-deben-alcanzarse-qué-recursos-hay-disponibles-para-respaldar-el-plan-gtm">1. ¿Qué indicadores clave de rendimiento medirán el éxito? ¿Qué hitos deben alcanzarse? ¿Qué recursos hay disponibles para respaldar el plan GTM?</h4>
+<p><strong>Hitos y métricas clave - enfoque pragmático</strong>:</p>
+<p><strong>INMEDIATO (Nov-Dic 2025)</strong>: - MVP demo funcional para Elevator Pitch (19 diciembre) - 3-5 conversaciones con clientes potenciales - Decisión go/no-go empresa post-pitch</p>
+<p><strong>Si se decide crear empresa (2026)</strong>: - Conseguir 2-3 pilotos para validar el producto - Formar equipo inicial (1-2 co-fundadores) - Asegurar financiación mínima (50-100k€) - Validar que clientes encuentran valor real (medir satisfacción, renovación)</p>
+<p><strong>Criterios para replantear</strong>: - Si a finales 2026 no hay 2+ clientes validando el producto - Si no se consigue financiación mínima - Si los clientes no ven valor suficiente</p>
+<p><strong>Métricas específicas se definirán con aprendizaje real</strong>, no con modelos teóricos predefinidos.</p>
+<p><strong>Recursos REALES disponibles HOY (12 nov 2025)</strong>: - Fundador solo (Miguel Escribano): 20-30h/semana, autofinanciado - Budget inmediato: 1-2k€ disponibles - Budget contingente: 20k€ adicionales si decisión go empresa post-pitch - Capacidades actuales: Python básico/MLOps, n8n, CustomGPT, IoT deployment, CRM/ERP - Prototipos: Agentes CustomGPT, flujos n8n, algo Python/APIs (no integrado aún) - Track record validado: 8 proyectos TRL 6-8 (€4.5M+ funding histórico) - TwIN Lab recursos: Sandbox FIWARE, datos IDENA, mentorización</p>
+<p><strong>Recursos necesarios si se crea empresa (2026)</strong>: - Fundador dedicación completa - 1-2 co-fundadores (equity, sin salario inicial) - Ayuda técnica externa según necesidades (desarrollo, diseño) - Financiación objetivo: 100-200k€ (combinación inversores ángel + ayudas públicas)</p>
+<h3 id="k.-regulaciones">K. Regulaciones</h3>
+<h4 id="describa-cómo-los-asuntos-regulatorios-influyen-en-el-plan-de-comercialización-max-500-palabras">1. Describa cómo los asuntos regulatorios influyen en el plan de comercialización (max 500 palabras)</h4>
+<p>La regulación europea es <strong>catalizador y ventaja competitiva</strong> para RESILIA, no barrera:</p>
+<p><strong>OPORTUNIDAD DE MERCADO (Compliance-driven demand)</strong>:</p>
+<p>El Reglamento Europeo de Inteligencia Artificial (AI Act, Reglamento UE 2024/1689) establece que RESILIA como sistema de IA de alto riesgo para seguridad pública debe cumplir los artículos 13-16 sobre transparencia, supervisión humana y trazabilidad. Nuestro diseño con supervisión humana en el proceso (Human-in-the-Loop) y auditoría completa cumple con la normativa desde el diseño, lo que representa un diferenciador frente a la competencia que debe realizar adaptaciones posteriores. El mensaje de marketing es “AI Act Ready desde día 1”.</p>
+<p>La Directiva de Seguridad de Redes e Información 2 (NIS2, Directiva UE 2022/2555) obliga a operadores de infraestructuras críticas en energía, agua y salud a implementar gestión de riesgos ciber-operacionales. RESILIA cubre este mandato, generando un mercado cautivo en utilities. El argumento de ventas es “cumplimiento NIS2 más resiliencia operativa en una sola solución”.</p>
+<p>La Directiva de Resiliencia de Entidades Críticas (CER, Directiva 2022/2557) exige a entidades críticas capacidad de respuesta ante incidentes físicos y cibernéticos. RESILIA integra ambos tipos de respuesta, ofreciendo una propuesta de valor única multirriesgo.</p>
+<p>La Directiva de Resiliencia de la UE 2024/2881 junto con el Marco Sendai de la ONU establecen el compromiso de ciudades europeas con sistemas de alerta temprana antes de 2027 mediante la iniciativa “Early Warnings for All”. RESILIA está alineado al 100% con estos objetivos, representando un timing perfecto para la entrada al mercado.</p>
+<p><strong>ESTRATEGIA DE COMERCIALIZACIÓN ADAPTADA</strong>:</p>
+<p>El mensaje clave es “Cumple regulación y va más allá”, enfatizando que no se trata solo de cumplir checkboxes de compliance sino de proporcionar valor operativo real. El proceso de ventas incluye en la fase de descubrimiento una evaluación regulatoria para identificar qué normas aplican al cliente y un roadmap de cumplimiento personalizado. El pricing incluye el cumplimiento normativo como característica integrada, no como add-on, lo que justifica un precio premium frente a soluciones legacy. Se establecerán alianzas con consultoras legales y de compliance como Deloitte y KPMG en prácticas GovTech para co-venta en licitaciones grandes.</p>
+<p>Las certificaciones prioritarias en el roadmap de 12 a 24 meses incluyen ISO 27001 de seguridad de la información para el año 2, ENS Alto (Esquema Nacional de Seguridad de España) también para el año 2 como requisito para licitaciones públicas, y la certificación FIWARE “Powered by” para el año 1 en el mes 9.</p>
+<p>Los riesgos regulatorios están mitigados mediante un roadmap técnico flexible para adaptación rápida ante cambios en el AI Act, opción de despliegue on-premise para clientes con restricciones de datos sensibles para abordar la soberanía de datos, y documentación exhaustiva para licitaciones públicas desde el año 1 para cumplir con procurement compliance.</p>
+<p>La ventaja estratégica es que los competidores legacy deben adaptar arquitecturas existentes, lo cual es costoso y lento, mientras que RESILIA está diseñado para cumplimiento nativo desde el origen, lo que permite tiempo de entrada al mercado más rápido y menor riesgo para los clientes.</p>
+<hr />
+<h1 id="anexos">ANEXOS</h1>
+<h2 id="anexo-1-plan-operativo-pitch-próximas-5-semanas">ANEXO 1: Plan Operativo Pitch (Próximas 5 semanas)</h2>
+<p><strong>Semana 1-2 (12-26 nov)</strong> - Desarrollo MVP core: - Integrar 3-4 APIs básicas (AEMET, Red Eléctrica, IDENA, Twitter/scraping) - Construir Knowledge Base (umbrales normales/anormales calidad aire, meteo, ríos + protocolos) - Agente conversacional LLM funcional (GPT/Mistral) interpretando datos bajo demanda - Mockup UI básica (Streamlit/Gradio) para demo</p>
+<p><strong>Semana 3 (27 nov - 3 dic)</strong> - Caso de uso + validación: - Implementar caso uso apagón prolongado (datos históricos o sintéticos) - 3-5 conversaciones clientes potenciales (Tesicnor, utility contacto Miguel, 112 área comunicación) - Validar narrativa pitch con mentores TwIN Lab - Aspiracional: Agente “vivo” ReAct autónomo (si tiempo permite)</p>
+<p><strong>Semana 4 (4-10 dic)</strong> - Pitch + presentación: - Pitch deck (10-12 slides): Problema, solución, demo, roadmap, financiación, equipo - Ensayar pitch (5-7 min + 3 min demo en vivo) - Preparar Plan B si falla demo en vivo (video grabado backup) - Documentar feedback conversaciones clientes</p>
+<p><strong>Semana 5 (11-19 dic)</strong> - Refinamiento + pitch: - Ajustes finales MVP según feedback - Última validación técnica con TwIN Lab - <strong>19 dic: ELEVATOR PITCH</strong> - Reunión decisión go/no-go empresa (Miguel + equipo shadow potencial)</p>
+<p><strong>Post-pitch (20-31 dic)</strong> - Decisión estratégica: - Analizar feedback inversores/mentores pitch - Validar interés real co-fundadores shadow - Decisión final: Constituir RESILIA Q1 2026 / Buscar socios / Otras opciones - Si GO: Preparar solicitud Business Angel + ENISA + CDTI/SODENA</p>
+<hr />
+<h2 id="anexo-2-roadmap-de-implementación-técnica-11-fases">ANEXO 2: Roadmap de Implementación Técnica (11 fases)</h2>
+<p><strong>Ver documento completo</strong>: <code>PRISMA_Architecture_BuildUp_TextVersion.md</code></p>
+<p><strong>Resumen ejecutivo del build-up técnico</strong> (6 meses TwIN Lab):</p>
+<p><strong>FASE 1-2 (Meses 1-2): Diseño y Arquitectura</strong> - Use Case Definition: Identificar riesgos, definir scope, catalogar fuentes de datos urbanos - Solution Design: Decisiones técnicas clave (LLMs vs. GEO models, frontier vs. open-source, FIWARE vs. cloud agnostic) - Entregable: Arquitectura de solución documentada, decisiones justificadas</p>
+<p><strong>FASE 3-5 (Meses 2-3): Datos e IA</strong> - Data Engineering: Pipelines de ingesta, integración FIWARE Smart Data Models, RAG setup - Model Selection: Multimodal, frontier (Grok), open-source (EFMs europeos), embeddings, reasoning - Prompt Engineering: Zero-shot, few-shot, Chain-of-Thought, biblioteca de prompts - Entregable: Data flows operativos, modelos seleccionados, prompt library</p>
+<p><strong>FASE 6-7 (Meses 3-4): Agentes y Fine-tuning</strong> - Agentic Design: Arquitectura multi-agente (detección, análisis, coordinación, comunicación) según Disaster Management Life Cycle - Fine Tuning: Ajuste con datos dominio específico, PoCs con stakeholders (112, bomberos, info pública) - Entregable: Sistema de agentes funcional, modelos optimizados, validación operativa</p>
+<p><strong>FASE 8-10 (Meses 4-6): Seguridad, Desarrollo y Despliegue</strong> - Evaluation &amp; Security: LLM judge tests, AI Act logging, NIS2 threat modeling, GovTech guardrails - Application Development: UI sobre FIWARE apps, chat interface, visualización geoespacial (CesiumJS) - Solution Deployment: Kubernetes, CI/CD, APIs expuestas, gestión de data spaces - Entregable: MVP en producción validado con compliance</p>
+<p><strong>FASE 11 (Mes 6+): Monitorización Continua</strong> - Tracking: Costes, human-in-the-loop, guardrails, regression tests, model drift detection - Entregable: Dashboards operativos, sistema de alertas, métricas de performance</p>
+<p><strong>Roles técnicos necesarios</strong>: Solution Architect, AI/ML Engineer, Data Engineer, Prompt Engineer, Software Engineer, DevOps Engineer, Cybersecurity Engineer, Domain Expert (Protección Civil), UX Designer</p>
+<p><strong>Stack tecnológico</strong>: FIWARE (Orion, STH Comet, IoT Agents, Perseo CEP) + LangChain + Grok/Mistral + ChromaDB + CesiumJS + Kubernetes + GPU cloud</p>
+<p><strong>Timeline</strong>: 6 meses para MVP funcional en TwIN Lab con arquitectura escalable para producción</p>
+<hr />
+<h2 id="anexo-3-exploración-de-mercado">ANEXO 3: Exploración de Mercado</h2>
+<p><strong>Nota</strong>: Este anexo resume el análisis profundo documentado en <code>PRISMA_Market_Exploration.md</code> (30+ competidores, 7 sectores críticos, 4 arquetipos modelo de negocio). Aquí se presenta el resumen ejecutivo de hallazgos clave, síntesis de sectores prioritarios y análisis SWOT.</p>
+<h3 id="contexto">Contexto</h3>
+<p>Este análisis es un <strong>mapa exploratorio</strong>, no un plan estratégico definitivo. PRISMA se encuentra en fase pre-MVP (TRL 4-5), sin empresa constituida, fundador solo, participando en TwIN Lab 2025 para validar propuesta de valor y modelo de negocio.</p>
+<p><strong>Objetivo</strong>: Mapear el territorio de mercado, identificar patrones invariantes, white spaces competitivos, y generar hipótesis a validar mediante conversaciones con clientes potenciales y mentores TwIN Lab.</p>
+<hr />
+<h3 id="hallazgos-clave-del-mercado">Hallazgos Clave del Mercado</h3>
+<p><strong>1. Mercado fragmentado entre infraestructura IoT y gestión de emergencias</strong></p>
+<p>El ecosistema de gemelos digitales urbanos y resiliencia se divide claramente en dos mundos que NO se hablan:</p>
+<ul>
+<li><p><strong>Mundo 1 — Plataformas IoT/Data Space</strong> (Siemens, Azure, AWS, iris360): Dashboards, sensores, gemelos 3D estáticos, monitorización reactiva. Excelentes en visibilidad operacional, débiles en respuesta autónoma a emergencias.</p></li>
+<li><p><strong>Mundo 2 — Critical Event Management</strong> (Everbridge, One Concern, Palantir): Alertas masivas, coordinación manual, análisis post-evento. Excelentes en notificación, débiles en detección autónoma y comprensión semántica de eventos complejos.</p></li>
+</ul>
+<p><strong>PRISMA propone un puente</strong>: Computer Vision autónoma + LLMs multimodales + Agentic AI coordinación → Sistema nervioso autónomo (no solo sensorial) para emergencias.</p>
+<p><strong>2. Timing crítico: Ventana tecnológica 12-18 meses</strong></p>
+<p>Los competidores actuales construyeron sus plataformas en era pre-GenAI (2015-2022). LSTM, RNN, dashboards reactivos, alertas basadas en umbrales. Retrofitting GenAI a estas arquitecturas requiere 12-18 meses mínimo.</p>
+<p>PRISMA puede arrancar con arquitectura <strong>nativa GenAI</strong> (LLMs multimodales, Agentic AI, CV state-of-the-art) desde día 1. Primera verdad fundamental: <strong>la velocidad de innovación IA supera la capacidad de adoption de infraestructuras legacy</strong>.</p>
+<p><strong>3. Regulación europea empuja inversión obligatoria (NIS2, CER, AI Act)</strong></p>
+<p>Directivas NIS2 (ciberseguridad infraestructuras críticas) y CER (resiliencia entidades críticas) obligan a energía, transporte, farma, agua a invertir en resiliencia 2024-2026. AI Act clasifica sistemas IA en emergencias como “alto riesgo” → compliance by design es ventaja competitiva.</p>
+<p><strong>Insight estratégico</strong>: Sectores críticos NO compran “tech cool”, compran <strong>compliance + mitigación riesgo regulatorio</strong>. PRISMA by design para NIS2/CER/AI Act = puerta de entrada.</p>
+<p><strong>4. Dual B2G/B2B es obligatorio (no opcional)</strong></p>
+<p>GovTech puro sufre: - Ciclos venta 12-18 meses - CAC alto (licitaciones, certificaciones, competencia desleal grandes integradores) - Cash burn peligroso para fundador solo sin financiación</p>
+<p><strong>Quick-wins B2B críticos</strong>: Utilities privadas, hospitales privados, recintos eventos, aeropuertos, seguridad privada. Pricing 50-150k €, ciclos 3-6 meses, validación rápida.</p>
+<p><strong>5. Modelo de negocio: Arquetipo híbrido projects-to-product es el más viable</strong></p>
+<p>Fundador solo año 1 → Servicios AIOps / proyectos custom (cash flow 0-3 meses)<br />
+Fundador + 1-2 devs año 2 → Extraer módulos reutilizables (Detección CV, Respuesta Agentic AI)<br />
+Fundador + equipo año 3 → Producto SaaS modular</p>
+<p><strong>NO</strong> plataforma SaaS monolítica día 1 (imposible sin funding 500k-1M).<br />
+<strong>NO</strong> open-source day 1 (sin co-founder técnico, complejidad excesiva).</p>
+<hr />
+<h3 id="sectores-críticos-prioritarios">Sectores Críticos Prioritarios</h3>
+<h4 id="energía-utilities-grid-operators">1. Energía (Utilities, Grid Operators)</h4>
+<p><strong>Tensión fundamental</strong>: Dependencia gas ruso (pre-2022 ~40% UE) + transición renovables (intermitencia) + ciberataques OT crecientes (Colonial Pipeline USA 2021, grid attacks Ucrania) = tormenta perfecta resiliencia.</p>
+<p><strong>Regulación obligatoria</strong>: - <strong>NIS2</strong> (Directiva UE 2022, transposición octubre 2024): Energía es “sector alta criticidad” Annex I. Obligatorio: risk assessments regulares, gestión incidentes 24h, supervisión cadena suministro, auditorías no anunciadas, multas diarias por incumplimiento. - <strong>CER</strong> (2022/2557): Utilities deben planes resiliencia multi-riesgo (ciber + físico + cascada).</p>
+<p><strong>Players B2B prioritarios</strong>: - Iberdrola (España ~40GW capacidad), EDP (Portugal/España), Naturgy, Endesa → Utilities grandes con presupuestos IT/resiliencia 50-200M € anuales - REE (Red Eléctrica España): Grid operator, responsable estabilidad red, presión regulatoria máxima NIS2</p>
+<p><strong>Casos uso PRISMA específicos</strong>: 1. <strong>Detección autónoma ciberataques OT</strong>: CV analiza dashboards SCADA → LLM detecta patrones anómalos (ransomware, DDoS) → Agentic AI aísla zonas, activa redundancias, coordina CERT 2. <strong>Coordinación apagones cascada</strong>: Social media early warning (tendencias “apagón barrio X”) + sensores grid + 112 transcrito (llamadas “sin luz hospitales”) → LLM prioriza restauración (hospitales &gt; industria &gt; residencial) 3. <strong>Respuesta emergencias físicas subestaciones</strong>: CV detecta incendio/intrusión → Agentic AI coordina bomberos + seguridad + redirige carga eléctrica a subestación backup</p>
+<p><strong>Pricing orientativo</strong> (basado en benchmarking Everbridge, Palantir utilities): - PoC/Pilot: 50-80k € (6 meses, 1 subestación crítica) - Despliegue regional: 150-300k € anual (ARR modelo o proyecto 12 meses) - Decision maker: CISO + Director Operaciones Grid + Compliance Officer (triple approval NIS2)</p>
+<p><strong>Cycle venta</strong>: - B2B privado (Iberdrola, Naturgy): 6-9 meses típico (PoC rápido 3 meses, después contrato) - B2G (REE): 12-18 meses (licitación pública)</p>
+<hr />
+<h4 id="farmasalud-hospitales-pharma-manufacturing">2. Farma/Salud (Hospitales, Pharma Manufacturing)</h4>
+<p><strong>Tensión fundamental</strong>: Dependencia APIs China/India 80%+ (principios activos farmacéuticos) + reshoring post-COVID + pandemias futuras (OMS predice cada 5-10 años) = soberanía sanitaria crítica.</p>
+<p><strong>Regulación obligatoria</strong>: - <strong>CER</strong>: Hospitales grandes y pharma manufacturers esenciales → planes resiliencia multi-amenaza - <strong>AI Act</strong>: Sistemas IA en triaje emergencias/coordinación médica = <strong>“alto riesgo”</strong> Annex III → Documentación, auditoría, transparencia obligatoria. PRISMA debe diseñarse compliance AI Act desde día 1.</p>
+<p><strong>Players B2B prioritarios</strong>: - Hospitales públicos grandes: Osakidetza (Euskadi), Sermas (Madrid), Hospital Vall d’Hebron → presupuestos IT/emergencias ~10-30M € anuales - Hospitales privados: Quirónsalud (red 50+ hospitales España), HM Hospitales → ciclos compra más rápidos que público - Pharma manufacturers: Rovi (vacunas, biosimilares), Almirall, Esteve → resiliencia cadena producción crítica - Distribuidoras: Cofares, Alliance Healthcare → continuidad suministro farmacias</p>
+<p><strong>Casos uso PRISMA específicos</strong>: 1. <strong>Early warning brotes epidémicos</strong>: Social media (trending “fiebre hospital X”) + 112 transcrito (llamadas síntomas) + datos epidemiológicos públicos → LLM detecta patrón brote 24-48h antes que métodos tradicionales → Agentic AI pre-alerta hospitales, activa protocolos 2. <strong>Coordinación saturación UCI multi-hospital</strong>: CV detecta ocupación UCI Hospital A 95% → LLM analiza gravedad pacientes → Agentic AI coordina derivaciones Hospital B/C + ambulancias + camas disponibles → triaje autónomo 3. <strong>Gestión crisis pharma (rotura stock medicamento crítico)</strong>: Integración bases datos distribuidoras + social media alarma desabastecimiento → LLM prioriza hospitales críticos (UCI, oncología) → Agentic AI redirige stock, coordina transporte urgente</p>
+<p><strong>Pricing orientativo</strong>: - PoC hospital: 40-60k € (3 meses, módulo early warning brotes) - Despliegue red hospitalaria: 100-200k € anual (red 5-10 hospitales) - Decision maker: Director TI + Director Médico + Comité Emergencias (hospitales públicos lenta burocracia, privados más rápido)</p>
+<p><strong>Cycle venta</strong>: - B2B privado (Quirónsalud): 4-6 meses - B2G (hospitales públicos): 9-15 meses</p>
+<p><strong>Insight crítico</strong>: Hospitales son sector con <strong>máxima urgencia situational awareness personas en riesgo</strong>. COVID demostró fragilidad sistemas coordinación manual. Willingness-to-pay alta si PRISMA demuestra “salva vidas”.</p>
+<hr />
+<h4 id="transportemovilidad-crítica-aeropuertos-puertos-renfe">3. Transporte/Movilidad Crítica (Aeropuertos, Puertos, Renfe)</h4>
+<p><strong>Tensión fundamental</strong>: Puertos estratégicos Asia-Europa (Valencia 1º EU contenedores, Algeciras) + aeropuertos hub (Madrid-Barajas 60M pasajeros) + terrorismo soft targets + accidentes masivos (Germanwings 2015, train crashes) = alta exposición riesgo.</p>
+<p><strong>Regulación obligatoria</strong>: - <strong>NIS2</strong>: Transporte es sector crítico Annex I - <strong>CER</strong>: Infraestructuras transporte deben planes resiliencia multi-riesgo</p>
+<p><strong>Players B2B prioritarios</strong>: - Aena (aeropuertos España): Monopolio, presupuesto IT ~100M €, necesitan soluciones escalables 50+ aeropuertos - Puertos del Estado: Autoridades portuarias (Valencia, Algeciras, Barcelona) → proyectos individuales o coordinados - Renfe: Operador ferroviario, preocupación seguridad pasajeros (accidentes, terrorismo) - TMB/Metro Madrid: Transporte urbano masivo, riesgo aglomeraciones, emergencias túneles</p>
+<p><strong>Casos uso PRISMA específicos</strong>: 1. <strong>Detección aglomeraciones peligrosas aeropuerto</strong>: CV autónoma en puertas embarque/llegada → LLM detecta “densidad crítica + movimiento bloqueado + posible pánico” → Agentic AI redistribuye seguridad, cierra accesos, alerta megafonía, coordina servicios médicos 2. <strong>Coordinación accidente ferroviario</strong>: CV detecta anomalía vía (descarrilamiento) + 112 masivo (llamadas emergencia) → LLM evalúa gravedad (heridos, fuego, químicos) → Agentic AI coordina bomberos + hospitales + evacuación pasajeros otros trenes + corte eléctrico catenaria 3. <strong>Seguridad portuaria multi-amenaza</strong>: CV detecta contenedor sospechoso + Integración listas negras aduana + LLM análisis riesgo → Agentic AI activa protocolos inspección, coordina policía/aduanas</p>
+<p><strong>Pricing orientativo</strong>: - PoC aeropuerto medio (Bilbao, Valencia): 60-100k € (6 meses, 1 terminal) - Despliegue aeropuerto grande (Madrid, Barcelona): 200-400k € anual - Decision maker: Director Seguridad + Director Operaciones + IT</p>
+<p><strong>Cycle venta</strong>: - Aena (público): 12-18 meses (licitación) - Puertos (mixto público-privado): 9-12 meses</p>
+<hr />
+<h3 id="análisis-swot">Análisis SWOT</h3>
+<h4 id="fortalezas-internas-controlables">FORTALEZAS (Internas, Controlables)</h4>
+<p><strong>F1. Tech Stack Único Nativo GenAI</strong> - PRISMA arranca 2025 con LLMs multimodales (GPT-4V, Gemini, Grok) + Agentic AI (AutoGen, LangChain) + CV state-of-the-art (YOLO, SAM) desde día 1 - Competidores (iris360, Everbridge) arquitecturas pre-GenAI (2015-2022) → retrofitting 12-18 meses - <strong>Ventana oportunidad</strong> 12-18 meses construir nativo mientras otros migran</p>
+<p><strong>F2. Compliance by Design (NIS2/CER/AI Act)</strong> - Diseño desde día 1 para compliance → auditoría, transparencia, documentación - Competidores retrofittean compliance (coste alto, tiempo largo) - <strong>Messaging diferencial</strong>: “PRISMA le ayuda cumplir NIS2” &gt; “PRISMA tiene mejor IA”</p>
+<p><strong>F3. Track Record Fundador (8 Proyectos TRL 6-8)</strong> - Credibilidad técnica demostrada (según memoria TwIN Lab) - Reduce riesgo percibido buyer (“¿puede ejecutar?”) - Facilita conversaciones B2B (vs startup sin track record)</p>
+<p><strong>F4. Open-Source EUPL (Auditable Sector Público)</strong> - Código auditable = requisito licitaciones públicas sensibles - Competidores propietarios (Palantir, Everbridge) = caja negra - <strong>Argumento B2G</strong>: “EUPL = soberanía digital europea, NO depende vendor USA”</p>
+<p><strong>F5. Timing Mercado (Regulación + GenAI Madurez)</strong> - NIS2/CER obligan inversión 2024-2026 (forcing function) - LLMs multimodales + Agentic AI maduros 2023-2024 (tech ready) - Confluencia timing regulatorio + tecnológico = ventana perfecta</p>
+<hr />
+<h4 id="debilidades-internas-mitigables">DEBILIDADES (Internas, Mitigables)</h4>
+<p><strong>D1. Fundador Solo, Sin Equipo</strong> - Limitación ejecución (1 persona NO escala) - Riesgo percibido buyer (“¿y si se va/enferma?”) - <strong>Mitigación</strong>: Outsourcing devs freelancers + TwIN Lab network + partnerships (Tesicnor entrega, PRISMA tech core)</p>
+<p><strong>D2. Sin Empresa Constituida, Sin Marca</strong> - Credibilidad institucional baja vs Siemens, Everbridge - Dificulta licitaciones públicas (requisitos legales) - <strong>Mitigación</strong>: Leverage TwIN Lab (marca paraguas), casos éxito rápidos B2B (credibilidad por resultados), partnership integradores (Indra vende, PRISMA entrega)</p>
+<p><strong>D3. Sin Financiación Secured</strong> - Cash flow crítico meses 0-6 - NO puede esperar 18m time-to-market SaaS - <strong>Mitigación</strong>: Bootstrappear proyectos B2B 50-100k €, grants TwIN Lab/FIWARE, modelo híbrido (cash flow proyectos → financia desarrollo producto)</p>
+<p><strong>D4. Necesidad Externalizar Desarrollo</strong> - Calidad código riesgo (freelancers vs equipo estable) - Dependencia terceros (disponibilidad, commitment) - <strong>Mitigación</strong>: Selección rigurosa freelancers (portfolio verificado), contratos milestones claros, co-founder técnico futuro (búsqueda activa TwIN Lab network)</p>
+<hr />
+<h4 id="oportunidades-externas-aprovechables">OPORTUNIDADES (Externas, Aprovechables)</h4>
+<p><strong>O1. NIS2 + CER + Sendai (Mandatos Regulatorios)</strong> - Energía, transporte, farma, agua OBLIGADOS invertir resiliencia 2024-2026 - Presupuestos aprobados (NO discrecionales) - <strong>Acción</strong>: Messaging compliance-first, partnerships consultoras compliance (deloitte, EY auditan NIS2 → recomiendan PRISMA)</p>
+<p><strong>O2. Fondos Next Generation EU (Grants 2024-2026)</strong> - FIWARE Open Calls: 10-170k € cascade funding - H2020/Horizon Europe: 200k-2M € proyectos colaborativos - TwIN Lab grants - <strong>Acción</strong>: Aplicar sistemáticamente Q1-Q2 2025, prioridad FIWARE Powered by</p>
+<p><strong>O3. FIWARE Marketplace (Canal Europeo)</strong> - Visibilidad 50+ iHubs, 1000+ empresas ecosistema - Certificación “Powered by” = señal calidad B2G - <strong>Acción</strong>: Roadmap certificación 2025 (requiere conformidad NGSI-LD, tiempo estimado 3-6 meses)</p>
+<p><strong>O4. PANTHEON/H2020 Partnerships (Credibilidad)</strong> - PANTHEON busca casos uso verticales disaster resilience - Co-desarrollo = funding + credibilidad académica + acceso consortium - <strong>Acción</strong>: Contactar PANTHEON Q1 2025, proponer caso uso “autonomous response emergencies”</p>
+<p><strong>O5. Palantir/Everbridge NO Mid-Market Europa (Ventana)</strong> - Palantir vende mega-contratos defense/gobierno USA (5-20M €) - Everbridge enfoque anglo (USA/UK), España mercado secundario - <strong>PRISMA puede dominar mid-market europeo</strong> (50-200k € utilities/hospitals/airports) antes que bajen - <strong>Ventana</strong>: 3-5 años estimado antes Palantir ataque mid-market Europa agresivamente</p>
+<hr />
+<h4 id="amenazas-externas-monitorizables">AMENAZAS (Externas, Monitorizables)</h4>
+<p><strong>A1. Palantir Bajando a Smart Cities (Horizonte 3-5 años)</strong> - Palantir tiene capital ilimitado, puede atacar cualquier mercado - Señales monitorizar: Partnerships Smart Cities Europa, contratos &lt;5M €, hiring sales Europa - <strong>Defensa</strong>: Especialización vertical + velocidad (ganar 20-30 clientes antes que lleguen) + diferenciación “European, EUPL, compliance by design” vs “USA, caja negra, controversial”</p>
+<p><strong>A2. Everbridge Añadiendo GenAI (12-18 meses)</strong> - Everbridge tiene revenue $500M, puede invertir 20-50M $ I+D GenAI - Probable roadmap 2025-2026: LLMs interpretación alerts, Agentic AI beta - <strong>Defensa</strong>: Ventana 12-18m construir nativo + ganar clientes (switching cost después)</p>
+<p><strong>A3. Integradores Marca Blanca (Indra, Atos Copian)</strong> - Integradores podrían ver PRISMA → copiar → marca blanca licitaciones - Riesgo especialmente si NO hay partnership formal - <strong>Defensa</strong>: Partnership formal Tesicnor/Indra (revenue share, cláusulas no-competencia), open-source EUPL (si copian, al menos comunidad crece), patentes clave (si viables)</p>
+<p><strong>A4. Ciclos Venta Públicos Largos (Riesgo Cash Burn)</strong> - B2G 12-18 meses típico → cash burn peligroso sin B2B paralelo - Competencia desleal licitaciones (Indra/Atos lobby político) - <strong>Defensa</strong>: Dual B2G/B2B OBLIGATORIO (70/30 B2B/B2G año 1-2), quick-wins B2B (estadios, hospitales privados)</p>
+<hr />
+</body>
+</html>
