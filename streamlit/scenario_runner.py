@@ -101,43 +101,6 @@ class ScenarioRunner:
         self.df = pd.read_csv(self.csv_path)
         self.current_row = 0
         print(f"Loaded {len(self.df)} rows from {self.csv_path.name}")
-        
-    def create_entities(self):
-        """Create FIWARE entities if they don't exist."""
-        for entity_type, entity_id in ENTITY_IDS.items():
-            stream_config = STREAMS[entity_type]
-            location = stream_config.get("location", {})
-            
-            entity_data = {
-                "id": entity_id,
-                "type": entity_type,
-            }
-            
-            # Add location if available
-            if location:
-                entity_data["location"] = {
-                    "type": "geo:json",
-                    "value": {
-                        "type": "Point",
-                        "coordinates": [location["lon"], location["lat"]]
-                    }
-                }
-            
-            # Add initial attributes with empty values
-            for attr_name, attr_config in stream_config["attributes"].items():
-                if attr_config["type"] == "Text":
-                    entity_data[attr_name] = {"type": "Text", "value": ""}
-                else:
-                    entity_data[attr_name] = {"type": "Number", "value": 0}
-            
-            try:
-                self.client.create_entity(entity_data)
-                print(f"  Created: {entity_id}")
-            except Exception as e:
-                if "Already Exists" in str(e) or "422" in str(e):
-                    print(f"  Exists: {entity_id}")
-                else:
-                    print(f"  Error creating {entity_id}: {e}")
     
     def inject_row(self, row_idx: int, on_update: Optional[Callable] = None) -> Dict[str, Any]:
         """
@@ -233,7 +196,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Run PRISMA scenario")
     parser.add_argument("scenario", choices=["15_junio", "6_julio", "1_agosto"])
     parser.add_argument("--speed", type=float, default=6.0, help="Speed multiplier")
-    parser.add_argument("--create-entities", action="store_true", help="Create FIWARE entities first")
     
     args = parser.parse_args()
     
@@ -241,10 +203,6 @@ if __name__ == "__main__":
     
     runner = ScenarioRunner(str(csv_path), speed=args.speed)
     runner.load()
-    
-    if args.create_entities:
-        print("\nCreating FIWARE entities...")
-        runner.create_entities()
     
     def on_update(entity_type, entity_id, attrs):
         print(f"  → {entity_type}: {list(attrs.keys())}")
