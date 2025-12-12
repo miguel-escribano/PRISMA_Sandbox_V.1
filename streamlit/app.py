@@ -1,26 +1,27 @@
-"""PRISMA MVP - Layout skeleton."""
+"""PRISMA MVP - Ola de Calor + Incendio."""
 import streamlit as st
 
 st.set_page_config(page_title="PRISMA", page_icon="🔮", layout="wide")
 
 # =============================================================================
-# SIDEBAR - Configurador escenarios
+# SIDEBAR - Configurador escenario
 # =============================================================================
 
 with st.sidebar:
     st.title("🔮 PRISMA")
-    st.caption("Configurador de escenarios")
-    
-    # Caso
-    caso = st.radio("Caso", ["🌡️ Ola Calor + Incendio", "🔐 Ciberataque Agua"])
+    st.caption("Ola de Calor + Incendio Forestal")
     
     st.markdown("---")
     
-    # Parámetros básicos
-    st.markdown("**Contexto**")
-    ubicacion = st.text_input("Ubicación", value="Pamplona")
-    fecha = st.date_input("Fecha")
-    hora = st.time_input("Hora inicio")
+    # Fecha (los 3 escenarios predefinidos)
+    fecha = st.radio(
+        "Fecha escenario",
+        ["15 Junio", "1 Julio (San Fermín)", "1 Agosto"],
+        index=1  # Default: San Fermín
+    )
+    
+    # Ubicación fija para MVP
+    st.text_input("Ubicación", value="Pamplona", disabled=True)
     
     st.markdown("---")
     
@@ -45,4 +46,3 @@ with col_chat:
 with col_reasoning:
     st.markdown("### 🧠 Razonamiento")
     st.container(height=250, border=True)
-
