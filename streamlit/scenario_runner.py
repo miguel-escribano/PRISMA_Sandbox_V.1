@@ -324,11 +324,11 @@ if __name__ == "__main__":
         print(f"  -> {entity_type}: {list(attrs.keys())}")
     
     def on_tick(t_min, sim_time):
-        write_state(True, t_min, sim_time, runner.current_row + 1, total_rows)
+        write_state(True, t_min, sim_time, runner.current_row, total_rows)
 
     try:
         runner.run(on_update=on_update, on_tick=on_tick)
     finally:
-        # Use actual last row values
+        # Use actual last row values (index is total_rows - 1)
         last_row = runner.df.iloc[-1]
-        write_state(False, int(last_row["t_min"]), last_row["sim_time"], total_rows, total_rows)
+        write_state(False, int(last_row["t_min"]), last_row["sim_time"], total_rows - 1, total_rows)
