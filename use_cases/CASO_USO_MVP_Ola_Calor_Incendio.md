@@ -500,7 +500,7 @@ Acciones:
 
 ## 🏗️ Arquitectura Técnica MVP
 
-### Decisión: Streamlit + FIWARE MCP + n8n (agente)
+### Decisión: Streamlit + CSVs + Runner + n8n (agente)
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -512,9 +512,9 @@ Acciones:
 │         │                 │                               │
 │         ▼                 ▼                               │
 │  ┌─────────────┐    ┌─────────────────────────────────┐  │
-│  │ Script      │    │         n8n (agente)            │  │
-│  │ generador   │    │   LLM + Knowledge Base          │  │
-│  │ (FIWARE MCP)│    │   + Cascadas few-shot           │  │
+│  │ CSV         │    │         n8n (agente)            │  │
+│  │ timeline_*  │    │   LLM + Knowledge Base          │  │
+│  │ + Runner    │    │   + Cascadas few-shot           │  │
 │  └──────┬──────┘    └───────────────┬─────────────────┘  │
 └─────────┼───────────────────────────┼────────────────────┘
           │                           │
@@ -526,7 +526,7 @@ Acciones:
 └──────────────────────────────────────────────────────────┘
 ```
 
-**Simplificación MVP:** No hay n8n-1. El script generador de escenarios está en Streamlit usando FIWARE MCP directamente.
+**Datos sintéticos:** CSVs pre-scripted con nomenclatura `{EntityType}_{attribute}`. Runner lee CSV y envía secuencialmente a FIWARE con velocidad configurable (6x = 30 min demo simulan 3h reales).
 
 ---
 
@@ -557,28 +557,41 @@ Acciones:
 
 | Componente | Estado | Archivo |
 |------------|--------|---------|
-| UI Streamlit | ✅ Layout | `streamlit/app.py` |
-| Contexto escenarios | ✅ Definido | `streamlit/config/scenarios.py` |
-| Streams/entidades | ✅ Definido | `streamlit/config/scenarios.py` |
+| UI Streamlit | ✅ Layout + tabs | `streamlit/app.py` |
+| Contexto escenarios | ✅ 3 fechas | `streamlit/config/scenarios.py` |
+| Streams/entidades | ✅ 6 entidades FIWARE | `streamlit/config/scenarios.py` |
 | Knowledge Base | ✅ Definido | `streamlit/config/knowledge_base.py` |
 | Cascadas few-shot | ✅ Definido | `streamlit/config/knowledge_base.py` |
-| Script generador | ⏳ Pendiente | Usar FIWARE MCP |
+| **CSVs timeline** | ✅ 3 escenarios | `streamlit/data/timeline_*.csv` |
+| **Runner FIWARE** | ✅ Inyección secuencial | `streamlit/scenario_runner.py` |
 | Conexión n8n agente | ⏳ Pendiente | Webhook definido en .env |
 
-### Curva narrativa scripted (6 Julio - Chupinazo)
+### CSVs de datos sintéticos
+
+Nomenclatura: `{EntityType}_{attribute}` compatible con Smart Data Models.
 
 ```
-T+0min:  Estado inicial (35°C, PM2.5=50, urgencias 60%)
-T+2min:  AEMET: 42°C mañana
-T+4min:  EFFIS: incendio Valle Roncal
-T+6min:  Twitter: +20 menciones humo
-T+8min:  PM2.5: 50→80
-T+10min: Urgencias: 60%→70%
-T+12min: PM2.5: 80→150 (crítico)
-T+14min: 112: +40% llamadas respiratorias
-T+16min: Urgencias: 85% (límite)
-T+18min: PUNTO DE DECISIÓN
+streamlit/data/
+├── timeline_15_junio.csv   # Viento puede girar S → mejora
+├── timeline_6_julio.csv    # Sin esperanza, decidir YA
+└── timeline_1_agosto.csv   # Lluvia en 6h → aguantar
 ```
+
+**Uso runner:**
+```bash
+python streamlit/scenario_runner.py 6_julio --speed 6
+```
+
+### Curva narrativa (20 min demo = 3h simuladas)
+
+| Demo | Sim | Evento clave |
+|------|-----|--------------|
+| 0:00 | 09:00 | Estado base, incendio activo al N, viento S |
+| 0:04 | 09:24 | Viento gira N → humo empieza a bajar |
+| 0:08 | 09:48 | PM2.5 130, urgencias 78% |
+| 0:12 | 10:12 | PM2.5 195, Twitter "alarm" |
+| 0:16 | 10:36 | PM2.5 245, urgencias 96% |
+| 0:20 | 11:00 | **PUNTO DECISIÓN** 🎯 |
 
 ### n8n Agente (PRISMA_2_Situational_Intelligence)
 - Recibe: contexto + datos actuales + pregunta
@@ -606,7 +619,7 @@ Dado el estado actual de los datos, responde:
 | Día | Foco | Entregable |
 |-----|------|------------|
 | **Jue 12** | UI layout + config escenarios | ✅ Hecho |
-| **Vie 13** | Script generador FIWARE | Inyectar datos con MCP |
+| **Vie 13** | CSVs timeline + Runner | ✅ Hecho |
 | **Sáb 14** | Conexión chat → n8n agente | Flujo completo |
 | **Dom 15** | Pulir agente + respuestas | Calidad LLM |
 | **Lun 16** | Mapa + visualización | Contexto geográfico |

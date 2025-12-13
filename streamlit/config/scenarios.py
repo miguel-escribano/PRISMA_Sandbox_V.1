@@ -73,8 +73,6 @@ STREAMS = {
         "attributes": {
             "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 500]},
             "pm10": {"type": "Number", "unit": "µg/m³", "range": [0, 600]},
-            "no2": {"type": "Number", "unit": "µg/m³", "range": [0, 400]},
-            "o3": {"type": "Number", "unit": "µg/m³", "range": [0, 300]},
         }
     },
     
@@ -93,7 +91,6 @@ STREAMS = {
         "entity_id": "EmergencyCalls112:Pamplona:01",
         "location": {"lat": 42.8055, "lon": -1.6460, "name": "SOS Navarra 112"},
         "attributes": {
-            "totalCalls": {"type": "Number", "unit": "calls/h", "range": [0, 500]},
             "respiratoryCalls": {"type": "Number", "unit": "calls/h", "range": [0, 100]},
             "heatStrokeCalls": {"type": "Number", "unit": "calls/h", "range": [0, 50]},
             "deltaVsNormal": {"type": "Number", "unit": "%", "range": [-50, 200]},
@@ -106,7 +103,6 @@ STREAMS = {
         "attributes": {
             "emergencyOccupancy": {"type": "Number", "unit": "%", "range": [0, 150]},
             "icuOccupancy": {"type": "Number", "unit": "%", "range": [0, 100]},
-            "availableBeds": {"type": "Number", "unit": "beds", "range": [0, 200]},
         }
     },
     
@@ -116,7 +112,6 @@ STREAMS = {
         "attributes": {
             "mentionCount": {"type": "Number", "unit": "mentions/h", "range": [0, 1000]},
             "sentiment": {"type": "Text", "values": ["positive", "neutral", "negative", "alarm"]},
-            "topHashtags": {"type": "Text", "example": "#OlaDeCalor,#Pamplona,#Humo"},
         }
     },
 }
