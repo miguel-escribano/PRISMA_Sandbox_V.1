@@ -697,3 +697,8 @@ Todo esto se han dado los primeros pasos para incorporar toda esta información 
 - **Otros:** Verticales específicos (agua, alumbrado, tráfico). PRISMA es horizontal: inteligencia situacional agnóstica al dominio.
 
 
+
+
+
+
+

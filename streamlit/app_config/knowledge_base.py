@@ -17,8 +17,8 @@ KNOWLEDGE_BASE = {
     "umbrales_alerta": {
         "temperatura": {"amarillo": 38, "naranja": 40, "rojo": 42, "unit": "°C"},
         "pm25": {"bueno": 50, "moderado": 100, "malo": 150, "peligroso": 200, "unit": "µg/m³"},
+        "co": {"normal": 2, "elevado": 5, "peligroso": 10, "unit": "mg/m³"},
         "urgencias_ocupacion": {"normal": 70, "alto": 85, "critico": 95, "unit": "%"},
-        "llamadas_112_delta": {"normal": 20, "alerta": 40, "critico": 60, "unit": "%"},
     },
     
     "acciones_disponibles": [
@@ -48,10 +48,22 @@ KNOWLEDGE_BASE = {
     
     "geografia": {
         "ubicacion": "Cuenca de Pamplona, Navarra",
-        "pirineos": "30 km al norte",
-        "valles_riesgo": ["Roncal", "Salazar", "Baztán"],
+        "valles_incendio": {
+            "Ultzama": "20km norte - MÁS CERCANO, prioridad máxima",
+            "Baztán": "40km norte - ruta Francia N-121-A",
+            "Roncal": "50km noreste - zona turística pirenaica",
+        },
         "viento_sur": "Bochorno - crea condiciones de ignición",
-        "viento_norte": "Trae humo de incendios pirenaicos a Pamplona",
+        "viento_norte": "Empuja humo hacia Pamplona en 1-2h",
+    },
+    
+    "fuentes_datos": {
+        "AEMET": "Meteorología oficial España",
+        "ThinkingCities": "Sensores IoT Gemelo Digital Pamplona",
+        "EFFIS": "Sistema europeo incendios forestales",
+        "DGT": "Estado carreteras España",
+        "SOS112": "Central emergencias Navarra",
+        "SNS": "Servicio Navarro de Salud",
     },
     
     "cascadas_tipicas": [

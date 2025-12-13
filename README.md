@@ -2,83 +2,102 @@
 
 Situational intelligence system for emergency management using AI agents + FIWARE.
 
+**MVP Demo:** Heat Wave + Forest Fire scenario in Pamplona/Navarra.
+
 ## Quick Start
 
 ```bash
 # 1. Setup
-cp .env.example .env  # Add your credentials
+cp .env.example .env  # Add your FIWARE credentials
 
-# 2. Start MCP Server
-python start.py
+# 2. Initialize FIWARE entities
+cd streamlit
+python fiware_init_mvp.py
 
-# 3. Use FIWARE
-python test_fiware_connection.py
+# 3. Run the app
+streamlit run app.py
 ```
+
+App runs at http://localhost:8501
+
+## Demo Scenarios
+
+| Scenario | Description | Duration |
+|----------|-------------|----------|
+| **6 julio** | Extreme crisis - heat wave + uncontrolled fires | 4h → 15min @x16 |
+| **15 junio** | Training - situation gets controlled | 4h → 15min @x16 |
+| **1 agosto** | Rain saves the day - escalation then relief | 4h → 15min @x16 |
 
 ## Architecture
 
 ```
-Cursor / Your App
+Streamlit App (localhost:8501)
+       │
+       ├── ScenarioRunner (subprocess)
+       │         │
+       │         ▼
+       │   CSV Timelines (17 datapoints, 13:00-17:00)
+       │         │
+       ▼         ▼
+    FIWARE Context Broker (Telefónica Cloud)
        │
        ▼
-MCP Server (localhost:5002)
+    n8n Webhooks (subscriptions)
        │
        ▼
-Telefónica FIWARE (cloud)
+    LLM Agent (reasoning)
 ```
+
+## Project Structure
+
+```
+├── streamlit/
+│   ├── app.py                    # Main Streamlit UI
+│   ├── scenario_runner.py        # Injects CSV data to FIWARE
+│   ├── fiware_init_mvp.py        # Initialize FIWARE entities
+│   ├── app_config/
+│   │   ├── scenarios.py          # Entity definitions & streams
+│   │   └── knowledge_base.py     # Agent knowledge base
+│   └── data/
+│       ├── timeline_6_julio.csv
+│       ├── timeline_15_junio.csv
+│       └── timeline_1_agosto.csv
+│
+├── src/
+│   ├── fiware_client.py          # FIWARE API client
+│   └── config.py                 # Configuration loader
+│
+├── n8n/                          # Workflow definitions
+└── vendor/                       # Smart Data Models, GeoJSON
+```
+
+## FIWARE Entities
+
+| Entity Type | Source | Instances |
+|-------------|--------|-----------|
+| WeatherObserved | AEMET API | 1 (Pamplona) |
+| AirQualityObserved | ThinkingCities IoT | 3 (Rochapea, FelisaMunarriz, Iturrama) |
+| ForestFire | EFFIS API | 3 (Baztán, Ultzama, Roncal) |
+| EmergencyCalls | SOS 112 Navarra | 1 |
+| HospitalStatus | SNS-Osasunbidea | 1 (HUN Urgencias) |
+| SocialMediaAlert | Commercial API | 1 |
+| TrafficAlert | DGT API | 3 (N-121-A, NA-411, NA-137) |
 
 ## Configuration
 
 Edit `.env`:
 - `FIWARE_USERNAME` / `FIWARE_PASSWORD` - Telefónica credentials
 - `SERVICE` - `sc_pamplona_sandbox`
-- `SUBSERVICE` - `/02_Escribano` (dev) or `/sdmenvironment` (prod)
-
-**Note:** Use `FIWARE_USERNAME` (not `USERNAME`) to avoid Windows environment variable conflicts.
-
-## Subservices
-
-| Subservice | Purpose |
-|------------|---------|
-| `/02_Escribano` | Development sandbox |
-| `/sdmenvironment` | Production - 86 sensors in Pamplona |
-
-## Project Structure
-
-```
-├── start.py              # Start MCP server
-├── config.py             # Configuration loader
-├── src/fiware_client.py  # Direct FIWARE client
-├── .env                  # Your credentials (gitignored)
-├── vendor/               # Smart Data Models, GeoJSON refs
-└── .cursor/commands/     # FIWARE command reference
-```
+- `SUBSERVICE` - `/02_Escribano`
 
 ## MCP Servers
 
-This project uses **2 FIWARE MCP servers** for different subservices:
+Two FIWARE MCP servers available:
 
-| MCP Server | Subservice | Location |
-|------------|------------|----------|
-| `FIWARE-MCP-Server-02_Escribano` | `/02_Escribano` | `C:\Users\migue\FIWARE-MCP-Server-02_Escribano` |
-| `FIWARE-MCP-Server-sdmenvironment` | `/sdmenvironment` | `C:\Users\migue\FIWARE-MCP-Server-sdmenvironment` |
-
-**Configuration:**
-- Each MCP has its own `.env` file with credentials
-- Configured in `~/.cursor/mcp.json`
-- Use `FIWARE_USERNAME` and `FIWARE_PASSWORD` (not `USERNAME`/`PASSWORD`)
-- Each MCP has a unique `FastMCP` instance name
-
-**Available Tools:**
-- `CB_version` - Check Context Broker version
-- `fiware_request` - Execute NGSI-v2 API requests
-- `list_smart_data_model_domains` - List available Smart Data Models
-- `get_smart_data_model` - Get Smart Data Model schema
-
-**Resources:**
-- `fiware://examples` - Postman collection with API examples
-
-See `.cursor/commands/` for detailed usage guides.
+| MCP Server | Subservice |
+|------------|------------|
+| `FIWARE-MCP-Server-02_Escribano` | `/02_Escribano` (dev sandbox) |
+| `FIWARE-MCP-Server-sdmenvironment` | `/sdmenvironment` (prod - 86 sensors) |
 
 ---
 
