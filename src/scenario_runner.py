@@ -18,12 +18,19 @@ if project_root not in sys.path:
 
 from src.fiware_client import FIWAREClient
 
-# Import STREAMS from local app_config
+# Import STREAMS from streamlit app_config
 import importlib.util
-spec = importlib.util.spec_from_file_location("scenarios", Path(__file__).parent / "app_config" / "scenarios.py")
+spec = importlib.util.spec_from_file_location(
+    "scenarios", 
+    Path(__file__).parent.parent / "streamlit" / "app_config" / "scenarios.py"
+)
 scenarios_module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(scenarios_module)
 STREAMS = scenarios_module.STREAMS
+
+# Data paths
+SCENARIO_DATA_DIR = Path(__file__).parent.parent / "data" / "ola_calor_incendio"
+STATE_DIR = Path(__file__).parent.parent / "streamlit" / "data"
 
 
 # =============================================================================
@@ -282,7 +289,7 @@ class ScenarioRunner:
 # STATE FILE (for UI communication)
 # =============================================================================
 
-STATE_FILE = Path(__file__).parent / "data" / ".runner_state.json"
+STATE_FILE = STATE_DIR / ".runner_state.json"
 
 def write_state(running, t_min, sim_time, row, total_rows):
     """Write state to JSON file for UI to read."""
@@ -310,7 +317,7 @@ if __name__ == "__main__":
     
     args = parser.parse_args()
     
-    csv_path = Path(__file__).parent / "data" / f"timeline_{args.scenario}.csv"
+    csv_path = SCENARIO_DATA_DIR / f"timeline_{args.scenario}.csv"
     
     runner = ScenarioRunner(str(csv_path), speed=args.speed)
     runner.load()
@@ -332,3 +339,4 @@ if __name__ == "__main__":
         # Use actual last row values (index is total_rows - 1)
         last_row = runner.df.iloc[-1]
         write_state(False, int(last_row["t_min"]), last_row["sim_time"], total_rows - 1, total_rows)
+

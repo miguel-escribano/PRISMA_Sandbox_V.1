@@ -122,10 +122,10 @@ with st.sidebar:
             scenario = csv_map[fecha]
             
             # Launch runner as subprocess (Windows compatible)
-            runner_script = _this_dir / "scenario_runner.py"
+            runner_script = _project_root / "src" / "scenario_runner.py"
             proc = subprocess.Popen(
                 [sys.executable, str(runner_script), scenario, "--speed", str(speed)],
-                cwd=str(_this_dir),
+                cwd=str(_project_root),
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 creationflags=subprocess.CREATE_NO_WINDOW
@@ -187,7 +187,7 @@ with tab_scenario:
         "6 Julio (San Fermín)": "timeline_6_julio.csv",
         "1 Agosto": "timeline_1_agosto.csv"
     }
-    csv_file = _this_dir / "data" / csv_map[fecha]
+    csv_file = _project_root / "data" / "ola_calor_incendio" / csv_map[fecha]
     
     # --- BIG TIME DISPLAY ---
     col_time, col_status = st.columns([2, 1])

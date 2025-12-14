@@ -1,4 +1,4 @@
-"""Start PRISMA MVP - MCP Server + Streamlit."""
+"""Start PRISMA MVP - Streamlit App."""
 import subprocess
 import sys
 import socket
@@ -8,8 +8,6 @@ import os
 # CONFIG
 # =============================================================================
 
-MCP_SERVER_PATH = r"C:\Users\migue\FIWARE-MCP-Server-Auth-Miguel"
-MCP_PORT = 5002
 STREAMLIT_PORT = 8501
 STREAMLIT_APP = "streamlit/app.py"
 
@@ -22,23 +20,6 @@ def is_port_open(port):
     result = sock.connect_ex(('127.0.0.1', port)) == 0
     sock.close()
     return result
-
-# =============================================================================
-# START MCP SERVER (opcional)
-# =============================================================================
-
-if is_port_open(MCP_PORT):
-    print(f"[OK] MCP Server already running on http://127.0.0.1:{MCP_PORT}/mcp")
-elif os.path.exists(MCP_SERVER_PATH):
-    print(f"Starting MCP Server on port {MCP_PORT}...")
-    subprocess.Popen(
-        [sys.executable, 'server.py', '--http', '--port', str(MCP_PORT)],
-        cwd=MCP_SERVER_PATH,
-        creationflags=subprocess.CREATE_NEW_CONSOLE
-    )
-    print(f"[OK] MCP Server starting at http://127.0.0.1:{MCP_PORT}/mcp")
-else:
-    print(f"[!] MCP Server path not found, skipping: {MCP_SERVER_PATH}")
 
 # =============================================================================
 # START STREAMLIT

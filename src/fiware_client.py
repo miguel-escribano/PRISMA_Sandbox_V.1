@@ -224,6 +224,65 @@ class FIWAREClient:
         
         return True
 
+    # =========================================================================
+    # SUBSCRIPTIONS
+    # =========================================================================
+    
+    def list_subscriptions(self) -> List[Dict[str, Any]]:
+        """List all subscriptions in current subservice."""
+        self._ensure_token()
+        url = f"{self.cb_url}/v2/subscriptions"
+        
+        response = requests.get(url, headers=self._get_headers(), verify=False)
+        response.raise_for_status()
+        
+        return response.json()
+    
+    def get_subscription(self, subscription_id: str) -> Dict[str, Any]:
+        """Get a specific subscription by ID."""
+        self._ensure_token()
+        url = f"{self.cb_url}/v2/subscriptions/{subscription_id}"
+        
+        response = requests.get(url, headers=self._get_headers(), verify=False)
+        response.raise_for_status()
+        
+        return response.json()
+    
+    def create_subscription(self, subscription_data: Dict[str, Any]) -> str:
+        """
+        Create a new subscription.
+        
+        Args:
+            subscription_data: Subscription definition
+        
+        Returns:
+            Subscription ID (from Location header)
+        """
+        self._ensure_token()
+        url = f"{self.cb_url}/v2/subscriptions"
+        
+        headers = self._get_headers()
+        headers['Content-Type'] = 'application/json'
+        
+        response = requests.post(url, headers=headers, json=subscription_data, verify=False)
+        response.raise_for_status()
+        
+        # ID is in Location header: /v2/subscriptions/{id}
+        location = response.headers.get('Location', '')
+        subscription_id = location.split('/')[-1] if location else None
+        
+        return subscription_id
+    
+    def delete_subscription(self, subscription_id: str) -> bool:
+        """Delete a subscription."""
+        self._ensure_token()
+        url = f"{self.cb_url}/v2/subscriptions/{subscription_id}"
+        
+        response = requests.delete(url, headers=self._get_headers(), verify=False)
+        response.raise_for_status()
+        
+        return True
+
 
 # Example usage
 if __name__ == '__main__':

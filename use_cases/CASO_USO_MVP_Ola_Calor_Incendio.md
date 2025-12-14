@@ -563,7 +563,7 @@ Acciones:
 | Knowledge Base | ✅ Definido | `streamlit/config/knowledge_base.py` |
 | Cascadas few-shot | ✅ Definido | `streamlit/config/knowledge_base.py` |
 | **CSVs timeline** | ✅ 3 escenarios | `streamlit/data/timeline_*.csv` |
-| **Runner FIWARE** | ✅ Inyección secuencial | `streamlit/scenario_runner.py` |
+| **Runner FIWARE** | ✅ Inyección secuencial | `src/scenario_runner.py` |
 | Conexión n8n agente | ⏳ Pendiente | Webhook definido en .env |
 
 ### CSVs de datos sintéticos
@@ -571,7 +571,7 @@ Acciones:
 Nomenclatura: `{EntityType}_{attribute}` compatible con Smart Data Models.
 
 ```
-streamlit/data/
+data/ola_calor_incendio/
 ├── timeline_15_junio.csv   # Viento puede girar S → mejora
 ├── timeline_6_julio.csv    # Sin esperanza, decidir YA
 └── timeline_1_agosto.csv   # Lluvia en 6h → aguantar
@@ -579,7 +579,7 @@ streamlit/data/
 
 **Uso runner:**
 ```bash
-python streamlit/scenario_runner.py 6_julio --speed 6
+python src/scenario_runner.py 6_julio --speed 6
 ```
 
 ### Curva narrativa (20 min demo = 3h simuladas)
