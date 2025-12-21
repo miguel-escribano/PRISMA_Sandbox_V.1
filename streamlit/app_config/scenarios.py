@@ -71,11 +71,11 @@ STREAMS = {
     },
     
     # -------------------------------------------------------------------------
-    # AIR QUALITY - 3 sensors
+    # AIR QUALITY - 3 sensors (2 Kunak TwIN Lab + 1 GobNavarra oficial)
     # -------------------------------------------------------------------------
-    "AirQualityObserved_FelisaMunarriz": {
-        "entity_id": "AirQualityObserved:ThinkingCities_FelisaMunarriz",
-        "location": {"lat": 42.8069, "lon": -1.6441, "name": "Aire Felisa Munarriz (sur)"},
+    "AirQualityObserved_KunakBajaNavarra": {
+        "entity_id": "AirQualityObserved:ThinkingCities_Kunak_BajaNavarra",
+        "location": {"lat": 42.8141, "lon": -1.6316, "name": "Kunak Baja Navarra (TwIN Lab)"},
         "attributes": {
             "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 500]},
             "pm10": {"type": "Number", "unit": "µg/m³", "range": [0, 600]},
@@ -83,9 +83,9 @@ STREAMS = {
             "airQualityIndex": {"type": "Number", "unit": "index", "range": [1, 6]},
         }
     },
-    "AirQualityObserved_Rochapea": {
-        "entity_id": "AirQualityObserved:ThinkingCities_Rochapea",
-        "location": {"lat": 42.8300, "lon": -1.6500, "name": "Aire Rochapea (norte)"},
+    "AirQualityObserved_KunakRochapea": {
+        "entity_id": "AirQualityObserved:ThinkingCities_Kunak_Rochapea",
+        "location": {"lat": 42.8300, "lon": -1.6500, "name": "Kunak Rochapea (TwIN Lab)"},
         "attributes": {
             "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 500]},
             "pm10": {"type": "Number", "unit": "µg/m³", "range": [0, 600]},
@@ -100,6 +100,34 @@ STREAMS = {
             "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 500]},
             "pm10": {"type": "Number", "unit": "µg/m³", "range": [0, 600]},
             "co": {"type": "Number", "unit": "mg/m³", "range": [0, 50]},
+        }
+    },
+    
+    # -------------------------------------------------------------------------
+    # INDOOR AIR QUALITY - inBiot MICA_WELL (TwIN Lab)
+    # -------------------------------------------------------------------------
+    "IndoorAirQuality_HUN": {
+        "entity_id": "IndoorAirQuality:inBiot_MICA_HUN_Urgencias",
+        "location": {"lat": 42.8044, "lon": -1.6662, "name": "IAQ Hospital HUN Urgencias (inBiot)"},
+        "attributes": {
+            "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 200]},
+            "co2": {"type": "Number", "unit": "ppm", "range": [400, 2000]},
+        }
+    },
+    "IndoorAirQuality_inBiot": {
+        "entity_id": "IndoorAirQuality:inBiot_MICA_Oficinas_Mutilva",
+        "location": {"lat": 42.79765365222666, "lon": -1.6136467398333465, "name": "IAQ Oficinas inBiot Mutilva (inBiot)"},
+        "attributes": {
+            "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 200]},
+            "co2": {"type": "Number", "unit": "ppm", "range": [400, 2000]},
+        }
+    },
+    "IndoorAirQuality_Itaroa": {
+        "entity_id": "IndoorAirQuality:inBiot_MICA_CC_Itaroa",
+        "location": {"lat": 42.82926658081576, "lon": -1.5826414164837532, "name": "IAQ Centro Comercial Itaroa (inBiot)"},
+        "attributes": {
+            "pm25": {"type": "Number", "unit": "µg/m³", "range": [0, 200]},
+            "co2": {"type": "Number", "unit": "ppm", "range": [400, 2000]},
         }
     },
     
@@ -203,6 +231,66 @@ STREAMS = {
         "location": {"lat": 42.7148, "lon": -1.0079, "name": "NA-137 Roncal"},
         "attributes": {
             "status": {"type": "Text", "values": ["open", "restricted", "closed"]},
+        }
+    },
+    
+    # -------------------------------------------------------------------------
+    # DRONES - Bravodrones (TwIN Lab) - Computer Vision
+    # -------------------------------------------------------------------------
+    "Drone_Fire": {
+        "entity_id": "Drone:Bravodrones_Fire_001",
+        "location": {"lat": 42.81405730745419, "lon": -1.6253845194510725, "name": "Dron Incendios - Base Policía Foral"},
+        "attributes": {
+            "status": {"type": "Text", "values": ["idle", "en_route", "inspecting", "returning"]},
+            "altitude": {"type": "Number", "unit": "m", "range": [0, 500]},
+            "groundTemperature": {"type": "Number", "unit": "°C", "range": [20, 800]},
+            "hotspotCount": {"type": "Number", "unit": "focos", "range": [0, 50]},
+            "assignedToFire": {"type": "Text", "description": "ID del incendio asignado"},
+        }
+    },
+    "Drone_Crowd": {
+        "entity_id": "Drone:Bravodrones_Crowd_001",
+        "location": {"lat": 42.81405730745419, "lon": -1.6253845194510725, "name": "Dron Masas - Base Policía Foral"},
+        "attributes": {
+            "status": {"type": "Text", "values": ["idle", "monitoring", "alert"]},
+            "altitude": {"type": "Number", "unit": "m", "range": [0, 200]},
+            "crowdDensity": {"type": "Number", "unit": "personas/m2", "range": [0, 10]},
+            "panicIndicator": {"type": "Number", "unit": "score", "range": [0, 100]},
+            "flowDirection": {"type": "Text", "values": ["N", "S", "E", "W", "NE", "NW", "SE", "SW", "dispersing", "stable"]},
+        }
+    },
+    
+    # -------------------------------------------------------------------------
+    # FIRE FORECAST - TESICNOR RRD (TwIN Lab) - Prediction Models
+    # -------------------------------------------------------------------------
+    "FireForecast_Baztan": {
+        "entity_id": "FireForecast:TESICNOR_RRD_Baztan",
+        "location": {"lat": 43.1478, "lon": -1.5167, "name": "Prediccion Baztan (TESICNOR)"},
+        "attributes": {
+            "predictedSizeHectares": {"type": "Number", "unit": "ha", "range": [0, 15000]},
+            "predictedPropagation": {"type": "Text", "values": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]},
+            "arrivalToPamplona": {"type": "Text", "description": "Hora llegada HUMO (no fuego)"},
+            "confidence": {"type": "Number", "unit": "%", "range": [0, 100]},
+        }
+    },
+    "FireForecast_Ultzama": {
+        "entity_id": "FireForecast:TESICNOR_RRD_Ultzama",
+        "location": {"lat": 42.9500, "lon": -1.6500, "name": "Prediccion Ultzama (TESICNOR)"},
+        "attributes": {
+            "predictedSizeHectares": {"type": "Number", "unit": "ha", "range": [0, 15000]},
+            "predictedPropagation": {"type": "Text", "values": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]},
+            "arrivalToPamplona": {"type": "Text", "description": "Hora llegada HUMO (no fuego)"},
+            "confidence": {"type": "Number", "unit": "%", "range": [0, 100]},
+        }
+    },
+    "FireForecast_Roncal": {
+        "entity_id": "FireForecast:TESICNOR_RRD_Roncal",
+        "location": {"lat": 42.8000, "lon": -0.9500, "name": "Prediccion Roncal (TESICNOR)"},
+        "attributes": {
+            "predictedSizeHectares": {"type": "Number", "unit": "ha", "range": [0, 15000]},
+            "predictedPropagation": {"type": "Text", "values": ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]},
+            "arrivalToPamplona": {"type": "Text", "description": "Hora llegada HUMO (no fuego)"},
+            "confidence": {"type": "Number", "unit": "%", "range": [0, 100]},
         }
     },
 }

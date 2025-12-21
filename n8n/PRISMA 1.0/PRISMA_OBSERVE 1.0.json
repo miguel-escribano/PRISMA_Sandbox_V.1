@@ -1,0 +1,369 @@
+{
+  "name": "PRISMA:OBSERVE 1.0",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "fba465ee-fec7-4b21-8fca-cd3ecb2186e8",
+        "options": {
+          "noResponseBody": true
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -608,
+        128
+      ],
+      "id": "8ac3ae11-4ace-4856-baa8-b1cbaa9edcfa",
+      "name": "Webhook",
+      "webhookId": "fba465ee-fec7-4b21-8fca-cd3ecb2186e8"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=={{\n\"Eres PRISMA, analista de inteligencia situacional. Recibes datos de sensores y generas un resumen para el operador.\\n\\n\" +\n\"Responde ÚNICAMENTE con JSON válido. Sin explicaciones, sin markdown.\\n\\n\" +\n\"EVENTO:\\n\" +\nJSON.stringify({\n  entity_id: $json.entity_id ?? $json.entityId,\n  entity_type: $json.entity_type ?? $json.entityType,\n  ts: $json.ts,\n  source: $json.source,\n  attributes: $json.attributes\n}) +\n\"\\n\\nICONOS (mapeo EXACTO por entity_type, no interpretes):\\n\" +\n\"WeatherObserved = 🌡️\\n\" +\n\"AirQualityObserved = 💨\\n\" +\n\"IndoorAirQuality = 🏠\\n\" +\n\"ForestFire = 🔥\\n\" +\n\"HospitalStatus = 🏥\\n\" +\n\"EmergencyCalls = 📞\\n\" +\n\"NoiseLevelObserved = 🔊\\n\" +\n\"TrafficAlert = 🚗\\n\" +\n\"Drone = 🚁\\n\" +\n\"SocialMediaAlert = 📱\\n\" +\n\"FireForecast = 📈\\n\" +\n\"otros = ❓\\n\\n\" +\n\"INSTRUCCIONES:\\n\" +\n\"- icon: usa EXACTAMENTE el emoji que corresponde al entity_type de arriba\\n\" +\n\"- Usa el campo agentContext del evento para entender qué significan los datos\\n\" +\n\"- facts: string con valores clave separados por | (ej: 36°C | 38% HR | 5 km/h S)\\n\" +\n\"- summary: interpretación para operador, máx 20 palabras, sin repetir los datos de facts\\n\" +\n\"- No inventes datos, usa solo lo que viene en el evento\\n\\n\" +\n\"JSON de salida:\\n\" +\n'{\"icon\":\"emoji\",\"entity_id\":\"string\",\"entity_type\":\"string\",\"ts\":\"ISO8601\",\"location\":{\"lat\":n,\"lon\":n}|null,\"facts\":\"datos clave separados por |\",\"summary\":\"interpretación sin datos\"}'\n}}",
+        "options": {
+          "systemMessage": "="
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        320,
+        224
+      ],
+      "id": "d286d110-ab37-442c-84a0-bcfc96a00cb1",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "chatId": "572794217",
+        "text": "={{ $json.ts.replace(\"T\", \" \").replace(\"+00:00\", \" UTC\") + \"\\n━━━━━━━━━━━━━━━━━━━\\n\" + $json.icon + \" \" + $json.entity_type.toUpperCase() + \"\\nFuente: \" + $json.entity_id.replace(/[_:]/g, \" \") + \"\\nCoord: \" + ($json.location ? $json.location.lat + \", \" + $json.location.lon : \"N/A\") + \"\\n\\nDatos: \" + $json.facts + \"\\nNota: \" + $json.summary }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        928,
+        224
+      ],
+      "id": "161f5a5a-6a57-4164-b799-c6fc945b039d",
+      "name": "Send a text message",
+      "webhookId": "dbafb31e-ed6a-4604-8480-a9bf6651ad22",
+      "credentials": {
+        "telegramApi": {
+          "id": "f0iMahNzZHmHK14l",
+          "name": "Telegram account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "tableId": "prisma_events",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "event_id",
+              "fieldValue": "={{$json.eventId}}"
+            },
+            {
+              "fieldId": "entity_id",
+              "fieldValue": "={{$json.entityId}}"
+            },
+            {
+              "fieldId": "entity_type",
+              "fieldValue": "={{$json.entityType}}"
+            },
+            {
+              "fieldId": "ts",
+              "fieldValue": "={{$json.ts}}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "={{$json.source}}"
+            },
+            {
+              "fieldId": "attributes",
+              "fieldValue": "={{$json.attributes}}"
+            },
+            {
+              "fieldId": "meta",
+              "fieldValue": "={{$json.meta}}"
+            },
+            {
+              "fieldId": "raw",
+              "fieldValue": "={{$json.raw}}"
+            },
+            {
+              "fieldId": "run_id",
+              "fieldValue": "={{$json.run_id}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        64,
+        32
+      ],
+      "id": "9b1d8981-75d6-482b-b5cd-36f2164b7cb8",
+      "name": "Create a row_prisma_events",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "// Normalize Event (Canonical)\n// Modo: Run once for each item\n\nconst body = $json.body ?? $json;\n\n// Normalizar entrada\nlet entity = body;\nif (Array.isArray(body)) {\n  entity = body[0];\n} else if (Array.isArray(body?.data)) {\n  entity = body.data[0];\n} else if (body?.data && typeof body.data === \"object\") {\n  entity = body.data;\n}\n\n// ===== RUN ID (CLAVE) =====\nconst runId = $json.run_id;\nif (!runId) {\n  throw new Error('run_id not found in input data');\n}\n\n// ===== IDENTIDAD =====\nconst entityId = String(entity?.id ?? entity?.entityId ?? body?.id ?? \"unknown\").trim();\nconst entityType = String(entity?.type ?? body?.type ?? \"unknown\").trim();\n\n// ===== TIMESTAMP EVENTO (FIWARE / BEST EFFORT) =====\nconst nowIso = new Date().toISOString();\nconst tsRaw =\n  entity?.timeObserved?.value ??\n  entity?.dateObserved?.value ??\n  entity?.observedAt ??\n  entity?.timestamp ??\n  body?.timestamp ??\n  nowIso;\n\nconst ts = String(tsRaw).trim() || nowIso;\n\n// ===== ATRIBUTOS =====\nconst attributes = {};\nif (entity && typeof entity === \"object\") {\n  for (const [k, v] of Object.entries(entity)) {\n    if (k === \"id\" || k === \"type\") continue;\n    if (v && typeof v === \"object\" && \"value\" in v) {\n      attributes[k] = v.value;\n    } else {\n      attributes[k] = v;\n    }\n  }\n}\n\n// ===== META =====\nconst meta = {\n  attributeKinds: {},\n  units: {},\n  location: null,\n  tags: [],\n};\n\nfunction kindOf(x) {\n  if (x === null || x === undefined) return \"null\";\n  if (Array.isArray(x)) return \"array\";\n  return typeof x;\n}\n\nif (entity?.location?.value) meta.location = entity.location.value;\nif (entity?.address?.value) meta.location = entity.address.value;\nif (!meta.location && attributes?.location) meta.location = attributes.location;\n\nfor (const [k, v] of Object.entries(attributes)) {\n  meta.attributeKinds[k] = kindOf(v);\n}\n\n// ===== SOURCE =====\nconst source = body?.subscriptionId\n  ? \"fiware_subscription\"\n  : (body?.source ?? \"unknown\");\n\n// ===== EVENT ID (ORDENADO POR RUN) =====\nconst eventId = `evt_${runId}_${entityId}_${Date.now()}`;\n\n// ===== OUTPUT =====\nreturn {\n  json: {\n    // claves de run\n    run_id: runId,\n\n    // ids\n    eventId,\n    event_id: eventId,\n    entityId,\n    entity_id: entityId,\n    entityType,\n    entity_type: entityType,\n\n    // tiempo\n    ts,\n\n    // datos\n    source,\n    attributes,\n    meta,\n    raw: body,\n  },\n};\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -256,
+        128
+      ],
+      "id": "71b784a2-bdb7-4f59-84d9-78fc86030752",
+      "name": "Normalize Event (Canonical)"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=prisma_stateless",
+        "contextWindowLength": 1
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        336,
+        464
+      ],
+      "id": "5b963925-92a1-40a9-85dd-eda2ef762888",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "tableId": "prisma_latest_state",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "entity_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.entityId }}"
+            }
+          ]
+        },
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "entity_id",
+              "fieldValue": "={{$json.entityId}}"
+            },
+            {
+              "fieldId": "entity_type",
+              "fieldValue": "={{$json.entityType}}"
+            },
+            {
+              "fieldId": "ts",
+              "fieldValue": "={{$json.ts}}"
+            },
+            {
+              "fieldId": "source",
+              "fieldValue": "={{$json.source}}"
+            },
+            {
+              "fieldId": "attributes",
+              "fieldValue": "={{$json.attributes}}"
+            },
+            {
+              "fieldId": "meta",
+              "fieldValue": "={{$json.meta}}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        64,
+        224
+      ],
+      "id": "af2541be-8f83-44f5-851d-a08f16f98287",
+      "name": "Create a row_prisma_events1",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "jsCode": "const runId = Date.now();\n\n$getWorkflowStaticData('global').run_id = runId;\n\n// Pass run_id in the output JSON\nconst items = $input.all();\nreturn items.map(item => ({\n  json: {\n    ...item.json,\n    run_id: runId\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -432,
+        128
+      ],
+      "id": "ad04c49c-792e-4b46-ae78-ff34a19b20c2",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "claude-sonnet-4-5-20250929",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        192,
+        464
+      ],
+      "id": "a93e580b-a195-44b6-bade-688a2ab6460e",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "T8oaOeRWhexmZpY8",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $input.first().json.text || $input.first().json.output || JSON.stringify($input.first().json);\nconst j = JSON.parse(raw.match(/\\{[\\s\\S]*\\}/)[0]);\nreturn j;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        672,
+        224
+      ],
+      "id": "491f917f-7c09-434c-9842-bd5979d142f8",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Event (Canonical)": {
+      "main": [
+        [
+          {
+            "node": "Create a row_prisma_events",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Create a row_prisma_events1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row_prisma_events1": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Normalize Event (Canonical)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "62f14e27-0877-40a9-9da3-ed93f1dad594",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "149f36c57130d2ae2966b18b662013bf5bece878bebaa1a68a003c9c01d8e8b3"
+  },
+  "id": "b8hSSTFr8jKZkU4e",
+  "tags": []
+}

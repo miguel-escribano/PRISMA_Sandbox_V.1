@@ -25,7 +25,10 @@ SUBSCRIPTION_DATA = {
         "entities": [
             {"idPattern": ".*", "type": "WeatherObserved"},
             {"idPattern": ".*", "type": "AirQualityObserved"},
+            {"idPattern": ".*", "type": "IndoorAirQuality"},  # inBiot MICA_WELL (TwIN Lab)
             {"idPattern": ".*", "type": "ForestFire"},
+            {"idPattern": ".*", "type": "FireForecast"},      # TESICNOR RRD (TwIN Lab)
+            {"idPattern": ".*", "type": "Drone"},             # Bravodrones (TwIN Lab)
             {"idPattern": ".*", "type": "EmergencyCalls"},
             {"idPattern": ".*", "type": "HospitalStatus"},
             {"idPattern": ".*", "type": "SocialMediaAlert"},

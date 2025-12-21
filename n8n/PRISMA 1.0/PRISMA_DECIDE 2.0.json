@@ -1,0 +1,257 @@
+{
+  "name": "PRISMA:DECIDE 2.0",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -928,
+        -320
+      ],
+      "id": "c7fcb7c9-4f95-4982-9ab7-8e07f897433b",
+      "name": "Telegram Trigger",
+      "webhookId": "prisma-chat-webhook",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZYhG67I5bH4TmiC5",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "prisma_decisions",
+        "limit": 1,
+        "filterType": "none"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -672,
+        -320
+      ],
+      "id": "2558d8ef-535c-4df3-b58f-efb684222c0b",
+      "name": "Get última decisión",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "prisma_latest_state",
+        "returnAll": true,
+        "filterType": "none"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -416,
+        -320
+      ],
+      "id": "2e69944d-73b0-4515-a28c-ae0d45588ad5",
+      "name": "Get estado actual",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const decision = $('Get última decisión').first().json;\nconst stateItems = $('Get estado actual').all();\nconst userMessage = $('Telegram Trigger').first().json.message.text;\nconst chatId = $('Telegram Trigger').first().json.message.chat.id;\n\nconst state = stateItems.map(i => ({\n  entity_id: i.json.entity_id,\n  entity_type: i.json.entity_type,\n  attributes: i.json.attributes\n}));\n\nreturn [{\n  json: {\n    user_message: userMessage,\n    chat_id: chatId,\n    last_decision: {\n      alert_level: decision.alert_level,\n      summary: decision.summary,\n      key_factors: decision.key_factors,\n      recommended_actions: decision.recommended_actions,\n      scenario_ts: decision.scenario_ts\n    },\n    current_state: state\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        -320
+      ],
+      "id": "75c933d2-91b1-423a-842f-09657aed3868",
+      "name": "Build Context"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Pregunta del operador:\n{{ $json.user_message }}\n\nÚltima decisión PRISMA ({{ $json.last_decision.scenario_ts }}):\n- Nivel: {{ $json.last_decision.alert_level }}\n- Situación: {{ $json.last_decision.summary }}\n- Factores: {{ $json.last_decision.key_factors.join(', ') }}\n- Acciones: {{ $json.last_decision.recommended_actions.join(', ') }}\n\nEstado actual de sensores:\n{{ JSON.stringify($json.current_state, null, 2) }}",
+        "options": {
+          "systemMessage": "Eres PRISMA, asistente de inteligencia situacional para emergencias en Pamplona.\n\nTu rol es ayudar al operador del 112 a entender la situación actual y las decisiones del sistema.\n\nCONTEXTO DISPONIBLE:\n- Última decisión automática de PRISMA (nivel de alerta, factores, acciones)\n- Estado actual de todos los sensores\n\nREGLAS:\n- Responde en español, tono profesional pero cercano\n- Sé conciso: máximo 3-4 frases por respuesta\n- Si te preguntan algo que no está en los datos, dilo claramente\n- No inventes información\n- Si el operador pide una acción, recuérdale quién es el responsable según el protocolo\n\nEJEMPLOS DE PREGUNTAS:\n- \"¿Por qué recomiendas X?\" → Explica el razonamiento basándote en los datos\n- \"¿Cómo está el hospital?\" → Busca HospitalStatus en el estado actual\n- \"¿Va a empeorar?\" → Analiza tendencias en los datos disponibles\n- \"Dame más detalles de X\" → Profundiza en la entidad relevante"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        96,
+        -320
+      ],
+      "id": "e11f8603-aa0e-4d83-b2a3-b77dbd9f6180",
+      "name": "AI Agent Chat"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Telegram Trigger').first().json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        208,
+        -96
+      ],
+      "id": "7be8acb6-4a7e-432e-bc29-3a48dfec9a87",
+      "name": "Chat Memory"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').first().json.message.chat.id }}",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        352,
+        -320
+      ],
+      "id": "651026f3-d356-462a-909c-dd89bfedf752",
+      "name": "Telegram Response",
+      "webhookId": "1f6eaaed-dc56-4929-8e76-46c673a41d35",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZYhG67I5bH4TmiC5",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "gpt-4o"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        48,
+        -96
+      ],
+      "id": "d888501b-60bc-4b96-a63a-83b9494cd39c",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "wjMd781DAG4MaVYa",
+          "name": "OpenAi account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get última decisión",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get última decisión": {
+      "main": [
+        [
+          {
+            "node": "Get estado actual",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get estado actual": {
+      "main": [
+        [
+          {
+            "node": "Build Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Context": {
+      "main": [
+        [
+          {
+            "node": "AI Agent Chat",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent Chat": {
+      "main": [
+        [
+          {
+            "node": "Telegram Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent Chat",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent Chat",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "9f4eabeb-9ec4-4f7a-af8a-a65440ba20d5",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "149f36c57130d2ae2966b18b662013bf5bece878bebaa1a68a003c9c01d8e8b3"
+  },
+  "id": "ktN2rU7DneoZzGft",
+  "tags": []
+}

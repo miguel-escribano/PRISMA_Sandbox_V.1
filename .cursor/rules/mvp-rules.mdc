@@ -1,81 +1,103 @@
-# PRISMA MVP Development Rules
-
-## Principio Rector: NO OVERENGINEER
-
-**Fecha límite:** 19 diciembre 2025 (Elevator Pitch)
-**Objetivo:** Demo funcional de 7 minutos, no producto completo.
+# PRISMA Development Rules
 
 ---
 
-## ⛔ NO HACER (hasta después del pitch)
+## Fase 1: MVP → Pitch (Completada ✅)
+
+**Fecha límite:** 19 diciembre 2025  
+**Resultado:** Pitch completado, v1.0-pitch estable
+
+### Lo que funcionó
 
 1. **No abstracciones prematuras** — Si solo se usa una vez, no hagas función/clase
-2. **No manejo de errores exhaustivo** — Try/except básico, no error handling enterprise
+2. **No manejo de errores exhaustivo** — Try/except básico
 3. **No tests unitarios** — La demo ES el test
-4. **No logging estructurado** — print() es suficiente para debug
-5. **No documentación de código** — Docstrings mínimos, el código debe ser obvio
-6. **No optimización** — Si funciona, no lo toques
-7. **No features que no se demuestren** — Si no se ve en el pitch, no existe
-8. **No refactoring** — Código feo que funciona > código bonito a medias
-9. **No configuración dinámica** — Hardcodear valores para la demo está OK
-10. **No múltiples entornos** — Solo desarrollo, no staging/prod
-
----
-
-## ✅ SÍ HACER
-
-1. **Código que funcione** — Prioridad absoluta
-2. **Camino feliz primero** — Happy path, sin edge cases
-3. **Hardcodear para la demo** — Valores fijos, JSON inline, está permitido
-4. **Copiar/pegar** — Si acelera, hazlo. DRY es para v2
-5. **Comentarios TODO** — Marcar lo que mejorar después: `# TODO: v2 - hacer X`
+4. **Código que funcione** — Prioridad absoluta
+5. **Hardcodear para la demo** — Valores fijos, JSON inline
 6. **Commits frecuentes** — Cada feature que funcione, commit
-7. **Plan B siempre** — Cada componente debe tener fallback offline
+7. **Plan B siempre** — Cada componente con fallback offline
+
+> "If it works, ship it" — MVP mantra
 
 ---
 
-## Arquitectura MVP
+## Fase 2: Estabilización (Actual)
+
+**Desde:** 21 diciembre 2025  
+**Objetivo:** Repo limpio, documentado, listo para v2.0
+
+### ✅ SÍ HACER
+
+1. **Documentar cambios** — Todo en CHANGELOG.md
+2. **No romper v1.0-pitch** — Es la versión de referencia
+3. **Refactorizar con cuidado** — Solo lo que moleste de verdad
+4. **Tests manuales** — Probar antes de commit
+5. **Limpiar código** — Eliminar scripts temporales, duplicados
+6. **Organizar archivos** — Todo en su sitio
+
+### ⛔ NO HACER (todavía)
+
+1. **No features nuevas** — Primero estabilizar
+2. **No cambios de arquitectura** — Eso es v2.0
+3. **No integraciones nuevas** — Mantener lo que funciona
+4. **No overengineering** — Sigue aplicando
+
+---
+
+## Fase 3: v2.0 (Q1 2026)
+
+**Objetivo:** Producto real, no demo
+
+### Ahora SÍ
+
+- Tests automatizados para lo crítico
+- Arquitectura limpia (separar concerns)
+- Real APIs (AEMET, EFFIS, 112)
+- Self-hosted FIWARE
+- Configuración externa (no hardcoded)
+- Manejo de errores robusto
+- Múltiples entornos (dev/staging/prod)
+
+---
+
+## Arquitectura actual
 
 ```
 streamlit/
-├── app.py              # Entry point, todo junto inicialmente
-├── components/         # Solo si app.py supera 300 líneas
-│   ├── chat.py
-│   ├── sidebar.py
-│   └── scenario.py
-└── assets/             # Logos, imágenes
+├── app.py                    # UI principal
+├── app_config/
+│   ├── scenarios.py          # Definición de escenarios
+│   ├── knowledge_base.py     # Base de conocimiento
+│   └── AGENT_SYSTEM_PROMPT_CONTEXT.md
 
-n8n/                    # Workflows (no código Python)
+n8n/
+├── PRISMA 1.0/               # Workflows estables
+│   ├── PRISMA_OBSERVE 1.0.json
+│   ├── PRISMA_ORIENT 2.0.json
+│   └── PRISMA_DECIDE 2.0.json
+└── drafts/                   # Experimentos
 
-src/                    # Solo utilidades críticas
-├── fiware_client.py    # Ya existe
-└── config.py           # Ya existe
+database/
+├── schema.sql                # Schema Supabase
+└── README.md
+
+src/
+├── fiware_client.py          # Cliente FIWARE
+├── fiware_init_mvp.py        # Inicialización entidades
+├── scenario_runner.py        # Runner de escenarios
+└── config.py                 # → usa config.py en root
 ```
 
 ---
 
-## Flujo de desarrollo
+## Referencias
 
-1. **Vertical slice** — Una feature completa end-to-end antes de la siguiente
-2. **Demo primero** — ¿Se ve bien en el pitch? Si no, no importa
-3. **Fake it till you make it** — Datos hardcodeados > integración rota
-
----
-
-## Checklist antes de cada commit
-
-- [ ] ¿Funciona el happy path?
-- [ ] ¿Se ve en la demo de 7 min?
-- [ ] ¿Tiene Plan B si falla?
-- [ ] ¿Es lo mínimo necesario?
+- **FIWARE:** `.cursor/commands/` para comandos NGSI-v2
+- **Pitch:** `business/Pitch/PRISMA_PITCH_DECK.md`
+- **n8n:** `n8n/PRISMA 1.0/README.md`
+- **Database:** `database/README.md`
+- **Changelog:** `CHANGELOG.md`
 
 ---
 
-## Recordatorio
-
-> "Premature optimization is the root of all evil" — Knuth
-> 
-> "If it works, ship it" — MVP mantra
-
-**Después del 19 dic:** Refactorizar, tests, documentación, arquitectura limpia.
-**Ahora:** Demo que funcione.
+*Última actualización: 21 diciembre 2025*

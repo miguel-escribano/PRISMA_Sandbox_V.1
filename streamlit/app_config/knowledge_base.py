@@ -60,6 +60,10 @@ KNOWLEDGE_BASE = {
     "fuentes_datos": {
         "AEMET": "Meteorología oficial España",
         "ThinkingCities": "Sensores IoT Gemelo Digital Pamplona",
+        "Kunak": "Sensores IoT calidad del aire EXTERIOR de alta precisión (TwIN Lab)",
+        "inBiot": "Sensores MICA_WELL calidad del aire INTERIOR para edificios saludables (TwIN Lab)",
+        "Bravodrones": "Drones con computer vision para emergencias - inspección incendios y vigilancia masas (TwIN Lab)",
+        "TESICNOR_RRD": "Modelos predictivos de propagación de incendios forestales (TwIN Lab)",
         "EFFIS": "Sistema europeo incendios forestales",
         "DGT": "Estado carreteras España",
         "SOS112": "Central emergencias Navarra",

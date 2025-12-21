@@ -66,10 +66,18 @@ LOC_FIRE_BAZTAN = [-1.5167, 43.1478]    # Valle Baztán - 40km north
 LOC_FIRE_ULTZAMA = [-1.6500, 42.9500]   # Valle Ultzama - 20km north
 LOC_FIRE_RONCAL = [-0.9500, 42.8000]    # Valle Roncal - 50km northeast
 
-# Air quality sensors
-LOC_AIR_FELISA = [-1.6441, 42.8069]     # Felisa Munarriz - south Pamplona
-LOC_AIR_ROCHAPEA = [-1.6500, 42.8300]   # Rochapea - north Pamplona
-LOC_AIR_ITURRAMA = [-1.6525, 42.8062]   # Iturrama - official GobNavarra station
+# Air quality sensors (Kunak TwIN Lab + GobNavarra)
+LOC_AIR_KUNAK_BAJANAVARRA = [-1.6316, 42.8141]  # Kunak sensor - Baja Navarra
+LOC_AIR_KUNAK_ROCHAPEA = [-1.6500, 42.8300]     # Kunak sensor - Rochapea north
+LOC_AIR_ITURRAMA = [-1.6525, 42.8062]           # Iturrama - official GobNavarra station
+
+# Drone locations (Bravodrones TwIN Lab) - Base en Policía Foral
+LOC_DRONE_BASE = [-1.6253845194510725, 42.81405730745419]  # Sede Policía Foral Navarra
+
+# Indoor Air Quality sensors (inBiot MICA_WELL TwIN Lab)
+LOC_IAQ_HUN = [-1.6662, 42.8044]                           # Hospital HUN Urgencias
+LOC_IAQ_INBIOT = [-1.6136467398333465, 42.79765365222666]  # Oficinas inBiot Mutilva
+LOC_IAQ_ITAROA = [-1.5826414164837532, 42.82926658081576]  # CC Itaroa Huarte
 
 # Other Pamplona locations
 LOC_METEO_NOAIN = [-1.6442, 42.8184]    # AEMET station Pamplona
@@ -116,16 +124,16 @@ def get_initial_entities():
         },
         
         # =====================================================================
-        # AIR QUALITY - Sensor Sur (Felisa Munarriz)
+        # AIR QUALITY - Kunak Baja Navarra (TwIN Lab)
         # =====================================================================
         {
-            "id": "AirQualityObserved:ThinkingCities_FelisaMunarriz",
+            "id": "AirQualityObserved:ThinkingCities_Kunak_BajaNavarra",
             "type": "AirQualityObserved",
-            "name": {"type": "Text", "value": "Aire FelisaMunarriz"},
-            "agentContext": {"type": "Text", "value": "Sensor IoT del Gemelo Digital de Pamplona gestionado por ThinkingCities, plataforma smart city de Telefonica. Ubicado en zona SUR de Pamplona, barrio Felisa Munarriz. Atributos: pm25 son particulas finas en microgramos por metro cubico, pm10 son particulas gruesas, co es monoxido de carbono en mg por metro cubico, airQualityIndex es indice de 1 bueno a 6 peligroso. Detecta contaminacion por humo de incendios. Comparar con sensor norte para determinar direccion del humo."},
+            "name": {"type": "Text", "value": "Kunak BajaNavarra"},
+            "agentContext": {"type": "Text", "value": "Sensor de calidad del aire de Kunak, empresa navarra del ecosistema TwIN Lab especializada en monitorizacion ambiental de alta precision. Integrado en el Gemelo Digital via ThinkingCities. Ubicado en zona Baja Navarra de Pamplona. Atributos: pm25 son particulas finas PM2.5 en microgramos por metro cubico, pm10 son particulas PM10, co es monoxido de carbono en mg por metro cubico, airQualityIndex es indice de 1 bueno a 6 peligroso. Detecta contaminacion por humo de incendios. Comparar con sensor Kunak norte para determinar direccion del humo."},
             "location": {
                 "type": "geo:json",
-                "value": {"type": "Point", "coordinates": LOC_AIR_FELISA}
+                "value": {"type": "Point", "coordinates": LOC_AIR_KUNAK_BAJANAVARRA}
             },
             "dateObserved": {"type": "DateTime", "value": timestamp},
             "pm25": {"type": "Number", "value": 28},
@@ -136,16 +144,16 @@ def get_initial_entities():
         },
         
         # =====================================================================
-        # AIR QUALITY - Sensor Norte (Rochapea)
+        # AIR QUALITY - Kunak Rochapea Norte (TwIN Lab)
         # =====================================================================
         {
-            "id": "AirQualityObserved:ThinkingCities_Rochapea",
+            "id": "AirQualityObserved:ThinkingCities_Kunak_Rochapea",
             "type": "AirQualityObserved",
-            "name": {"type": "Text", "value": "Aire Rochapea"},
-            "agentContext": {"type": "Text", "value": "Sensor IoT del Gemelo Digital de Pamplona gestionado por ThinkingCities, plataforma smart city de Telefonica. Ubicado en zona NORTE de Pamplona, barrio Rochapea, mas cercano a los incendios forestales. Atributos: pm25 son particulas finas en microgramos por metro cubico, pm10 son particulas gruesas, co es monoxido de carbono en mg por metro cubico, airQualityIndex es indice de 1 bueno a 6 peligroso. Detecta humo antes que el sensor sur cuando el viento viene del norte."},
+            "name": {"type": "Text", "value": "Kunak Rochapea"},
+            "agentContext": {"type": "Text", "value": "Sensor de calidad del aire de Kunak, empresa navarra del ecosistema TwIN Lab. Ubicado en zona NORTE de Pamplona, barrio Rochapea, mas cercano a los incendios forestales. Atributos: pm25 son particulas finas PM2.5 en microgramos por metro cubico, pm10 son particulas PM10, co es monoxido de carbono en mg por metro cubico, airQualityIndex es indice de 1 bueno a 6 peligroso. Detecta humo ANTES que sensores del sur cuando el viento viene del norte. Sensor critico para alertas tempranas."},
             "location": {
                 "type": "geo:json",
-                "value": {"type": "Point", "coordinates": LOC_AIR_ROCHAPEA}
+                "value": {"type": "Point", "coordinates": LOC_AIR_KUNAK_ROCHAPEA}
             },
             "dateObserved": {"type": "DateTime", "value": timestamp},
             "pm25": {"type": "Number", "value": 32},
@@ -171,6 +179,60 @@ def get_initial_entities():
             "pm25": {"type": "Number", "value": 25},
             "pm10": {"type": "Number", "value": 38},
             "co": {"type": "Number", "value": 0.4},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # INDOOR AIR QUALITY - Hospital HUN Urgencias (inBiot MICA_WELL TwIN Lab)
+        # =====================================================================
+        {
+            "id": "IndoorAirQuality:inBiot_MICA_HUN_Urgencias",
+            "type": "IndoorAirQuality",
+            "name": {"type": "Text", "value": "IAQ Hospital HUN"},
+            "agentContext": {"type": "Text", "value": "Sensor de calidad de aire INTERIOR modelo MICA_WELL de inBiot, empresa navarra del ecosistema TwIN Lab especializada en monitorizacion de calidad de aire interior para edificios saludables. Ubicado en Urgencias del Hospital Universitario de Navarra. Atributos: pm25 son particulas finas PM2.5 en interior que DEBEN SER MENORES que exterior si la filtracion funciona, co2 es dioxido de carbono en ppm que indica calidad de ventilacion donde 400-800 es bueno y mas de 1000 indica mala ventilacion. ALERTA CRITICA: Si pm25 interior sube mientras co2 tambien sube significa que el sistema de ventilacion esta introduciendo humo del exterior al intentar renovar aire. En ese caso CERRAR ventilacion externa y activar recirculacion con filtros HEPA."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_IAQ_HUN}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "pm25": {"type": "Number", "value": 8},
+            "co2": {"type": "Number", "value": 450},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # INDOOR AIR QUALITY - Oficinas inBiot Mutilva (inBiot MICA_WELL TwIN Lab)
+        # =====================================================================
+        {
+            "id": "IndoorAirQuality:inBiot_MICA_Oficinas_Mutilva",
+            "type": "IndoorAirQuality",
+            "name": {"type": "Text", "value": "IAQ Oficinas inBiot"},
+            "agentContext": {"type": "Text", "value": "Sensor de calidad de aire INTERIOR modelo MICA_WELL de inBiot, empresa navarra del ecosistema TwIN Lab. Ubicado en las propias oficinas de inBiot en Mutilva, edificio de oficinas moderno con certificacion de calidad de aire. Atributos: pm25 son particulas PM2.5 interior que deben ser menores que exterior, co2 es dioxido de carbono en ppm indicador de ventilacion. REFERENCIA de edificio bien gestionado: si este sensor muestra problemas, la situacion exterior es muy grave. Comparar con sensores Kunak exteriores."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_IAQ_INBIOT}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "pm25": {"type": "Number", "value": 6},
+            "co2": {"type": "Number", "value": 420},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # INDOOR AIR QUALITY - CC Itaroa Huarte (inBiot MICA_WELL TwIN Lab)
+        # =====================================================================
+        {
+            "id": "IndoorAirQuality:inBiot_MICA_CC_Itaroa",
+            "type": "IndoorAirQuality",
+            "name": {"type": "Text", "value": "IAQ CC Itaroa"},
+            "agentContext": {"type": "Text", "value": "Sensor de calidad de aire INTERIOR modelo MICA_WELL de inBiot, empresa navarra del ecosistema TwIN Lab. Ubicado en Centro Comercial Itaroa en Huarte, al NORTE de Pamplona mas cerca de los incendios. Gran afluencia de publico. Atributos: pm25 son particulas PM2.5 interior, co2 es dioxido de carbono en ppm. SENSOR CENTINELA: Por su ubicacion norte detectara antes la infiltracion de humo en interiores. Si pm25 sube aqui antes que en HUN o inBiot, confirma que el humo esta llegando desde el norte. Espacio con alta densidad de personas vulnerables."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_IAQ_ITAROA}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "pm25": {"type": "Number", "value": 10},
+            "co2": {"type": "Number", "value": 520},
             "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
         },
         
@@ -366,6 +428,110 @@ def get_initial_entities():
             "status": {"type": "Text", "value": "open"},
             "estimatedReopenTime": {"type": "Text", "value": ""},
             "cause": {"type": "Text", "value": "forest_fire_smoke"},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # DRONE - Inspector de Incendios (Bravodrones TwIN Lab)
+        # Base: Sede Policía Foral de Navarra
+        # =====================================================================
+        {
+            "id": "Drone:Bravodrones_Fire_001",
+            "type": "Drone",
+            "name": {"type": "Text", "value": "Dron Inspector Incendios"},
+            "agentContext": {"type": "Text", "value": "Dron de inspeccion de incendios de Bravodrones, empresa del ecosistema TwIN Lab especializada en computer vision y drones para emergencias. Base en sede de Policia Foral de Navarra. Equipado con camara termica para detectar focos de calor en el suelo. Atributos: status es estado donde idle es en base Policia Foral, en_route es volando hacia destino, inspecting es inspeccionando incendio y returning es regresando a base, altitude es altura de vuelo en metros, groundTemperature es temperatura del suelo detectada en grados Celsius, hotspotCount es numero de focos secundarios detectados, assignedToFire es ID del incendio al que esta asignado. Proporciona datos que satelites no pueden ver."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_DRONE_BASE}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "status": {"type": "Text", "value": "idle"},
+            "altitude": {"type": "Number", "value": 0},
+            "groundTemperature": {"type": "Number", "value": 35},
+            "hotspotCount": {"type": "Number", "value": 0},
+            "assignedToFire": {"type": "Text", "value": ""},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # DRONE - Vigilancia de Masas (Bravodrones TwIN Lab)
+        # Base: Sede Policía Foral de Navarra
+        # =====================================================================
+        {
+            "id": "Drone:Bravodrones_Crowd_001",
+            "type": "Drone",
+            "name": {"type": "Text", "value": "Dron Vigilancia Masas"},
+            "agentContext": {"type": "Text", "value": "Dron de vigilancia de masas de Bravodrones, empresa del ecosistema TwIN Lab. Base en sede de Policia Foral de Navarra. Equipado con computer vision para analisis de multitudes en eventos masivos como San Fermin. Atributos: status es estado donde idle es en base Policia Foral, monitoring es vigilando zona asignada y alert es alerta detectada, altitude es altura de vuelo en metros, crowdDensity es densidad de personas por metro cuadrado, panicIndicator es puntuacion de 0 a 100 donde valores altos indican movimiento caotico o estampida potencial, flowDirection indica hacia donde se mueve la masa o si esta dispersing. CRITICO para San Fermin con 1 millon de personas."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_DRONE_BASE}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "status": {"type": "Text", "value": "idle"},
+            "altitude": {"type": "Number", "value": 0},
+            "crowdDensity": {"type": "Number", "value": 0},
+            "panicIndicator": {"type": "Number", "value": 0},
+            "flowDirection": {"type": "Text", "value": "stable"},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # FIRE FORECAST - Baztan (TESICNOR RRD TwIN Lab)
+        # =====================================================================
+        {
+            "id": "FireForecast:TESICNOR_RRD_Baztan",
+            "type": "FireForecast",
+            "name": {"type": "Text", "value": "Prediccion Baztan TESICNOR"},
+            "agentContext": {"type": "Text", "value": "Prediccion de evolucion del incendio generada por modelos de TESICNOR RRD, empresa del ecosistema TwIN Lab especializada en reduccion de riesgo de desastres naturales. Modelos Python que procesan datos meteorologicos y generan predicciones geoespaciales. Atributos: predictedSizeHectares es tamano predicho del incendio en hectareas en horizonte 2h, predictedPropagation es direccion prevista de expansion, arrivalToPamplona es hora estimada de llegada del HUMO a la ciudad NO del fuego ya que el fuego tardaria dias en llegar, confidence es fiabilidad del modelo en porcentaje. COMPARAR con datos EFFIS actuales para anticipar evolucion. El humo viaja mucho mas rapido que el fuego."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_FIRE_BAZTAN}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "predictedSizeHectares": {"type": "Number", "value": 250},
+            "predictedPropagation": {"type": "Text", "value": "S"},
+            "arrivalToPamplona": {"type": "Text", "value": ""},
+            "confidence": {"type": "Number", "value": 75},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # FIRE FORECAST - Ultzama (TESICNOR RRD TwIN Lab)
+        # =====================================================================
+        {
+            "id": "FireForecast:TESICNOR_RRD_Ultzama",
+            "type": "FireForecast",
+            "name": {"type": "Text", "value": "Prediccion Ultzama TESICNOR"},
+            "agentContext": {"type": "Text", "value": "Prediccion de evolucion del incendio de Ultzama por TESICNOR RRD. ATENCION: Este es el frente MAS CERCANO a Pamplona a solo 20km, las predicciones de este modelo son CRITICAS. Atributos: predictedSizeHectares es tamano predicho en 2h, predictedPropagation es direccion, arrivalToPamplona es hora llegada del HUMO a Pamplona NO del fuego porque el fuego tardaria 1-2 dias en llegar pero el humo con viento norte llega en 1-2 horas, confidence es fiabilidad. IMPORTANTE: Si el modelo predice llegada de humo, ACTUAR PREVENTIVAMENTE antes de que sensores Kunak lo confirmen."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_FIRE_ULTZAMA}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "predictedSizeHectares": {"type": "Number", "value": 60},
+            "predictedPropagation": {"type": "Text", "value": "S"},
+            "arrivalToPamplona": {"type": "Text", "value": ""},
+            "confidence": {"type": "Number", "value": 80},
+            "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
+        },
+        
+        # =====================================================================
+        # FIRE FORECAST - Roncal (TESICNOR RRD TwIN Lab)
+        # =====================================================================
+        {
+            "id": "FireForecast:TESICNOR_RRD_Roncal",
+            "type": "FireForecast",
+            "name": {"type": "Text", "value": "Prediccion Roncal TESICNOR"},
+            "agentContext": {"type": "Text", "value": "Prediccion de evolucion del incendio de Roncal por TESICNOR RRD, empresa del ecosistema TwIN Lab. Zona turistica pirenaica a 50km. Atributos: predictedSizeHectares es tamano predicho en 2h, predictedPropagation es direccion de expansion, arrivalToPamplona es hora estimada de llegada del HUMO NO del fuego, confidence es fiabilidad del modelo. El incendio de Roncal esta mas lejos y con viento SW el humo no suele afectar directamente a Pamplona."},
+            "location": {
+                "type": "geo:json",
+                "value": {"type": "Point", "coordinates": LOC_FIRE_RONCAL}
+            },
+            "dateObserved": {"type": "DateTime", "value": timestamp},
+            "predictedSizeHectares": {"type": "Number", "value": 280},
+            "predictedPropagation": {"type": "Text", "value": "SW"},
+            "arrivalToPamplona": {"type": "Text", "value": ""},
+            "confidence": {"type": "Number", "value": 70},
             "source": {"type": "Text", "value": "PRISMA_MVP_SYNTHETIC"}
         },
         

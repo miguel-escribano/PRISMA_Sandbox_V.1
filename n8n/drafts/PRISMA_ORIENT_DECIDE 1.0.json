@@ -1,0 +1,495 @@
+{
+  "name": "PRISMA:ORIENT_DECIDE 1.0",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 1
+            },
+            {}
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -320,
+        0
+      ],
+      "id": "f3b32724-80e3-4ae5-af98-3fd085c7658a",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Estado del sistema (snapshot):\n\n{{ JSON.stringify($json.decision_input, null, 2) }}\n\nEvalúa el riesgo actual y devuelve EXACTAMENTE este JSON:\n{\n  \"alert_level\": \"LOW | MEDIUM | HIGH | CRITICAL\",\n  \"summary\": \"situación actual en máx 2 líneas\",\n  \"key_factors\": [\"factor clave 1\", \"factor clave 2\"],\n  \"recommended_actions\": [\"acción concreta 1 - responsable\", \"acción concreta 2 - responsable\"]\n}",
+        "options": {
+          "systemMessage": "Eres PRISMA, sistema de inteligencia situacional para anticipación de emergencias. Tu rol es interpretar datos entrantes, predecir impactos en cascada y recomendar acciones priorizadas.\n\n## Capacidades Core\n\nEn cada análisis debes:\n1. INTERPRETAR - ¿Qué está pasando ahora? Resume la situación actual.\n2. PREDECIR - ¿Qué pasará si no actuamos? Identifica cascada de impactos y ventanas temporales.\n3. RECOMENDAR - ¿Qué debemos hacer? Prioriza acciones con responsables.\n\n## Contexto Geográfico\n\nUbicación: Cuenca de Pamplona, Navarra, España\n\nValles con riesgo de incendio (norte de Pamplona):\n- Ultzama: 20km norte - MÁS CERCANO, prioridad máxima\n- Baztán: 40km norte - ruta Francia N-121-A\n- Roncal: 50km noreste - zona turística pirenaica\n\nPatrones de viento:\n- Viento sur (Bochorno): Crea condiciones de ignición, aleja humo de la ciudad\n- Viento norte: Empuja humo hacia Pamplona en 1-2 horas\n\n## Umbrales de Alerta\n\n| Parámetro | Amarillo | Naranja | Rojo | Unidad |\n|-----------|----------|---------|------|--------|\n| Temperatura | 38 | 40 | 42 | °C |\n| PM2.5 | 50 (bueno) | 100 (moderado) | 150 (malo) / 200 (peligroso) | µg/m³ |\n| CO | 2 (normal) | 5 (elevado) | 10 (peligroso) | mg/m³ |\n| Ocupación Urgencias | 70 (normal) | 85 (alto) | 95 (crítico) | % |\n\n## Infraestructura Crítica\n\nHospitales:\n- Hospital Universitario de Navarra (HUN): 80 camas urgencias, 24 UCI\n- Hospital Virgen del Camino: 40 camas urgencias, 12 UCI\n\nPoblación vulnerable:\n- 12 residencias de mayores\n- 15 centros de salud\n- 47 colegios\n\n## Stakeholders\n\n| Entidad | Rol |\n|---------|-----|\n| CECOPI | Centro de Coordinación de Emergencias - mando único |\n| Delegación Gobierno | Autoridad máxima, activa niveles de alerta |\n| Bomberos Navarra | Director técnico de operaciones |\n| Salud Pública | Epidemiología, coordinación sanitaria |\n| Policía Foral | Orden público, evacuaciones |\n| Ayuntamiento Pamplona | Servicios municipales, refugios |\n| 112 Navarra | Central de emergencias, comunicación pública |\n\n## Protocolos de Emergencia\n\n- PLATENA: Plan Territorial de Emergencias de Navarra\n- PLANINFONA: Plan Especial de Incendios Forestales\n- Plan Calor: Actuación ante Altas Temperaturas\n\n## Acciones Disponibles\n\n| Acción | Responsable | Urgencia |\n|--------|-------------|----------|\n| Activar alerta SMS población | Comunicación 112 | Alta |\n| Abrir refugios climatizados | Ayuntamiento | Alta |\n| Refuerzo personal urgencias | Salud | Alta |\n| Suspender actividades exteriores | Ayuntamiento | Media |\n| Comunicado San Fermín | CECOPI | Media |\n| Activar protocolo evacuación valles | Protección Civil | Alta |\n\n## Fuentes de Datos\n\n| Fuente | Tipo de Datos |\n|--------|---------------|\n| AEMET | Meteorología oficial España |\n| ThinkingCities | Sensores IoT Gemelo Digital Pamplona |\n| Kunak | Calidad aire exterior alta precisión (TwIN Lab) |\n| inBiot | MICA_WELL calidad aire interior edificios (TwIN Lab) |\n| Bravodrones | Drones con visión artificial - incendios y masas (TwIN Lab) |\n| TESICNOR_RRD | Modelos predictivos propagación incendios (TwIN Lab) |\n| EFFIS | Sistema Europeo Información Incendios Forestales |\n| DGT | Estado carreteras España |\n| SOS112 | Central emergencias Navarra |\n| SNS | Servicio Navarro de Salud |\n\n## Contexto de Escenario\n\nTres fechas con perfiles de riesgo diferentes:\n\n| Fecha | Población | Capacidad Operativa | Riesgo Principal |\n|-------|-----------|---------------------|------------------|\n| 15 Junio | 350k | 100% | Niños/jóvenes expuestos, familias en exteriores |\n| 6 Julio (San Fermín) | 1M | 90% | Máxima tensión: ¿Cancelar fiestas? Crisis internacional |\n| 1 Agosto | 250k | 70% | Personal reducido, incendio 5ª generación, menos recursos |\n\n## Patrones de Cascada (Ejemplos Few-shot)\n\n### Patrón 1: Calor Extremo\nTrigger: Temperatura > 40°C + Humedad < 20%\nCascada:\n1. Aumentan golpes de calor (+30% llamadas 112)\n2. Urgencias se satura (2-4h)\n3. Población vulnerable en riesgo (residencias)\nVentana de acción: 2-3 horas\n\n### Patrón 2: Incendio + Cambio de Viento\nTrigger: Incendio activo + Viento gira a Norte\nCascada:\n1. Humo llega a Pamplona (1-2h)\n2. PM2.5 se dispara (>150 µg/m³)\n3. Problemas respiratorios (+40% llamadas 112)\n4. Urgencias saturadas si ya hay estrés por calor\nVentana de acción: 1-2 horas antes de que llegue el humo\n\n### Patrón 3: Calidad Aire + Saturación Urgencias\nTrigger: PM2.5 > 150 + Urgencias > 85%\nCascada:\n1. Sistema sanitario al límite\n2. Cancelar cirugías no urgentes\n3. Derivar pacientes a otros centros\n4. Si es pre-San Fermín: decisión política crítica\nVentana de acción: 30 min - 1 hora\n\n### Patrón 4: Detección de Señales Indirectas\nTrigger: Llamadas 112 respiratorias +40% + Sensores oficiales normales\nInferencia: Humo llegando a zonas sin sensores (barrios norte)\nCascada:\n1. Sensores confirmarán en 2-3 horas\n2. Para entonces urgencias ya saturadas\n3. Actuar ANTES de confirmación oficial\nVentana de acción: 2 horas de ventaja si se actúa ahora\n\n### Patrón 5: Contexto San Fermín\nTrigger: Contexto San Fermín + cualquier crisis\nCascada:\n1. Amplificación mediática internacional (CNN, BBC)\n2. Presión política máxima\n3. Decisión sobre fiestas requerida\n4. Impacto económico potencial: 100M€+\nVentana de acción: Comunicación inmediata\n\n## Tipos de Entidad en Context Broker\n\nWeatherObserved: temperature, relativeHumidity, windSpeed, windDirection, atmosphericPressure, solarRadiation\n\nAirQualityObserved: pm25, pm10, pm1, co, no, no2, o3, so2\nFuentes: UTE_CWAQPMWTH_XX (sensores multiparamétricos), GN_XX (estaciones Gobierno Navarra)\n\nNoiseLevelObserved: LAeq, LAmin, LAmax, LA90, LA1, LA10, LA50, LA99\n\nForestFire: status (inactive/detected/active/high/extreme/contained), intensity, sizeHectares, distanceToPamplona, evacuatedPeople, propagationRisk\n\nEmergencyCalls: respiratoryCalls, heatRelatedCalls, totalCalls, trafficCalls, trend\n\nHospitalStatus: emergencyOccupancy, respiratoryAdmissions, occupiedBeds, staffLevel\n\nSocialMediaAlert: mentions, sentiment (positive/neutral/negative/alarm), trendingHashtags\n\nTrafficAlert: status (open/restricted/closed)\n\nDrone (Fire/Crowd):\n- Fire: status, altitude, groundTemperature, hotspotCount, assignedToFire\n- Crowd: status, altitude, crowdDensity, panicIndicator, flowDirection\n\nFireForecast (TESICNOR): predictedSizeHectares, predictedPropagation, arrivalToPamplona, confidence\n\n## Razonamiento Crítico\n\nEn cada actualización de datos, pregúntate:\n1. ¿Hay combinación de factores que por separado no alarman pero juntos sí?\n2. ¿Algún cambio reciente (viento, temperatura) altera el riesgo de datos anteriores?\n3. ¿Qué pasará en 1-2h si la tendencia continúa?\n4. ¿Hay ventana de acción que se está cerrando?\n\n## Principio Clave\n\n\"No gestionamos eventos. Prevenimos cascadas.\"\n\n- Detecta triggers (temperatura + incendio + humo)\n- Predice la cascada (qué fallará después)\n- Coordina respuesta (CECOPI informado, ciudadanía alertada)\n\nEl valor de PRISMA: No esperar confirmación oficial de sensores. Inferir de señales indirectas. Actuar ANTES de que la cascada sea irreversible.\n\n## Instrucciones de Output\n\nDevuelve SIEMPRE JSON válido. No inventes datos. Sé conservador: ante duda, eleva el nivel de alerta.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3,
+      "position": [
+        1456,
+        0
+      ],
+      "id": "8b8707de-8fc7-45ac-aab0-2ecab6edce13",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ===============================\n// PRISMA:ORIENT — Situation Snapshot\n// ===============================\n// Mode: Run once for all items\n\n// 1️⃣ Clock del sistema (RUN ID)\nconst evaluationTs = $node[\"evaluation_ts\"].json.evaluation_ts;\n\nif (!evaluationTs) {\n  throw new Error(\"evaluation_ts (run_id) not found\");\n}\n\n// 2️⃣ Ventana temporal (actividad reciente basada en ts)\nconst WINDOW_MINUTES = 60;\n\nconst windowEndTs = new Date().toISOString();\nconst windowStartTs = new Date(\n  Date.now() - WINDOW_MINUTES * 60 * 1000\n).toISOString();\n\n// 3️⃣ Estado actual (latest_state)\nconst latestStateItems = $items(\"Get latest state_now\") || [];\nconst latestState = latestStateItems.map(i => i.json);\n\n// 4️⃣ Eventos recientes (por ts)\nconst recentEventItems = $items(\"Get all events  60 minutes before_now\") || [];\nconst recentEvents = recentEventItems.map(i => i.json);\n\n// 5️⃣ Construcción de entidades\nconst entities = latestState.map(state => {\n  const events = recentEvents.filter(\n    e => e.entity_id === state.entity_id\n  );\n\n  // 🔧 ARREGLO CLAVE: ordenar eventos por ts\n  events.sort((a, b) => new Date(a.ts) - new Date(b.ts));\n\n  const firstSeen = events.length > 0 ? events[0].ts : null;\n  const lastSeen =\n    events.length > 0 ? events[events.length - 1].ts : null;\n\n  return {\n    entity_id: state.entity_id,\n    entity_type: state.entity_type,\n    latest_ts: state.ts,\n    recent_activity: {\n      event_count: events.length,\n      first_seen: firstSeen,\n      last_seen: lastSeen,\n    },\n    attributes: state.attributes,\n  };\n});\n\n// 6️⃣ Contexto global\nconst context = {\n  run_id: evaluationTs,\n  total_events: recentEvents.length,\n  distinct_entities: new Set(\n    recentEvents.map(e => e.entity_id)\n  ).size,\n};\n\n// 7️⃣ Output final\nreturn [\n  {\n    json: {\n      snapshot_ts: evaluationTs, // RUN ID\n      snapshot_mode: \"run_based\",\n      window: {\n        type: \"last_60_event_minutes\",\n        start: windowStartTs,\n        end: windowEndTs,\n      },\n      entities,\n      context,\n    },\n  },\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        976,
+        0
+      ],
+      "id": "2c30807d-89eb-4170-993b-c2d87e26d5ee",
+      "name": "Situation Snapshot"
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "prisma_latest_state",
+        "returnAll": true,
+        "filterType": "none"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        464,
+        0
+      ],
+      "id": "d5a62ee9-30e4-41e8-a4ce-45d34bb88646",
+      "name": "Get latest state_now",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "prisma_events",
+        "limit": 500,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "ts",
+              "condition": "gte",
+              "keyValue": "=={{ new Date(Date.now() - 60 * 60 * 1000).toISOString() }}\n"
+            },
+            {
+              "keyName": "ts",
+              "condition": "lte",
+              "keyValue": "=={{ new Date().toISOString() }}\n"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        720,
+        0
+      ],
+      "id": "73eae6ab-5605-40c8-8ff0-bef8dea566d8",
+      "name": "Get all events  60 minutes before_now",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://atertoouxqvbmrxiqkkt.supabase.co/rest/v1/prisma_events",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "supabaseApi",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "select",
+              "value": "event_id,run_id,ts"
+            },
+            {
+              "name": "order",
+              "value": "run_id.desc,event_id.desc"
+            },
+            {
+              "name": "limit",
+              "value": "1"
+            }
+          ]
+        },
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "apikey",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0ZXJ0b291eHF2Ym1yeGlxa2t0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTcyNjY2NiwiZXhwIjoyMDgxMzAyNjY2fQ.GqHwrJqPnImpJxII9Gi48szGvnCesadV_vZEocpotlI"
+            },
+            {
+              "name": "Authorization",
+              "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF0ZXJ0b291eHF2Ym1yeGlxa2t0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2NTcyNjY2NiwiZXhwIjoyMDgxMzAyNjY2fQ.GqHwrJqPnImpJxII9Gi48szGvnCesadV_vZEocpotlI"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -48,
+        0
+      ],
+      "id": "b4a62806-eb6f-421c-80cd-f180ca3c9776",
+      "name": "HTTP Request",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "if (!items || items.length === 0) {\n  throw new Error(\"No data from HTTP Request\");\n}\n\nreturn [{\n  json: {\n    evaluation_ts: items[0].json.run_id\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ],
+      "id": "dda380b1-644b-47e3-94f6-55affba6810e",
+      "name": "evaluation_ts"
+    },
+    {
+      "parameters": {
+        "jsCode": "// ===============================\n// Freeze Snapshot for DECIDE\n// ===============================\n// Mode: Run once for all items\n\nconst snapshot = items[0].json;\n\nif (!snapshot || !snapshot.entities) {\n  throw new Error(\"Snapshot not found or invalid\");\n}\n\n// Lo que el agente DEBE ver\nconst decision_input = {\n  snapshot_ts: snapshot.snapshot_ts,\n  entities: snapshot.entities.map(e => ({\n    entity_id: e.entity_id,\n    entity_type: e.entity_type,\n    attributes: e.attributes,\n  })),\n};\n\n// (opcional) contexto mínimo humano\nconst meta = {\n  entity_count: decision_input.entities.length,\n};\n\nreturn [\n  {\n    json: {\n      decision_input,\n      meta,\n    },\n  },\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1184,
+        0
+      ],
+      "id": "33c9aebb-c1ce-426b-b05c-a8bdacd53766",
+      "name": "Freeze Snapshot for DECIDE"
+    },
+    {
+      "parameters": {
+        "tableId": "prisma_decisions",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "snapshot_ts",
+              "fieldValue": "={{ $('Freeze Snapshot for DECIDE').item.json.decision_input.snapshot_ts }}"
+            },
+            {
+              "fieldId": "alert_level",
+              "fieldValue": "={{ $json.alert_level }}"
+            },
+            {
+              "fieldId": "summary",
+              "fieldValue": "={{ $json.summary }}"
+            },
+            {
+              "fieldId": "key_factors",
+              "fieldValue": "={{ $json.key_factors }}"
+            },
+            {
+              "fieldId": "recommended_actions",
+              "fieldValue": "={{ $json.recommended_actions }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2048,
+        0
+      ],
+      "id": "a60fd43c-2954-4027-aeb1-0a5569722245",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "YGjSartncfCdmZaF",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "572794217",
+        "text": "={{ $json.decision_ts.replace(\"T\", \" \").replace(\"+00:00\", \" UTC\").substring(0, 19) + \" UTC\\n━━━━━━━━━━━━━━━\\n🚨 DECISIÓN: \" + $json.alert_level + \"\\n\\n\" + $json.summary + \"\\n\\nFactores clave:\\n• \" + $json.key_factors.join(\"\\n• \") + \"\\n\\nAcciones recomendadas:\\n• \" + $json.recommended_actions.join(\"\\n• \") }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        2544,
+        0
+      ],
+      "id": "9fb4f3a4-29a6-4ecb-9793-68a7871e6ebb",
+      "name": "Send a text message",
+      "webhookId": "dbafb31e-ed6a-4604-8480-a9bf6651ad22",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZYhG67I5bH4TmiC5",
+          "name": "Telegram account 3"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.decision_input }}\n{{ $json.meta.entity_count }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1552,
+        304
+      ],
+      "id": "c3de5e54-f845-442d-8ffb-99356f69104d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        1168,
+        -192
+      ],
+      "id": "19b3408e-0844-428f-8eb2-04894d2a6de4",
+      "name": "Telegram Trigger",
+      "webhookId": "009a7a20-b100-454d-ab36-4bc82e82286a",
+      "credentials": {
+        "telegramApi": {
+          "id": "ZYhG67I5bH4TmiC5",
+          "name": "Telegram account 3"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "claude-sonnet-4-5-20250929",
+          "mode": "list",
+          "cachedResultName": "Claude Sonnet 4.5"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "typeVersion": 1.3,
+      "position": [
+        1344,
+        224
+      ],
+      "id": "d289df3a-4bac-4fa4-a3fd-969c72e1d700",
+      "name": "Anthropic Chat Model",
+      "credentials": {
+        "anthropicApi": {
+          "id": "T8oaOeRWhexmZpY8",
+          "name": "Anthropic account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const text = $input.first().json.text || $input.first().json.output || $input.first().json.content;\nconst match = text.match(/\\{[\\s\\S]*\\}/);\nconst parsed = JSON.parse(match[0]);\nreturn parsed;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1808,
+        0
+      ],
+      "id": "eb743ca0-841f-4c17-bc0c-2c2b8522b7d5",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Situation Snapshot": {
+      "main": [
+        [
+          {
+            "node": "Freeze Snapshot for DECIDE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get latest state_now": {
+      "main": [
+        [
+          {
+            "node": "Get all events  60 minutes before_now",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get all events  60 minutes before_now": {
+      "main": [
+        [
+          {
+            "node": "Situation Snapshot",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "evaluation_ts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "evaluation_ts": {
+      "main": [
+        [
+          {
+            "node": "Get latest state_now",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Freeze Snapshot for DECIDE": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a row": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Anthropic Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4d719919-ae81-43bd-ba5b-a683b2758e75",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "149f36c57130d2ae2966b18b662013bf5bece878bebaa1a68a003c9c01d8e8b3"
+  },
+  "id": "pCzFzkWoLVkYAaCa",
+  "tags": []
+}
